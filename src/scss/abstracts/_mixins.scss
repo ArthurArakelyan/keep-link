@@ -1,0 +1,48 @@
+@import './variables';
+
+@mixin flex(
+  $flexDirection: row,
+  $alignItems: stretch,
+  $justifyContent: flex-start
+) {
+  display: flex;
+  flex-direction: $flexDirection;
+  align-items: $alignItems;
+  justify-content: $justifyContent;
+}
+
+@mixin font($size: 1rem, $weight: 400, $color: var(--black), $align: left) {
+  font-size: $size;
+  font-weight: $weight;
+  color: $color;
+  text-align: $align;
+}
+
+@mixin ellipsis() {
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+}
+
+@mixin absoluteCenter() {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin hover() {
+  @media (pointer: fine) {
+    &:hover {
+      @content;
+    }
+  }
+}
+
+@mixin active() {
+  @media (pointer: fine) {
+    &:active {
+      @content;
+    }
+  }
+}
