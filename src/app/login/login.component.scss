@@ -1,0 +1,18 @@
+@import "mixins";
+@import "scss-variables";
+
+:host {
+  width: 100%;
+}
+
+.login {
+  width: 100%;
+}
+.login__fields {
+  margin: 2rem 0;
+  row-gap: 2rem;
+  @include flex(column, flex-start, flex-start);
+}
+.login__actions {
+  @include flex(row, flex-start, flex-start);
+}

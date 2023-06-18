@@ -1,12 +1,7 @@
 @import "mixins";
 
 :host {
-  display: flex;
   width: 100%;
   min-height: 100vh;
-}
-
-h1 {
-  @include font(4rem, 700, var(--black));
-  @include absoluteCenter();
+  @include flex(column, flex-start, flex-start);
 }
