@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 // Constants
-import { MIN_VALIDATION_LENGTHS, VALIDATION_LENGTHS } from '../shared/constants/validation';
+import { MIN_VALIDATION_LENGTHS, VALIDATION_LENGTHS } from '../../core/constants/validation';
 
 @Component({
   selector: 'app-login',

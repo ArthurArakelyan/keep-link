@@ -1,30 +1,30 @@
-@import "mixins";
-@import "scss-variables";
+@import "../../../scss/abstracts/mixins";
+@import "../../../scss/abstracts/scss-variables";
 
 :host {
   width: 100%;
 }
 
-.login {
+.signup {
   width: 100%;
 }
-.login__fields {
+.signup__fields {
   margin: 2rem 0;
   row-gap: 2rem;
   @include flex(column, flex-start, flex-start);
 }
-.login__actions {
+.signup__actions {
   width: 100%;
   gap: 1rem;
   @include flex(row, center, flex-start);
 }
-.login__actions-link {
+.signup__actions-link {
   text-decoration: underline;
   @include font(1rem, 500, var(--primary-text-color));
 }
 
 @media (max-width: 1000px) {
-  .login__actions {
+  .signup__actions {
     flex-direction: row-reverse;
   }
 }

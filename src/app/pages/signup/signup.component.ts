@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 // Constants
-import { MIN_VALIDATION_LENGTHS, VALIDATION_LENGTHS } from '../shared/constants/validation';
+import { MIN_VALIDATION_LENGTHS, VALIDATION_LENGTHS } from '../../core/constants/validation';
 
 // Validators
-import { confirmPasswordValidator } from '../core/validators/confirmPassword.validator';
+import { confirmPasswordValidator } from '../../core/validators/confirmPassword.validator';
 
 @Component({
   selector: 'app-signup',

@@ -12,11 +12,11 @@ const appRoutes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then((module) => module.LoginModule),
+    loadChildren: () => import('./pages/login/login.module').then((module) => module.LoginModule),
   },
   {
     path: 'signup',
-    loadChildren: () => import('./signup/signup.module').then((module) => module.SignupModule),
+    loadChildren: () => import('./pages/signup/signup.module').then((module) => module.SignupModule),
   },
 ];
 

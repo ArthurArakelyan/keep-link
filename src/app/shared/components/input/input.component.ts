@@ -12,7 +12,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, ValidationErrors } from '@angu
 import { animate, style, transition, trigger } from '@angular/animations';
 
 // Utilities
-import { getErrorMessage } from '../../utilities/getErrorMessage';
+import { getErrorMessage } from '../../../core/utilities/getErrorMessage';
 
 @Component({
   selector: 'app-input',

@@ -3,7 +3,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 // Modules
 import { SignupRoutingModule } from './signup-routing.module';
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from '../../shared/shared.module';
 
 // Components
 import { SignupComponent } from './signup.component';
