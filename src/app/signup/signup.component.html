@@ -1,0 +1,55 @@
+<app-auth title="Sign up">
+  <form class="signup" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <div class="signup__fields">
+      <app-input
+        placeholder="Name"
+        name="name"
+        type="text"
+        placeholderBackgroundColor="var(--card-color)"
+        formControlName="name"
+        [showError]="signupForm.controls.name.invalid && submitted"
+        [error]="signupForm.controls.name.errors"
+      ></app-input>
+
+      <app-input
+        placeholder="Email"
+        name="email"
+        type="email"
+        placeholderBackgroundColor="var(--card-color)"
+        formControlName="email"
+        [showError]="signupForm.controls.email.invalid && submitted"
+        [error]="signupForm.controls.email.errors"
+      ></app-input>
+
+      <app-input
+        placeholder="Password"
+        name="password"
+        type="password"
+        placeholderBackgroundColor="var(--card-color)"
+        formControlName="password"
+        [showError]="signupForm.controls.password.invalid && submitted"
+        [error]="signupForm.controls.password.errors"
+      ></app-input>
+
+      <app-input
+        placeholder="Confirm Password"
+        name="confirm-password"
+        type="password"
+        placeholderBackgroundColor="var(--card-color)"
+        formControlName="confirmPassword"
+        [showError]="signupForm.controls.confirmPassword.invalid && submitted"
+        [error]="signupForm.controls.confirmPassword.errors"
+      ></app-input>
+    </div>
+
+    <div class="signup__actions">
+      <app-button type="submit">
+        Sign up
+      </app-button>
+
+      <a routerLink="/login" class="signup__actions-link">
+        Login
+      </a>
+    </div>
+  </form>
+</app-auth>
