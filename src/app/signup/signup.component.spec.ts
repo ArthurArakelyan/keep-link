@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 
 // Modules
@@ -16,7 +17,7 @@ describe('SignupComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [SignupComponent],
-      imports: [ReactiveFormsModule, SignupRoutingModule, SharedModule],
+      imports: [ReactiveFormsModule, SignupRoutingModule, SharedModule, RouterTestingModule],
     });
 
     fixture = TestBed.createComponent(SignupComponent);

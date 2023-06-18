@@ -1,12 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 
 // Modules
 import { LoginRoutingModule } from './login-routing.module';
-import { SharedModule } from '../shared/shared.module';
 
 // Components
 import { LoginComponent } from './login.component';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -16,7 +17,7 @@ describe('LoginComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [LoginComponent],
-      imports: [ReactiveFormsModule, LoginRoutingModule, SharedModule],
+      imports: [ReactiveFormsModule, LoginRoutingModule, SharedModule, RouterTestingModule],
     });
 
     fixture = TestBed.createComponent(LoginComponent);
