@@ -1,0 +1,14 @@
+<button
+  [type]="type"
+  class="button"
+  (click)="onClick($event)"
+  (mousedown)="onMouseDown($event)"
+>
+  <div
+    *ngFor="let ripple of ripples"
+    class="ripple"
+    [ngStyle]="{ left: ripple.left, top: ripple.top }"
+  ></div>
+
+  <ng-content></ng-content>
+</button>

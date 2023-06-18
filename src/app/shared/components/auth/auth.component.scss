@@ -1,0 +1,28 @@
+@import "mixins";
+@import "scss-variables";
+
+:host {
+  width: 100%;
+  min-height: 100vh;
+  @include flex(row, center, center);
+}
+
+.auth {
+  width: $auth-container-width;
+  margin: 2rem 0;
+  padding: 1.5rem;
+  border-radius: 0.375rem;
+  background-color: var(--card-color);
+  box-shadow: 0 0 0.313rem var(--shadow-md-color);
+  @include flex(column, center, flex-start);
+}
+.auth__title {
+  @include font(2rem, 500, var(--primary-text-color));
+}
+
+@media (max-width: 510px) {
+  .auth {
+    width: 100%;
+    margin: 1rem;
+  }
+}

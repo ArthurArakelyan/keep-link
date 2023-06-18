@@ -42,6 +42,10 @@ a {
   text-decoration: none;
 }
 
+button {
+  cursor: pointer;
+}
+
 @media (forced-colors: active) {
   svg {
     fill: CanvasText !important;

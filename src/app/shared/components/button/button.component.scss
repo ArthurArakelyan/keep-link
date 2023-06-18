@@ -1,0 +1,49 @@
+@import "mixins";
+@import "scss-variables";
+
+.button {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  cursor: pointer;
+  border: none;
+  padding: 0.7rem 1rem;
+  border-radius: 0.25rem;
+  letter-spacing: 0.031rem;
+  background-color: $primary-color;
+  @include font(1rem, 500, $white, center);
+  @include flex(row, center, center);
+  transition: background-color .2s ease, box-shadow .2s ease, opacity .2s ease;
+
+  @include hover() {
+    box-shadow: 0 0 0.313rem var(--shadow-md-color);
+    background-color: $primary-color-hover;
+  }
+
+  @include active() {
+    box-shadow: 0 0 0.35rem var(--shadow-lg-color);
+  }
+}
+
+.button:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
+.ripple {
+  position: absolute;
+  z-index: -1;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  background-color: rgba(255, 255, 255, 0.4);
+  transform: scale(0);
+  animation: ripple 0.7s ease-in-out forwards;
+}
+
+@keyframes ripple {
+  to {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
