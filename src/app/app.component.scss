@@ -3,5 +3,6 @@
 :host {
   width: 100%;
   min-height: 100vh;
+  background-color: var(--background-color);
   @include flex(column, flex-start, flex-start);
 }

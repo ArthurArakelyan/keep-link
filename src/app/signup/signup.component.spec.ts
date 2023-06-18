@@ -2,30 +2,30 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 
 // Modules
-import { LoginRoutingModule } from './login-routing.module';
+import { SignupRoutingModule } from './signup-routing.module';
 import { SharedModule } from '../shared/shared.module';
 
 // Components
-import { LoginComponent } from './login.component';
+import { SignupComponent } from './signup.component';
 
-describe('LoginComponent', () => {
-  let component: LoginComponent;
-  let fixture: ComponentFixture<LoginComponent>;
+describe('SignupComponent', () => {
+  let component: SignupComponent;
+  let fixture: ComponentFixture<SignupComponent>;
   let compiled: HTMLElement;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [LoginComponent],
-      imports: [ReactiveFormsModule, LoginRoutingModule, SharedModule],
+      declarations: [SignupComponent],
+      imports: [ReactiveFormsModule, SignupRoutingModule, SharedModule],
     });
 
-    fixture = TestBed.createComponent(LoginComponent);
+    fixture = TestBed.createComponent(SignupComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
     compiled = fixture.debugElement.nativeElement;
   });
 
-  it('should create the login', () => {
+  it('should create the signup', () => {
     const authContainer = compiled.querySelector('app-auth');
     const form = compiled.querySelector('form');
     const inputs = compiled.querySelectorAll('app-input');

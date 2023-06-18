@@ -81,6 +81,8 @@ export class InputComponent implements ControlValueAccessor, OnChanges {
   }
 
   onBlur() {
+    this.onTouched();
+
     this.focused = false;
 
     if (!this.inputElement?.nativeElement?.value) {
@@ -90,11 +92,15 @@ export class InputComponent implements ControlValueAccessor, OnChanges {
 
   onChange(value: string) {}
 
+  onTouched() {}
+
   registerOnChange(fn: (value: string) => void) {
     this.onChange = fn;
   }
 
   writeValue() {}
 
-  registerOnTouched() {}
+  registerOnTouched(fn: any) {
+    this.onTouched = fn;
+  }
 }
