@@ -6,9 +6,12 @@ import { Subscription } from 'rxjs';
 import { AppStore } from './store/app.reducer';
 import { changeTheme, selectTheme } from './store/theme';
 
+// Utilities
+import { addColorSchemeGlobalStyle } from './core/utilities/addColorSchemeGlobalStyle';
+import { getPreferredTheme } from './core/utilities/getPreferredTheme';
+
 // Models
 import { ThemeType } from './core/models/theme';
-import { getPreferredTheme } from './core/utilities/getPreferredTheme';
 
 @Component({
   selector: 'app-root',
@@ -31,6 +34,8 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.themeSubscription = this.store.select(selectTheme).subscribe((themeState) => {
       this.theme = themeState.theme;
+
+      addColorSchemeGlobalStyle(themeState.theme);
 
       if (!themeState.isChanged) {
         const preferredTheme = getPreferredTheme();
