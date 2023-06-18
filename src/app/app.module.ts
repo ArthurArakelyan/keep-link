@@ -17,6 +17,10 @@ import { AppRoutingModule } from './app-routing.module';
 // Components
 import { AppComponent } from './app.component';
 
+// Store
+import { appReducer } from './store/app.reducer';
+import { appEffects } from './store/app.effects';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,8 +33,8 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
 
     // NgRx
-    StoreModule.forRoot({}, {}),
-    EffectsModule.forRoot([]),
+    StoreModule.forRoot(appReducer, {}),
+    EffectsModule.forRoot(appEffects),
 
     // Firebase
     provideFirebaseApp(() => initializeApp(environment.firebase)),
