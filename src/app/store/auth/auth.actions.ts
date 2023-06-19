@@ -1,5 +1,12 @@
 import { createAction, props } from '@ngrx/store';
 
+export const changeAuth = createAction(
+  '[Auth] Change Auth',
+  props<{
+    payload: boolean;
+  }>(),
+);
+
 export const login = createAction(
   '[Auth] Login',
   props<{
