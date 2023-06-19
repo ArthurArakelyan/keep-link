@@ -15,19 +15,44 @@
   @include flex(row, center, center);
   transition: background-color .2s ease, box-shadow .2s ease, opacity .2s ease;
 
-  @include hover() {
-    box-shadow: 0 0 0.313rem var(--shadow-md-color);
-    background-color: $primary-color-hover;
+  &:not(:disabled) {
+    @include hover() {
+      box-shadow: 0 0 0.313rem var(--shadow-md-color);
+      background-color: $primary-color-hover;
+    }
+
+    @include active() {
+      box-shadow: 0 0 0.35rem var(--shadow-lg-color);
+    }
   }
 
-  @include active() {
-    box-shadow: 0 0 0.35rem var(--shadow-lg-color);
+  &--loading {
+    .button__content {
+      opacity: 0;
+    }
+  }
+
+  &:not(&--loading):disabled {
+    .button__content {
+      opacity: 0.6;
+    }
   }
 }
 
 .button:disabled {
   cursor: default;
-  opacity: 0.6;
+  background-color: $primary-color-600;
+}
+
+.button__content {
+  opacity: 1;
+  @include flex(row, center, center);
+  transition: opacity .2s ease;
+}
+
+.button__loader {
+  position: absolute;
+  color: $white;
 }
 
 .ripple {

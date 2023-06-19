@@ -1,3 +1,6 @@
-export const appEffects = [
+// Effects
+import { AuthEffects } from './auth';
 
+export const appEffects = [
+  AuthEffects,
 ];

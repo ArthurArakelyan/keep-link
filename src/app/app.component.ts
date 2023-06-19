@@ -11,7 +11,7 @@ import { addColorSchemeGlobalStyle } from './core/utilities/addColorSchemeGlobal
 import { getPreferredTheme } from './core/utilities/getPreferredTheme';
 
 // Models
-import { ThemeType } from './core/models/theme';
+import { ThemeType } from './core/models/theme.model';
 
 @Component({
   selector: 'app-root',

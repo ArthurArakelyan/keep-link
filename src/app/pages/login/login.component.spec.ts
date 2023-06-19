@@ -1,29 +1,35 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { SharedModule } from '../../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
+import { Store, StoreModule } from '@ngrx/store';
 
 // Modules
 import { LoginRoutingModule } from './login-routing.module';
+import { SharedModule } from '../../shared/shared.module';
 
 // Components
 import { LoginComponent } from './login.component';
-import { RouterTestingModule } from '@angular/router/testing';
+
+// Store
+import { appReducer, AppStore } from '../../store/app.reducer';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
   let compiled: HTMLElement;
+  let store: Store<AppStore>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [LoginComponent],
-      imports: [ReactiveFormsModule, LoginRoutingModule, SharedModule, RouterTestingModule],
+      imports: [ReactiveFormsModule, LoginRoutingModule, SharedModule, RouterTestingModule, StoreModule.forRoot(appReducer)],
     });
 
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
     compiled = fixture.debugElement.nativeElement;
+    store = TestBed.get<Store>(Store);
   });
 
   it('should create the login', () => {

@@ -1,6 +1,8 @@
 <button
-  [type]="type"
   class="button"
+  [type]="type"
+  [disabled]="loading || disabled"
+  [ngClass]="{ 'button--loading': loading }"
   (click)="onClick($event)"
   (mousedown)="onMouseDown($event)"
 >
@@ -10,5 +12,9 @@
     [ngStyle]="{ left: ripple.left, top: ripple.top }"
   ></div>
 
-  <ng-content></ng-content>
+  <div class="button__content">
+    <ng-content></ng-content>
+  </div>
+
+  <app-loader *ngIf="loading" size="small" class="button__loader"></app-loader>
 </button>

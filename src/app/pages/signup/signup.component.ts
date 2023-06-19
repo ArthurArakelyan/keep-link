@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 
 // Constants
 import { MIN_VALIDATION_LENGTHS, VALIDATION_LENGTHS } from '../../core/constants/validation';
@@ -7,13 +9,20 @@ import { MIN_VALIDATION_LENGTHS, VALIDATION_LENGTHS } from '../../core/constants
 // Validators
 import { confirmPasswordValidator } from '../../core/validators/confirmPassword.validator';
 
+// Store
+import { AppStore } from '../../store/app.reducer';
+import { selectAuth, signup } from '../../store/auth';
+
 @Component({
   selector: 'app-signup',
   templateUrl: 'signup.component.html',
   styleUrls: ['signup.component.scss'],
 })
-export class SignupComponent {
+export class SignupComponent implements OnInit, OnDestroy {
   submitted: boolean = false;
+  loading: boolean = false;
+
+  authSubscription: Subscription | null = null;
 
   signupForm = new FormGroup({
     name: new FormControl('', {
@@ -30,6 +39,20 @@ export class SignupComponent {
     }),
   });
 
+  constructor(
+    private store: Store<AppStore>,
+  ) {}
+
+  ngOnInit() {
+    this.authSubscription = this.store.select(selectAuth).subscribe((authState) => {
+      this.loading = authState.loading.signup;
+    });
+  }
+
+  ngOnDestroy() {
+    this.authSubscription?.unsubscribe();
+  }
+
   onSubmit() {
     this.submitted = true;
 
@@ -37,5 +60,12 @@ export class SignupComponent {
       return;
     }
 
+    this.store.dispatch(signup({
+      payload: {
+        name: this.signupForm.value.name!,
+        email: this.signupForm.value.email!,
+        password: this.signupForm.value.password!,
+      },
+    }));
   }
 }
