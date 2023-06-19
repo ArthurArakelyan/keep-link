@@ -60,7 +60,7 @@ export class AuthEffects {
   redirectOnAuth = createEffect(() => this.actions$.pipe(
     ofType(loginFulfilled, signupFulfilled),
     tap(() => {
-      this.router.navigate(['/']);
+      this.router.navigate(['/'], { replaceUrl: true });
     }),
   ), { dispatch: false });
 
