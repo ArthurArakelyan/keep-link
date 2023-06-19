@@ -1,5 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { AuthService } from './core/services/auth.service';
 import { Store, StoreModule } from '@ngrx/store';
+import { User } from '@angular/fire/auth';
 
 // Modules
 import { AppRoutingModule } from './app-routing.module';
@@ -16,11 +19,19 @@ describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
   let compiled: HTMLElement;
   let store: Store<AppStore>;
+  let authServiceStub: Partial<AuthService> = {
+    onAuthChanged(callback: (user: (User | null)) => any): () => void {
+      return () => {};
+    },
+  };
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [AppComponent],
-      imports: [AppRoutingModule, StoreModule.forRoot(appReducer)],
+      imports: [AppRoutingModule, StoreModule.forRoot(appReducer), RouterTestingModule],
+      providers: [
+        { provide: AuthService, useValue: authServiceStub },
+      ],
     });
 
     fixture = TestBed.createComponent(AppComponent);
