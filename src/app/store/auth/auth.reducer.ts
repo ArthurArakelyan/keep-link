@@ -2,6 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 
 // Actions
 import {
+  changeAuth,
   login,
   loginFulfilled,
   loginRejected,
@@ -23,6 +24,12 @@ export const initialState: AuthState = {
 
 export const authReducer = createReducer(
   initialState,
+  on(changeAuth, (state, action) => {
+    return {
+      ...state,
+      isAuth: action.payload,
+    };
+  }),
   on(login, (state) => {
     return {
       ...state,

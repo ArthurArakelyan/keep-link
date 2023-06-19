@@ -20,6 +20,7 @@ import { AppComponent } from './app.component';
 
 // Store
 import { appReducer } from './store/app.reducer';
+import { metaReducers } from './store/meta.reducers';
 import { appEffects } from './store/app.effects';
 
 @NgModule({
@@ -34,7 +35,7 @@ import { appEffects } from './store/app.effects';
     AppRoutingModule,
 
     // NgRx
-    StoreModule.forRoot(appReducer, {}),
+    StoreModule.forRoot(appReducer, { metaReducers }),
     EffectsModule.forRoot(appEffects),
 
     // Firebase
