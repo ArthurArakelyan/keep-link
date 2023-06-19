@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 // Models
-import { IRipple } from '../../../core/models/ripple';
+import { IRipple } from '../../../core/models/ripple.model';
 
 @Component({
   selector: 'app-button',
@@ -12,14 +12,24 @@ export class ButtonComponent {
   ripples: IRipple[] = [];
 
   @Input() type: string = 'button';
+  @Input() loading: boolean = false;
+  @Input() disabled: boolean = false;
 
   @Output() buttonClick = new EventEmitter<MouseEvent>();
 
   onClick(e: MouseEvent) {
+    if (this.disabled || this.loading) {
+      return;
+    }
+
     this.buttonClick.emit(e);
   }
 
   onMouseDown(e: MouseEvent) {
+    if (this.disabled || this.loading) {
+      return;
+    }
+
     const id = Math.random().toString();
     const size = (<HTMLElement>e.currentTarget).clientWidth;
     const rect = (<HTMLElement>e.currentTarget).getBoundingClientRect();

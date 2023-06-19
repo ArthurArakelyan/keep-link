@@ -4,10 +4,14 @@ import { RouterModule, Routes } from '@angular/router';
 // Components
 import { SignupComponent } from './signup.component';
 
+// Guards
+import { NoAuthGuard } from '../../core/guards/no-auth.guard';
+
 const signupRoutes: Routes = [
   {
     path: '',
     component: SignupComponent,
+    canActivate: [NoAuthGuard],
   },
 ];
 

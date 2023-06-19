@@ -5,12 +5,14 @@ import { CommonModule } from '@angular/common';
 import { ButtonComponent } from './components/button/button.component';
 import { InputComponent } from './components/input/input.component';
 import { AuthComponent } from './components/auth/auth.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
   declarations: [
     ButtonComponent,
     InputComponent,
     AuthComponent,
+    LoaderComponent,
   ],
   imports: [
     CommonModule,
@@ -20,6 +22,7 @@ import { AuthComponent } from './components/auth/auth.component';
     ButtonComponent,
     InputComponent,
     AuthComponent,
+    LoaderComponent,
   ],
 })
 export class SharedModule {

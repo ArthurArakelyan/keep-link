@@ -1,5 +1,5 @@
 // Models
-import { ThemeType } from '../../models/theme';
+import { ThemeType } from '../../models/theme.model';
 
 export const addColorSchemeGlobalStyle = (theme: ThemeType) => {
   try {
