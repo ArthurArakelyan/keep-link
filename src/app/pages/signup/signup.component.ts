@@ -26,15 +26,19 @@ export class SignupComponent implements OnInit, OnDestroy {
 
   signupForm = new FormGroup({
     name: new FormControl('', {
+      nonNullable: true,
       validators: [Validators.required, Validators.maxLength(VALIDATION_LENGTHS.short)],
     }),
     email: new FormControl('', {
+      nonNullable: true,
       validators: [Validators.required, Validators.email, Validators.maxLength(VALIDATION_LENGTHS.long)],
     }),
     password: new FormControl('', {
+      nonNullable: true,
       validators: [Validators.required, Validators.minLength(MIN_VALIDATION_LENGTHS.short), Validators.maxLength(VALIDATION_LENGTHS.base)],
     }),
     confirmPassword: new FormControl('', {
+      nonNullable: true,
       validators: [Validators.required, confirmPasswordValidator],
     }),
   });
