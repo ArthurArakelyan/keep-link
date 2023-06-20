@@ -8,7 +8,6 @@ import { ThemeState } from './theme.state';
 
 export const initialState: ThemeState = {
   theme: 'light',
-  isChanged: false,
 };
 
 export const themeReducer = createReducer(
@@ -17,7 +16,6 @@ export const themeReducer = createReducer(
     return {
       ...state,
       theme: action.payload,
-      isChanged: true,
     };
   }),
 );

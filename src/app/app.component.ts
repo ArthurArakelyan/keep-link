@@ -41,13 +41,15 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.themeSubscription = this.store.select(selectTheme).subscribe((themeState) => {
-      this.theme = themeState.theme;
+      const theme = themeState.theme;
 
-      addColorSchemeGlobalStyle(themeState.theme);
+      this.theme = theme;
 
-      if (!themeState.isChanged) {
-        const preferredTheme = getPreferredTheme();
+      addColorSchemeGlobalStyle(theme);
 
+      const preferredTheme = getPreferredTheme();
+
+      if (theme !== preferredTheme) {
         this.store.dispatch(changeTheme({ payload: preferredTheme }));
       }
     });
