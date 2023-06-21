@@ -1,0 +1,13 @@
+@import "mixins";
+
+:host {
+  @include flex(row, center, center);
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}

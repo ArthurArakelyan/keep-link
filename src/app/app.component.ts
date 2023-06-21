@@ -28,8 +28,10 @@ import { ThemeType } from './core/models/theme.model';
   },
 })
 export class AppComponent implements OnInit, OnDestroy {
+  isAuth: boolean = false;
   theme: ThemeType = 'light';
 
+  authSubscription: Subscription | null = null;
   themeSubscription: Subscription | null = null;
   authChangedSubscription: (() => void) | null = null;
 
@@ -40,6 +42,10 @@ export class AppComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    this.authSubscription = this.store.select(selectAuth).subscribe((authState) => {
+      this.isAuth = authState.isAuth;
+    });
+
     this.themeSubscription = this.store.select(selectTheme).subscribe((themeState) => {
       const theme = themeState.theme;
 
@@ -72,6 +78,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.authSubscription?.unsubscribe();
     this.themeSubscription?.unsubscribe();
 
     this.authChangedSubscription?.();
