@@ -14,5 +14,12 @@ $error-color: #ed4337;
 
 // sizes
 $auth-container-width: 31.25rem;
-$header-height: 5rem;
-$side-menu-width: 12rem;
+$header-height: 5.625rem;
+$side-menu-width: 11.25rem;
+
+// z-indexes
+$negative-z-index: -1;
+$zero-z-index: 0;
+$component-z-index: 1;
+$popup-z-index: 2;
+$modal-z-index: 3;

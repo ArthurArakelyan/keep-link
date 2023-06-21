@@ -10,6 +10,7 @@ import { NoAuthGuard } from '../../core/guards/no-auth.guard';
 const signupRoutes: Routes = [
   {
     path: '',
+    title: 'Signup | KeepLink',
     component: SignupComponent,
     canActivate: [NoAuthGuard],
   },

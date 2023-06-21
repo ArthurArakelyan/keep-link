@@ -19,6 +19,7 @@ import { SharedModule } from './shared/shared.module';
 // Components
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './core/components/header/header.component';
+import { SideMenuComponent } from './core/components/side-menu/side-menu.component';
 
 // Store
 import { appReducer } from './store/app.reducer';
@@ -29,6 +30,7 @@ import { appEffects } from './store/app.effects';
   declarations: [
     AppComponent,
     HeaderComponent,
+    SideMenuComponent,
   ],
   imports: [
     BrowserModule,
