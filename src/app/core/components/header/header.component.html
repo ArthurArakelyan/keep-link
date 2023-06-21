@@ -1,0 +1,26 @@
+<div class="search">
+  <app-search-icon
+    width="20"
+    height="20"
+    iconClass="search__icon"
+    (click)="onFocusSearch(search)"
+  ></app-search-icon>
+
+  <input
+    type="text"
+    tabindex="0"
+    placeholder="Search"
+    class="search__input"
+    #search
+  />
+</div>
+
+<div class="avatar">
+  <app-avatar
+    src=""
+    alt="Avatar"
+    width="50"
+    height="50"
+    class="avatar__image"
+  />
+</div>
