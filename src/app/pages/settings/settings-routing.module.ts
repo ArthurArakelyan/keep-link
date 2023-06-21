@@ -2,24 +2,24 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 // Components
-import { HomeComponent } from './home.component';
+import { SettingsComponent } from './settings.component';
 
 // Guards
 import { AuthGuard } from '../../core/guards/auth.guard';
 
-const homeRoutes: Routes = [
+const settingsRoutes: Routes = [
   {
     path: '',
-    title: 'KeepLink',
-    component: HomeComponent,
+    title: 'Settings | KeepLink',
+    component: SettingsComponent,
     canActivate: [AuthGuard],
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(homeRoutes)],
+  imports: [RouterModule.forChild(settingsRoutes)],
   exports: [RouterModule],
 })
-export class HomeRoutingModule {
+export class SettingsRoutingModule {
 
 }

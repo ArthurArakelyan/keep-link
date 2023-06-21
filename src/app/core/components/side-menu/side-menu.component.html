@@ -1,0 +1,43 @@
+<div class="side-menu-header">
+  <a routerLink="/" tabindex="0" class="side-menu-header__logo">
+    <img
+      src="/assets/logo-64.png"
+      alt="Logo"
+      width="60"
+      height="60"
+      class="side-menu-header__logo-image"
+    />
+  </a>
+</div>
+
+<nav class="side-menu-content">
+  <div class="side-menu__add">
+    <app-button variant="rounded" class="side-menu__add-button">
+      <app-plus-icon width="16" height="16" class="side-menu__add-button-icon" iconClass="side-menu__add-button-icon"></app-plus-icon>
+      <span>Add Link</span>
+    </app-button>
+  </div>
+
+  <ul class="side-menu__links">
+    <li
+      *ngFor="let navLink of navLinks"
+      class="side-menu__link-wrapper"
+    >
+      <a
+        [routerLink]="navLink.link"
+        routerLinkActive="side-menu__link--active active"
+        [routerLinkActiveOptions]="{ exact: navLink.exact }"
+        tabindex="0"
+        class="side-menu__link"
+      >
+        <div [ngSwitch]="navLink.icon">
+          <app-link-icon *ngSwitchCase="'link'" class="side-menu__link-icon-wrapper" iconClass="side-menu__link-icon"></app-link-icon>
+          <app-user-icon *ngSwitchCase="'user'" class="side-menu__link-icon-wrapper" iconClass="side-menu__link-icon"></app-user-icon>
+          <app-gear-icon *ngSwitchCase="'gear'" class="side-menu__link-icon-wrapper" iconClass="side-menu__link-icon"></app-gear-icon>
+        </div>
+
+        <p class="side-menu__link-name">{{ navLink.name }}</p>
+      </a>
+    </li>
+  </ul>
+</nav>

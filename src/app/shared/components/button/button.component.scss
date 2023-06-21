@@ -3,7 +3,7 @@
 
 .button {
   position: relative;
-  z-index: 1;
+  z-index: $component-z-index;
   overflow: hidden;
   cursor: pointer;
   border: none;
@@ -14,6 +14,12 @@
   @include font(1rem, 500, $white, center);
   @include flex(row, center, center);
   transition: background-color .2s ease, box-shadow .2s ease, opacity .2s ease;
+
+  &--loading {
+    .button__content {
+      opacity: 0;
+    }
+  }
 
   &:not(:disabled) {
     @include hover() {
@@ -26,16 +32,18 @@
     }
   }
 
-  &--loading {
-    .button__content {
-      opacity: 0;
-    }
-  }
-
   &:not(&--loading):disabled {
     .button__content {
       opacity: 0.6;
     }
+  }
+
+  // variants
+  &--rounded {
+    width: 100%;
+    padding: 0.7rem 0.9rem;
+    border-radius: 1.5rem;
+    justify-content: flex-start;
   }
 }
 
@@ -57,7 +65,7 @@
 
 .ripple {
   position: absolute;
-  z-index: -1;
+  z-index: $negative-z-index;
   border-radius: 50%;
   width: 100px;
   height: 100px;

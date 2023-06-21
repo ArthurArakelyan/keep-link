@@ -2,7 +2,7 @@
   class="button"
   [type]="type"
   [disabled]="loading || disabled"
-  [ngClass]="{ 'button--loading': loading }"
+  [ngClass]="{ 'button--loading': loading, 'button--rounded': variant === 'rounded' }"
   (click)="onClick($event)"
   (mousedown)="onMouseDown($event)"
 >

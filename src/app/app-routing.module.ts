@@ -8,6 +8,14 @@ const appRoutes: Routes = [
     loadChildren: () => import('./pages/home/home.module').then((module) => module.HomeModule),
   },
   {
+    path: 'profile',
+    loadChildren: () => import('./pages/profile/profile.module').then((module) => module.ProfileModule),
+  },
+  {
+    path: 'settings',
+    loadChildren: () => import('./pages/settings/settings.module').then((module) => module.SettingsModule),
+  },
+  {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then((module) => module.LoginModule),
   },

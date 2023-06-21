@@ -25,7 +25,7 @@ describe('HeaderComponent', () => {
 
   it('should create the header', () => {
     expect(compiled.querySelector('.search__input')).toBeInstanceOf(HTMLInputElement);
-    expect(compiled.querySelector('.search__icon')).toBeInstanceOf(SVGSVGElement);
+    expect(compiled.querySelector('svg.search__icon')).toBeInstanceOf(SVGSVGElement);
     expect(compiled.querySelector('.avatar__image')).toBeInstanceOf(HTMLElement);
   });
 

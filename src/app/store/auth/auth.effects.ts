@@ -21,7 +21,7 @@ import {
 import { getFirebaseError } from '../../core/utilities/getFirebaseError';
 
 // Constants
-import { authErrors } from '../../core/constants/authErrors';
+import { authErrors } from '../../core/constants/auth-errors';
 
 @Injectable()
 export class AuthEffects {

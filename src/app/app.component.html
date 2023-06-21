@@ -1,5 +1,7 @@
-<div *ngIf="isAuth; else loggedOut">
+<div *ngIf="isAuth; else loggedOut" class="user-layout">
   <app-header></app-header>
+
+  <app-side-menu></app-side-menu>
 
   <main class="main">
     <router-outlet></router-outlet>

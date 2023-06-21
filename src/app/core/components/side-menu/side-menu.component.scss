@@ -1,0 +1,117 @@
+@import "mixins";
+@import "scss-variables";
+
+:host {
+  position: sticky;
+  left: 0;
+  top: 0;
+  z-index: $component-z-index;
+  width: $side-menu-width;
+  height: 100vh;
+  background-color: var(--header-footer-background-color);
+}
+:host::ng-deep {
+  svg.side-menu__link-icon {
+    width: 1.125rem;
+    height: 1.125rem;
+    fill: var(--primary-text-color);
+  }
+
+  svg.side-menu__add-button-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: $white;
+  }
+}
+
+.side-menu-header {
+  position: relative;
+  z-index: $component-z-index;
+  width: 100%;
+  height: $header-height + 0.063;
+  border-bottom: 0.063rem solid var(--gray-100);
+  border-right: 0.063rem solid var(--gray-100);
+  @include flex(row, center, center);
+
+  &::after {
+    content: "";
+    position: absolute;
+    z-index: $component-z-index;
+    bottom: 0;
+    width: 100%;
+    height: 0;
+    box-shadow: 0 0 5px var(--shadow-sm-color);
+  }
+}
+.side-menu-header__logo {
+  @include flex(row, center, flex-start);
+}
+.side-menu-header__logo-image {
+  width: 3.75rem;
+  height: 3.75rem;
+  display: block;
+}
+
+.side-menu-content {
+  width: 100%;
+  padding: 2rem 0;
+}
+
+.side-menu__add {
+  width: 100%;
+  padding: 0 1.5rem;
+  @include flex(row, center, center);
+}
+.side-menu__add-button {
+  width: 100%;
+}
+.side-menu__add-button-icon {
+  margin-right: 0.3rem;
+}
+
+.side-menu__links {
+  width: 100%;
+  margin-top: 2rem;
+  @include flex(column, flex-start, flex-start);
+}
+.side-menu__link-wrapper {
+  width: 100%;
+}
+.side-menu__link {
+  width: 100%;
+  padding: 1rem;
+  background-color: transparent;
+  @include flex(row, center, flex-start);
+  transition: background-color .2s ease;
+
+  &.active {
+    background-color: var(--white-background-highlited);
+
+    .side-menu__link-name {
+      font-weight: 500;
+    }
+
+    @include hover() {
+      background-color: var(--white-background-highlited-hover);
+    }
+
+    @include active() {
+      background-color: var(--white-background-highlited-active);
+    }
+  }
+
+  @include hover() {
+    background-color: var(--white-background-hover);
+  }
+
+  @include active() {
+    background-color: var(--white-background-active);
+  }
+}
+.side-menu__link-icon-wrapper {
+  @include flex(row, center, center);
+}
+.side-menu__link-name {
+  margin-left: 0.75rem;
+  @include font(1rem, 400, var(--primary-text-color));
+}

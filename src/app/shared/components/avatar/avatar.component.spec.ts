@@ -11,7 +11,6 @@ describe('AvatarComponent', () => {
   let fixture: ComponentFixture<AvatarComponent>;
   let compiled: HTMLElement;
 
-  // A blank image
   const defaultSrc = 'assets/avatar.png';
   const testSrc = 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs=';
 

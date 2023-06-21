@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-search-icon',
-  templateUrl: 'search-icon.component.html',
+  selector: 'app-gear-icon',
+  templateUrl: 'gear-icon.component.html',
   styles: [
     `
       :host {
@@ -13,7 +13,7 @@ import { Component, Input } from '@angular/core';
     `,
   ],
 })
-export class SearchIconComponent {
+export class GearIconComponent {
   @Input() width: string = '16';
   @Input() height: string = '16';
   @Input() iconClass: string = '';
