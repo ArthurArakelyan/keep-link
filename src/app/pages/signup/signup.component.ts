@@ -49,6 +49,10 @@ export class SignupComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.authSubscription = this.store.select(selectAuth).subscribe((authState) => {
+      if (this.loading && !authState.loading.signup) {
+        this.resetForm();
+      }
+
       this.loading = authState.loading.signup;
     });
   }
@@ -71,5 +75,10 @@ export class SignupComponent implements OnInit, OnDestroy {
         password: this.signupForm.value.password!,
       },
     }));
+  }
+
+  private resetForm() {
+    this.submitted = false;
+    this.signupForm.reset();
   }
 }

@@ -44,6 +44,7 @@ export class InputComponent implements ControlValueAccessor, OnChanges {
   focused: boolean = false;
   divided: boolean = false;
   errorMessage: string = '';
+  value: string = '';
 
   @Input({ required: true }) placeholder: string = '';
   @Input() name: string = '';
@@ -72,7 +73,11 @@ export class InputComponent implements ControlValueAccessor, OnChanges {
   }
 
   onInput(e: Event) {
-    this.onChange((<HTMLInputElement>e.target).value);
+    const value = (<HTMLInputElement>e.target).value;
+
+    this.value = value;
+
+    this.onChange(value);
   }
 
   onFocus() {
@@ -98,7 +103,9 @@ export class InputComponent implements ControlValueAccessor, OnChanges {
     this.onChange = fn;
   }
 
-  writeValue() {}
+  writeValue(value: string) {
+    this.value = value;
+  }
 
   registerOnTouched(fn: any) {
     this.onTouched = fn;

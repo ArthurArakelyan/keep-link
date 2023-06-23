@@ -38,6 +38,10 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.authSubscription = this.store.select(selectAuth).subscribe((authState) => {
+      if (this.loading && !authState.loading.login) {
+        this.resetForm();
+      }
+
       this.loading = authState.loading.login;
     });
   }
@@ -59,5 +63,10 @@ export class LoginComponent implements OnInit, OnDestroy {
         password: this.loginForm.value.password!,
       },
     }));
+  }
+
+  private resetForm() {
+    this.submitted = false;
+    this.loginForm.reset();
   }
 }
