@@ -19,6 +19,7 @@ export const login = createAction(
 
 export const loginFulfilled = createAction(
   '[Auth] Login Fulfilled',
+  props<{ payload: string }>(),
 );
 
 export const loginRejected = createAction(
@@ -38,6 +39,7 @@ export const signup = createAction(
 
 export const signupFulfilled = createAction(
   '[Auth] Signup Fulfilled',
+  props<{ payload: string }>(),
 );
 
 export const signupRejected = createAction(

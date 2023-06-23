@@ -15,6 +15,7 @@ import {
 import { AuthState } from './auth.state';
 
 export const initialState: AuthState = {
+  id: null,
   isAuth: false,
   loading: {
     login: false,
@@ -39,10 +40,11 @@ export const authReducer = createReducer(
       },
     };
   }),
-  on(loginFulfilled, (state) => {
+  on(loginFulfilled, (state, action) => {
     return {
       ...state,
       isAuth: true,
+      id: action.payload,
       loading: {
         ...state.loading,
         login: false,
@@ -53,6 +55,7 @@ export const authReducer = createReducer(
     return {
       ...state,
       isAuth: false,
+      id: null,
       loading: {
         ...state.loading,
         login: false,
@@ -68,10 +71,11 @@ export const authReducer = createReducer(
       },
     };
   }),
-  on(signupFulfilled, (state) => {
+  on(signupFulfilled, (state, action) => {
     return {
       ...state,
       isAuth: true,
+      id: action.payload,
       loading: {
         ...state.loading,
         signup: false,
@@ -82,6 +86,7 @@ export const authReducer = createReducer(
     return {
       ...state,
       isAuth: false,
+      id: null,
       loading: {
         ...state.loading,
         signup: false,

@@ -18,6 +18,7 @@ import { SharedModule } from './shared/shared.module';
 
 // Components
 import { AppComponent } from './app.component';
+import { UserLayoutComponent } from './core/components/user-layout/user-layout.component';
 import { HeaderComponent } from './core/components/header/header.component';
 import { SideMenuComponent } from './core/components/side-menu/side-menu.component';
 
@@ -29,6 +30,7 @@ import { appEffects } from './store/app.effects';
 @NgModule({
   declarations: [
     AppComponent,
+    UserLayoutComponent,
     HeaderComponent,
     SideMenuComponent,
   ],
