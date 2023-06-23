@@ -28,6 +28,7 @@ import { getFirebaseError } from '../../core/utilities/getFirebaseError';
 
 // Constants
 import { authErrors } from '../../core/constants/auth-errors';
+import { verificationMessage } from '../../core/constants/error-messages';
 
 @Injectable()
 export class AuthEffects {
@@ -37,7 +38,22 @@ export class AuthEffects {
       return this.authService.login(payload.email, payload.password)
         .pipe(
           switchMap(({ user }) => {
-            return of(loginFulfilled({ payload: user.uid }));
+            if (user.emailVerified) {
+              return of(loginFulfilled({ payload: user.uid }));
+            }
+
+            return this.authService.sendEmailVerification(user)
+              .pipe(
+                switchMap(() => {
+                  this.showVerificationMessage();
+
+                  return of(loginRejected());
+                }),
+                catchError((error) => {
+                  this.toast.error(getFirebaseError(error.toString(), authErrors));
+                  return of(loginRejected());
+                }),
+              );
           }),
           catchError((error) => {
             this.toast.error(getFirebaseError(error.toString(), authErrors));
@@ -66,7 +82,24 @@ export class AuthEffects {
             return this.userService.addedUser$
               .pipe(
                 switchMap(() => {
-                  return of(signupFulfilled({ payload: user.uid }));
+                  if (user.emailVerified) {
+                    return of(signupFulfilled({ payload: user.uid }));
+                  }
+
+                  return this.authService.sendEmailVerification(user)
+                    .pipe(
+                      switchMap(() => {
+                        this.showVerificationMessage();
+
+                        this.router.navigate(['/login']);
+
+                        return of(signupRejected());
+                      }),
+                      catchError((error) => {
+                        this.toast.error(getFirebaseError(error.toString(), authErrors));
+                        return of(signupRejected());
+                      }),
+                    );
                 }),
                 catchError(() => {
                   return of(signupRejected());
@@ -96,4 +129,11 @@ export class AuthEffects {
     private router: Router,
     private store: Store<AppStore>,
   ) {}
+
+  private showVerificationMessage() {
+    this.toast.info(verificationMessage, undefined, {
+      timeOut: 30000,
+      progressBar: true,
+    });
+  }
 }

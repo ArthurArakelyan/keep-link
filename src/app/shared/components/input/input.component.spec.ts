@@ -64,6 +64,18 @@ describe('InputComponent', () => {
     expect(input.getAttribute('aria-label')).toBe(placeholder);
   });
 
+  it('should have sync with input value property', () => {
+    const value = 'value';
+
+    component.value = value;
+
+    fixture.detectChanges();
+
+    const input = compiled.querySelector('input')!;
+
+    expect(input.value).toBe(value);
+  });
+
   it('should change the focused and divided states on focus and blur', () => {
     expect(component.focused).toBeFalse();
     expect(component.divided).toBeFalse();
