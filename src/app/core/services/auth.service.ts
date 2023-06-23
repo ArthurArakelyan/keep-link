@@ -24,7 +24,7 @@ export class AuthService {
     return from(createUserWithEmailAndPassword(this.auth, email, password));
   }
 
-  onAuthChanged(callback: (user: User | null) => any) {
+  onAuthChanged(callback: (user: User | null) => void) {
     return onAuthStateChanged(this.auth, callback);
   }
 

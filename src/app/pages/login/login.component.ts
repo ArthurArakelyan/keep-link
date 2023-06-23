@@ -59,8 +59,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     this.store.dispatch(login({
       payload: {
-        email: this.loginForm.value.email!,
-        password: this.loginForm.value.password!,
+        email: this.loginForm.value.email || '',
+        password: this.loginForm.value.password || '',
       },
     }));
   }

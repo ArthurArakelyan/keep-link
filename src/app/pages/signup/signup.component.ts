@@ -70,9 +70,9 @@ export class SignupComponent implements OnInit, OnDestroy {
 
     this.store.dispatch(signup({
       payload: {
-        name: this.signupForm.value.name!,
-        email: this.signupForm.value.email!,
-        password: this.signupForm.value.password!,
+        name: this.signupForm.value.name || '',
+        email: this.signupForm.value.email || '',
+        password: this.signupForm.value.password || '',
       },
     }));
   }
