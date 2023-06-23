@@ -1,11 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
 import { catchError, of, switchMap, tap } from 'rxjs';
 
 // Services
 import { AuthService } from '../../core/services/auth.service';
+import { UserService } from '../../core/services/user.service';
+
+// Store
+import { AppStore } from '../app.reducer';
 
 // Actions
 import {
@@ -16,6 +21,7 @@ import {
   signupFulfilled,
   signupRejected,
 } from './auth.actions';
+import { addUser } from '../user';
 
 // Utilities
 import { getFirebaseError } from '../../core/utilities/getFirebaseError';
@@ -30,8 +36,8 @@ export class AuthEffects {
     switchMap(({ payload }) => {
       return this.authService.login(payload.email, payload.password)
         .pipe(
-          switchMap(() => {
-            return of(loginFulfilled());
+          switchMap(({ user }) => {
+            return of(loginFulfilled({ payload: user.uid }));
           }),
           catchError((error) => {
             this.toast.error(getFirebaseError(error.toString(), authErrors));
@@ -46,8 +52,26 @@ export class AuthEffects {
     switchMap(({ payload }) => {
       return this.authService.signup(payload.email, payload.password)
         .pipe(
-          switchMap(() => {
-            return of(signupFulfilled());
+          tap(({ user }) => {
+            this.store.dispatch(addUser({
+              payload: {
+                id: user.uid,
+                name: payload.name,
+                email: payload.email,
+                avatar: '',
+              },
+            }));
+          }),
+          switchMap(({ user }) => {
+            return this.userService.addedUser$
+              .pipe(
+                switchMap(() => {
+                  return of(signupFulfilled({ payload: user.uid }));
+                }),
+                catchError(() => {
+                  return of(signupRejected());
+                }),
+              );
           }),
           catchError((error) => {
             this.toast.error(getFirebaseError(error.toString(), authErrors));
@@ -67,7 +91,9 @@ export class AuthEffects {
   constructor(
     private actions$: Actions,
     private authService: AuthService,
+    private userService: UserService,
     private toast: ToastrService,
     private router: Router,
+    private store: Store<AppStore>,
   ) {}
 }

@@ -1,12 +1,4 @@
-<div *ngIf="isAuth; else loggedOut" class="user-layout">
-  <app-header></app-header>
-
-  <app-side-menu></app-side-menu>
-
-  <main class="main">
-    <router-outlet></router-outlet>
-  </main>
-</div>
+<app-user-layout *ngIf="isAuth; else loggedOut"></app-user-layout>
 <ng-template #loggedOut>
   <router-outlet></router-outlet>
 </ng-template>

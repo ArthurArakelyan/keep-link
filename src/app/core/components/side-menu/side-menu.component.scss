@@ -8,6 +8,8 @@
   z-index: $component-z-index;
   width: $side-menu-width;
   height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
   background-color: var(--header-footer-background-color);
 }
 :host::ng-deep {
@@ -55,6 +57,8 @@
 .side-menu-content {
   width: 100%;
   padding: 2rem 0;
+  max-height: calc(100vh - $header-height);
+  overflow-y: auto;
 }
 
 .side-menu__add {

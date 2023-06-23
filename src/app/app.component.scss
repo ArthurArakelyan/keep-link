@@ -7,24 +7,3 @@
   background-color: var(--background-color);
   display: flex;
 }
-
-.user-layout {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.main {
-  min-height: calc(100vh - $header-height);
-  width: 1%;
-  flex: 1 1;
-  padding: 2rem;
-  margin-top: $header-height;
-}
-
-@media (max-width: 1250px) {
-  .main {
-    padding: 1.5rem;
-    min-height: calc(100vh - $header-height);
-    margin-top: $header-height;
-  }
-}
