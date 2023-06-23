@@ -22,7 +22,9 @@ jobs:
         cache: 'npm'
     - name: Install node modules
       run: npm ci
-    - name: build
-      run: npm run build
+    - name: Run lint checks
+      run: npm run lint
     - name: Run unit tests
       run: npm run test:prod
+    - name: Build
+      run: npm run build
