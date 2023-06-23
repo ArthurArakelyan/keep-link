@@ -11,6 +11,8 @@ import {
   updateDoc,
   deleteDoc,
   QueryConstraint,
+  DocumentReference,
+  CollectionReference,
 } from '@angular/fire/firestore';
 import { from, Observable } from 'rxjs';
 
@@ -67,28 +69,28 @@ export class FirestoreService {
     }));
   }
 
-  add<T = any>(path: string, data: T, id?: string): Observable<void> {
+  add<T extends object>(path: string, data: T, id?: string): Observable<void> {
     return from(new Promise<void>(async (resolve, reject) => {
       try {
-        const newDoc: any = id ? doc(this.firestore, path, id) : collection(this.firestore, path);
+        const newDoc = id ? doc(this.firestore, path, id) : collection(this.firestore, path);
 
         if (id) {
-          resolve(setDoc(newDoc, data));
+          resolve(setDoc(newDoc as DocumentReference, data));
         }
 
-        resolve(addDoc(newDoc, data).then(() => undefined));
+        resolve(addDoc(newDoc as CollectionReference, data).then(() => undefined));
       } catch (e) {
         reject(e);
       }
     }));
   }
 
-  edit<T = any>(path: string, data: T, id: string): Observable<void> {
+  edit<T extends object>(path: string, data: T, id: string): Observable<void> {
     return from(new Promise<void>(async (resolve, reject) => {
       try {
         const newDoc = doc(this.firestore, path, id);
 
-        resolve(updateDoc(newDoc, data as any));
+        resolve(updateDoc(newDoc, data));
       } catch (e) {
         reject(e);
       }

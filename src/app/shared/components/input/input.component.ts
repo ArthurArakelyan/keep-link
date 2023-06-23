@@ -1,7 +1,7 @@
 import {
   Component,
   ElementRef,
-  forwardRef,
+  forwardRef, HostBinding,
   HostListener,
   Input,
   OnChanges,
@@ -18,11 +18,6 @@ import { getErrorMessage } from '../../../core/utilities/get-error-message';
   selector: 'app-input',
   templateUrl: 'input.component.html',
   styleUrls: ['input.component.scss'],
-  host: {
-    '[class.focus]': 'focused',
-    '[class.divide]': 'divided',
-    '[class.error]': 'showError && errorMessage',
-  },
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     multi: true,
@@ -53,11 +48,15 @@ export class InputComponent implements ControlValueAccessor, OnChanges {
   @Input() showError: boolean = false;
   @Input() placeholderBackgroundColor: string = 'var(--background-color)';
 
+  @HostBinding('class.focus') get classFocus() { return this.focused; }
+  @HostBinding('class.divide') get classDivide() { return this.divided; }
+  @HostBinding('class.error') get classError() { return this.showError && this.errorMessage; }
+
   @ViewChild('input', { static: true }) inputElement: ElementRef<HTMLInputElement> | undefined;
 
   ngOnChanges(changes: SimpleChanges) {
-    if ((<any>changes).error) {
-      const error = getErrorMessage((<any>changes).error.currentValue);
+    if (changes['error']) {
+      const error = getErrorMessage(changes['error'].currentValue);
 
       if (error) {
         this.errorMessage = error;
@@ -107,7 +106,7 @@ export class InputComponent implements ControlValueAccessor, OnChanges {
     this.value = value;
   }
 
-  registerOnTouched(fn: any) {
+  registerOnTouched(fn: () => void) {
     this.onTouched = fn;
   }
 }

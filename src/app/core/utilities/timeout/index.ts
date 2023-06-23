@@ -1,4 +1,4 @@
-export const timeout = <T = any>(timeout: number, data?: T) => {
+export const timeout = <T>(timeout: number, data?: T) => {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(data);

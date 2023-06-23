@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AuthService } from './core/services/auth.service';
 import { Store, StoreModule } from '@ngrx/store';
-import { User } from '@angular/fire/auth';
 import { takeWhile } from 'rxjs';
 
 // Modules
@@ -20,8 +19,9 @@ describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
   let compiled: HTMLElement;
   let store: Store<AppStore>;
-  let authServiceStub: Partial<AuthService> = {
-    onAuthChanged(callback: (user: (User | null)) => any): () => void {
+
+  const authServiceStub: Partial<AuthService> = {
+    onAuthChanged(): () => void {
       return () => {};
     },
   };

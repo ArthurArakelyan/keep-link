@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostBinding, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { Subscription, take } from 'rxjs';
@@ -22,10 +22,6 @@ import { ThemeType } from './core/models/theme.model';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  host: {
-    '[class.light]': 'theme === "light"',
-    '[class.dark]': 'theme === "dark"',
-  },
 })
 export class AppComponent implements OnInit, OnDestroy {
   isAuth: boolean = false;
@@ -34,6 +30,9 @@ export class AppComponent implements OnInit, OnDestroy {
   authSubscription: Subscription | null = null;
   themeSubscription: Subscription | null = null;
   authChangedSubscription: (() => void) | null = null;
+
+  @HostBinding('class.light') get classLight() { return this.theme === 'light'; }
+  @HostBinding('class.dark') get classDark() { return this.theme === 'dark'; }
 
   constructor(
     private store: Store<AppStore>,
