@@ -24,7 +24,7 @@ import {
 import { addUser } from '../user';
 
 // Utilities
-import { getFirebaseError } from '../../core/utilities/getFirebaseError';
+import { getFirebaseError } from '../../core/utilities/get-firebase-error';
 
 // Constants
 import { authErrors } from '../../core/constants/auth-errors';

@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InputComponent } from './input.component';
 
 // Utilities
-import { getErrorMessage } from '../../../core/utilities/getErrorMessage';
+import { getErrorMessage } from '../../../core/utilities/get-error-message';
 
 describe('InputComponent', () => {
   let component: InputComponent;
