@@ -3,6 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AuthService } from './core/services/auth.service';
 import { Store, StoreModule } from '@ngrx/store';
 import { User } from '@angular/fire/auth';
+import { takeWhile } from 'rxjs';
 
 // Modules
 import { AppRoutingModule } from './app-routing.module';
@@ -48,7 +49,7 @@ describe('AppComponent', () => {
   it('should have a class with theme', () => {
     store.select(fromTheme.selectTheme)
       .subscribe((themeState) => {
-        expect(compiled.classList.contains(themeState.theme)).toBeTrue();
+        expect(compiled.className.includes(themeState.theme)).toBeTrue();
       });
   });
 
@@ -57,6 +58,12 @@ describe('AppComponent', () => {
 
     store.dispatch(fromTheme.changeTheme({ payload: newTheme }));
 
-    expect(compiled.classList.contains(newTheme)).toBeTrue();
+    store.select(fromTheme.selectTheme)
+      .pipe(
+        takeWhile((themeState) => themeState.theme === newTheme)
+      )
+      .subscribe(() => {
+        expect(compiled.className.includes(newTheme)).toBeTrue();
+      });
   });
 });

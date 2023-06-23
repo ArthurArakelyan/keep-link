@@ -12,8 +12,8 @@ import { changeAuth, selectAuth } from './store/auth';
 import { AuthService } from './core/services/auth.service';
 
 // Utilities
-import { addColorSchemeGlobalStyle } from './core/utilities/addColorSchemeGlobalStyle';
-import { getPreferredTheme } from './core/utilities/getPreferredTheme';
+import { addColorSchemeGlobalStyle } from './core/utilities/add-color-scheme-global-style';
+import { getPreferredTheme } from './core/utilities/get-preferred-theme';
 
 // Models
 import { ThemeType } from './core/models/theme.model';
