@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Store, StoreModule } from '@ngrx/store';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Modules
 import { SharedModule } from '../../../shared/shared.module';
@@ -22,7 +23,7 @@ describe('UserLayoutComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [UserLayoutComponent, HeaderComponent, SideMenuComponent],
-      imports: [SharedModule, RouterTestingModule, StoreModule.forRoot(appReducer)],
+      imports: [SharedModule, RouterTestingModule, BrowserAnimationsModule, StoreModule.forRoot(appReducer)],
     });
 
     fixture = TestBed.createComponent(UserLayoutComponent);

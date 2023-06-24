@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Modules
 import { SharedModule } from '../../../shared/shared.module';
@@ -14,7 +15,7 @@ describe('HeaderComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [HeaderComponent],
-      imports: [SharedModule],
+      imports: [SharedModule, BrowserAnimationsModule],
     });
 
     fixture = TestBed.createComponent(HeaderComponent);
@@ -27,6 +28,7 @@ describe('HeaderComponent', () => {
     expect(compiled.querySelector('.search__input')).toBeInstanceOf(HTMLInputElement);
     expect(compiled.querySelector('svg.search__icon')).toBeInstanceOf(SVGSVGElement);
     expect(compiled.querySelector('.avatar__image')).toBeInstanceOf(HTMLElement);
+    expect(compiled.querySelector('app-dropdown')).toBeInstanceOf(HTMLElement);
   });
 
   it('should focus the search input on icon click', () => {

@@ -16,7 +16,11 @@
   />
 </div>
 
-<div class="avatar">
+<app-dropdown
+  class="avatar"
+  position="right"
+  [options]="avatarDropdownOptions"
+>
   <app-avatar
     src=""
     alt="Avatar"
@@ -24,4 +28,4 @@
     height="50"
     class="avatar__image"
   />
-</div>
+</app-dropdown>
