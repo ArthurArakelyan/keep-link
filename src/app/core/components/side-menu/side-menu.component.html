@@ -31,9 +31,9 @@
         class="side-menu__link"
       >
         <div [ngSwitch]="navLink.icon">
-          <app-link-icon *ngSwitchCase="'link'" class="side-menu__link-icon-wrapper" iconClass="side-menu__link-icon"></app-link-icon>
-          <app-user-icon *ngSwitchCase="'user'" class="side-menu__link-icon-wrapper" iconClass="side-menu__link-icon"></app-user-icon>
-          <app-gear-icon *ngSwitchCase="'gear'" class="side-menu__link-icon-wrapper" iconClass="side-menu__link-icon"></app-gear-icon>
+          <app-link-icon *ngSwitchCase="'link'" iconClass="side-menu__link-icon"></app-link-icon>
+          <app-user-icon *ngSwitchCase="'user'" iconClass="side-menu__link-icon"></app-user-icon>
+          <app-gear-icon *ngSwitchCase="'gear'" iconClass="side-menu__link-icon"></app-gear-icon>
         </div>
 
         <p class="side-menu__link-name">{{ navLink.name }}</p>

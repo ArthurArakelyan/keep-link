@@ -1,0 +1,26 @@
+<ng-content></ng-content>
+
+<div
+  *ngIf="open"
+  [ngStyle]="{ marginTop: height + 'px', left: leftStyle + 'px', top: top + 'px' }"
+  [@fadeInOut]
+  class="dropdown"
+  #dropdown
+>
+  <div class="dropdown__content">
+    <button
+      *ngFor="let option of options; let i = index"
+      class="dropdown__item"
+      tabindex="0"
+      (click)="onOptionClick(option.action)"
+    >
+      <div [ngSwitch]="option.icon">
+        <app-logout-icon *ngSwitchCase="'logout'" width="20" height="20" iconClass="dropdown__item-icon"></app-logout-icon>
+      </div>
+
+      <span class="dropdown__item-name">
+        {{ option.name }}
+      </span>
+    </button>
+  </div>
+</div>

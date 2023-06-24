@@ -10,6 +10,7 @@ import { InputComponent } from './components/input/input.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { AvatarComponent } from './components/avatar/avatar.component';
+import { DropdownComponent } from './components/dropdown/dropdown.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { AvatarComponent } from './components/avatar/avatar.component';
     AuthComponent,
     LoaderComponent,
     AvatarComponent,
+    DropdownComponent,
   ],
   imports: [
     CommonModule,
@@ -31,6 +33,7 @@ import { AvatarComponent } from './components/avatar/avatar.component';
     AuthComponent,
     LoaderComponent,
     AvatarComponent,
+    DropdownComponent,
   ],
 })
 export class SharedModule {

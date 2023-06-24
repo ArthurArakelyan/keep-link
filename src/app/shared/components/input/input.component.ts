@@ -1,7 +1,8 @@
 import {
   Component,
   ElementRef,
-  forwardRef, HostBinding,
+  forwardRef,
+  HostBinding,
   HostListener,
   Input,
   OnChanges,
@@ -9,7 +10,9 @@ import {
   ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ValidationErrors } from '@angular/forms';
-import { animate, style, transition, trigger } from '@angular/animations';
+
+// Animations
+import { fadeInOut } from '../../../core/animations/fade-in-out.animation';
 
 // Utilities
 import { getErrorMessage } from '../../../core/utilities/get-error-message';
@@ -23,17 +26,7 @@ import { getErrorMessage } from '../../../core/utilities/get-error-message';
     multi: true,
     useExisting: forwardRef(() => InputComponent)
   }],
-  animations: [
-    trigger('fadeInOut', [
-      transition(':enter', [
-        style({ opacity: 0 }),
-        animate('0.2s ease', style({ opacity: 1 })),
-      ]),
-      transition(':leave', [
-        animate('0.2s ease', style({ opacity: 0 })),
-      ]),
-    ]),
-  ],
+  animations: [fadeInOut],
 })
 export class InputComponent implements ControlValueAccessor, OnChanges {
   focused: boolean = false;

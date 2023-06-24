@@ -6,6 +6,7 @@ import { LinkIconComponent } from './icons/link-icon/link-icon.component';
 import { GearIconComponent } from './icons/gear-icon/gear-icon.component';
 import { UserIconComponent } from './icons/user-icon/user-icon.component';
 import { PlusIconComponent } from './icons/plus-icon/plus-icon.component';
+import { LogoutIconComponent } from './icons/logout-icon/logout-icon.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { PlusIconComponent } from './icons/plus-icon/plus-icon.component';
     GearIconComponent,
     UserIconComponent,
     PlusIconComponent,
+    LogoutIconComponent,
   ],
   exports: [
     SearchIconComponent,
@@ -21,6 +23,7 @@ import { PlusIconComponent } from './icons/plus-icon/plus-icon.component';
     GearIconComponent,
     UserIconComponent,
     PlusIconComponent,
+    LogoutIconComponent,
   ],
 })
 export class IconModule {

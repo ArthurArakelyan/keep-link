@@ -1,0 +1,47 @@
+@import "scss-variables";
+@import "mixins";
+
+:host::ng-deep {
+  .dropdown__item-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: var(--primary-text-color);
+  }
+}
+
+.dropdown {
+  position: fixed;
+  z-index: $popup-z-index;
+  top: 0;
+  left: 0;
+  width: 11rem;
+  padding-top: 0.75rem;
+}
+.dropdown__content {
+  width: 100%;
+  padding: 0.5rem 0;
+  border-radius: 0.375rem;
+  background-color: var(--header-footer-background-color);
+  box-shadow: 0 0 3px var(--shadow-md-color);
+}
+
+.dropdown__item {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  background-color: transparent;
+  border: none;
+  @include flex(row, center, flex-start);
+  transition: background-color .2s ease;
+
+  @include hover() {
+    background-color: var(--white-background-hover);
+  }
+
+  @include active() {
+    background-color: var(--white-background-active);
+  }
+}
+.dropdown__item-name {
+  margin-left: 0.5rem;
+  @include font(1rem, 500, var(--primary-text-color));
+}
