@@ -16,7 +16,11 @@ export class AvatarComponent implements OnInit {
   @Input({ required: true }) height: string | number = 0;
 
   ngOnInit() {
-    this.avatarSrc = this.src;
+    if (!this.src.trim()) {
+      this.avatarSrc = this.defaultAvatarSrc;
+    } else {
+      this.avatarSrc = this.src;
+    }
   }
 
   onError() {
