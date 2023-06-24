@@ -4,12 +4,11 @@ import {
   HostBinding,
   HostListener,
   Input,
-  OnInit,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 
 // Animations
-import { fadeInOut } from '../../../core/animations/fade-in-out.animation';
+import { fadeTranslateInOut } from '../../../core/animations/fade-translate-in-out.animation';
 
 // Constants
 import { keys } from '../../../core/constants/keys';
@@ -21,9 +20,9 @@ import { IDropdownOption } from '../../../core/models/dropdown-option.model';
   selector: 'app-dropdown',
   templateUrl: 'dropdown.component.html',
   styleUrls: ['dropdown.component.scss'],
-  animations: [fadeInOut],
+  animations: [fadeTranslateInOut],
 })
-export class DropdownComponent implements OnInit {
+export class DropdownComponent {
   open: boolean = false;
 
   leftStyle: number = 0;
@@ -81,10 +80,6 @@ export class DropdownComponent implements OnInit {
   constructor(
     private element: ElementRef<HTMLElement>,
   ) {}
-
-  ngOnInit() {
-    this.initializeRect();
-  }
 
   onOptionClick(action: () => void) {
     this.closeDropdown();

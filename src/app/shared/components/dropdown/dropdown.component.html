@@ -1,11 +1,12 @@
 <ng-content></ng-content>
 
+<div aria-hidden="true" class="dropdown-width" #dropdown></div>
+
 <div
   *ngIf="open"
   [ngStyle]="{ marginTop: height + 'px', left: leftStyle + 'px', top: top + 'px' }"
   [@fadeInOut]
   class="dropdown"
-  #dropdown
 >
   <div class="dropdown__content">
     <button

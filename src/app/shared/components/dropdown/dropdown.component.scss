@@ -9,11 +9,16 @@
   }
 }
 
+.dropdown-width {
+  position: fixed;
+  z-index: $negative-z-index;
+  opacity: 0;
+  width: 11rem;
+}
+
 .dropdown {
   position: fixed;
   z-index: $popup-z-index;
-  top: 0;
-  left: 0;
   width: 11rem;
   padding-top: 0.75rem;
 }
