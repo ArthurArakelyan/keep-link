@@ -9,6 +9,7 @@ import {
   signup,
   signupFulfilled,
   signupRejected,
+  logout,
 } from './auth.actions';
 
 // Types
@@ -92,5 +93,8 @@ export const authReducer = createReducer(
         signup: false,
       },
     };
+  }),
+  on(logout, () => {
+    return initialState;
   }),
 );

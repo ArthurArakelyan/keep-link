@@ -6,6 +6,7 @@ import {
   getUserRejected,
   addUserFulfilled,
 } from './user.actions';
+import { logout } from '../auth';
 
 // Types
 import { UserState } from './user.state';
@@ -33,5 +34,8 @@ export const userReducer = createReducer(
       ...state,
       user: action.payload,
     };
+  }),
+  on(logout, () => {
+    return initialState;
   }),
 );
