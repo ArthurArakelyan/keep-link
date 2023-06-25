@@ -45,3 +45,7 @@ export const signupFulfilled = createAction(
 export const signupRejected = createAction(
   '[Auth] Signup Rejected',
 );
+
+export const logout = createAction(
+  '[Auth] Logout',
+);

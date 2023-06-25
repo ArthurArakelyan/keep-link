@@ -1,4 +1,9 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+
+// Store
+import { AppStore } from '../../../store/app.reducer';
+import { logout } from '../../../store/auth';
 
 // Models
 import { IDropdownOption } from '../../models/dropdown-option.model';
@@ -13,11 +18,19 @@ export class HeaderComponent {
     {
       name: 'Logout',
       icon: 'logout',
-      action: () => {},
+      action: () => this.onLogout(),
     },
   ];
 
+  constructor(
+    private store: Store<AppStore>,
+  ) {}
+
   onFocusSearch(searchElement: HTMLInputElement) {
     searchElement.focus();
+  }
+
+  private onLogout() {
+    this.store.dispatch(logout());
   }
 }

@@ -20,6 +20,7 @@ import {
   signup,
   signupFulfilled,
   signupRejected,
+  logout,
 } from './auth.actions';
 import { addUser } from '../user';
 
@@ -113,6 +114,15 @@ export class AuthEffects {
         );
     }),
   ));
+
+  logout = createEffect(() => this.actions$.pipe(
+    ofType(logout),
+    tap(() => {
+      this.authService.logout();
+
+      this.router.navigate(['/login']);
+    }),
+  ), { dispatch: false });
 
   redirectOnAuth = createEffect(() => this.actions$.pipe(
     ofType(loginFulfilled, signupFulfilled),
