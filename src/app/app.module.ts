@@ -15,13 +15,11 @@ import { environment } from '../environments/environment';
 
 // Modules
 import { AppRoutingModule } from './app-routing.module';
+import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 
 // Components
 import { AppComponent } from './app.component';
-import { UserLayoutComponent } from './core/components/user-layout/user-layout.component';
-import { HeaderComponent } from './core/components/header/header.component';
-import { SideMenuComponent } from './core/components/side-menu/side-menu.component';
 
 // Store
 import { appReducer } from './store/app.reducer';
@@ -31,14 +29,12 @@ import { appEffects } from './store/app.effects';
 @NgModule({
   declarations: [
     AppComponent,
-    UserLayoutComponent,
-    HeaderComponent,
-    SideMenuComponent,
   ],
   imports: [
     BrowserModule,
-    SharedModule,
     BrowserAnimationsModule,
+    CoreModule,
+    SharedModule,
 
     // Router
     AppRoutingModule,

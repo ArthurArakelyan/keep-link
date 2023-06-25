@@ -1,7 +1,7 @@
 <div class="side-menu-header">
-  <a routerLink="/" tabindex="0" class="side-menu-header__logo">
+  <a routerLink="/" tabindex="0" class="side-menu-header__logo" (click)="onLinkClick()">
     <img
-      src="/assets/logo-64.png"
+      src="/assets/logo.svg"
       alt="Logo"
       width="60"
       height="60"
@@ -12,7 +12,7 @@
 
 <nav class="side-menu-content">
   <div class="side-menu__add">
-    <app-button variant="rounded" class="side-menu__add-button">
+    <app-button variant="rounded" class="side-menu__add-button" (buttonClick)="onAdd()">
       <app-plus-icon width="16" height="16" class="side-menu__add-button-icon" iconClass="side-menu__add-button-icon"></app-plus-icon>
       <span>Add Link</span>
     </app-button>
@@ -29,6 +29,7 @@
         [routerLinkActiveOptions]="{ exact: navLink.exact }"
         tabindex="0"
         class="side-menu__link"
+        (click)="onLinkClick()"
       >
         <div [ngSwitch]="navLink.icon">
           <app-link-icon *ngSwitchCase="'link'" iconClass="side-menu__link-icon"></app-link-icon>

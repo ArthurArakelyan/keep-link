@@ -10,6 +10,7 @@ import { changeAuth, selectAuth } from './store/auth';
 
 // Services
 import { AuthService } from './core/services/auth.service';
+import { SizeService } from './core/services/size.service';
 
 // Utilities
 import { addColorSchemeGlobalStyle } from './core/utilities/add-color-scheme-global-style';
@@ -27,9 +28,9 @@ export class AppComponent implements OnInit, OnDestroy {
   isAuth: boolean = false;
   theme: ThemeType = 'light';
 
-  authSubscription: Subscription | null = null;
-  themeSubscription: Subscription | null = null;
-  authChangedSubscription: (() => void) | null = null;
+  private authSubscription: Subscription | undefined;
+  private themeSubscription: Subscription | undefined;
+  private authChangedSubscription: (() => void) | undefined;
 
   @HostBinding('class.light') get classLight() { return this.theme === 'light'; }
   @HostBinding('class.dark') get classDark() { return this.theme === 'dark'; }
@@ -38,13 +39,35 @@ export class AppComponent implements OnInit, OnDestroy {
     private store: Store<AppStore>,
     private router: Router,
     private authService: AuthService,
+    private sizeService: SizeService,
   ) {}
 
   ngOnInit() {
+    this.subscribeToAuth();
+
+    this.subscribeToTheme();
+
+    this.subscribeToAuthChanged();
+
+    this.sizeService.addListener();
+  }
+
+  ngOnDestroy() {
+    this.authSubscription?.unsubscribe();
+    this.themeSubscription?.unsubscribe();
+
+    this.authChangedSubscription?.();
+
+    this.sizeService.deleteListener();
+  }
+
+  private subscribeToAuth() {
     this.authSubscription = this.store.select(selectAuth).subscribe((authState) => {
       this.isAuth = authState.isAuth;
     });
+  }
 
+  private subscribeToTheme() {
     this.themeSubscription = this.store.select(selectTheme).subscribe((themeState) => {
       const theme = themeState.theme;
 
@@ -58,7 +81,9 @@ export class AppComponent implements OnInit, OnDestroy {
         this.store.dispatch(changeTheme({ payload: preferredTheme }));
       }
     });
+  }
 
+  private subscribeToAuthChanged() {
     this.authChangedSubscription = this.authService.onAuthChanged((user) => {
       if (!user) {
         this.store.select(selectAuth)
@@ -74,12 +99,5 @@ export class AppComponent implements OnInit, OnDestroy {
           });
       }
     });
-  }
-
-  ngOnDestroy() {
-    this.authSubscription?.unsubscribe();
-    this.themeSubscription?.unsubscribe();
-
-    this.authChangedSubscription?.();
   }
 }

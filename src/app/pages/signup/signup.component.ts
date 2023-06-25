@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs';
 import { MIN_VALIDATION_LENGTHS, VALIDATION_LENGTHS } from '../../core/constants/validation';
 
 // Validators
-import { confirmPasswordValidator } from '../../core/validators/confirmPassword.validator';
+import { confirmPasswordValidator } from '../../core/validators/confirm-password.validator';
 
 // Store
 import { AppStore } from '../../store/app.reducer';

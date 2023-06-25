@@ -1,6 +1,9 @@
 <app-header></app-header>
 
-<app-side-menu></app-side-menu>
+<app-side-menu *ngIf="!showSideMenuResponsive; else sideMenuResponsive"></app-side-menu>
+<ng-template #sideMenuResponsive>
+  <app-side-menu-responsive></app-side-menu-responsive>
+</ng-template>
 
 <main class="main">
   <router-outlet></router-outlet>
