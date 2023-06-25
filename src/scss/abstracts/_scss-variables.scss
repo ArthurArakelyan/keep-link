@@ -15,6 +15,9 @@ $error-color: #ed4337;
 // sizes
 $auth-container-width: 31.25rem;
 $header-height: 5.625rem;
+$header-height-mobile: 5rem;
+$header-menu-width: 6.25rem;
+$header-menu-width-mobile: 5rem;
 $side-menu-width: 11.25rem;
 
 // z-indexes
@@ -23,3 +26,7 @@ $zero-z-index: 0;
 $component-z-index: 1;
 $popup-z-index: 2;
 $modal-z-index: 3;
+
+// breakpoints
+$hide-side-menu-breakpoint: 768px;
+$header-small-breakpoint: 640px;

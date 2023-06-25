@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 
+// Services
+import { SideMenuService } from '../../services/side-menu.service';
+
 // Constants
 import { navLinks } from '../../constants/nav-links';
 
@@ -10,4 +13,16 @@ import { navLinks } from '../../constants/nav-links';
 })
 export class SideMenuComponent {
   readonly navLinks = navLinks;
+
+  constructor(
+    private sideMenuService: SideMenuService,
+  ) {}
+
+  onAdd() {
+    this.sideMenuService.close();
+  }
+
+  onLinkClick() {
+    this.sideMenuService.close();
+  }
 }

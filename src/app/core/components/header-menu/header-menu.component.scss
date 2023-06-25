@@ -1,0 +1,38 @@
+@import "mixins";
+@import "scss-variables";
+
+:host {
+  height: 100%;
+}
+
+:host::ng-deep {
+  .header-menu__icon {
+    width: 3rem;
+    height: 3rem;
+    fill: var(--primary-text-color);
+  }
+}
+
+.header-menu {
+  width: $header-menu-width;
+  height: 100%;
+  background-color: transparent;
+  border: none;
+  margin-right: 2rem;
+  border-right: 0.063rem solid var(--gray-100);
+  @include flex(row, center, center);
+}
+
+@media (max-width: $header-small-breakpoint) {
+  :host::ng-deep {
+    .header-menu__icon {
+      width: 2.75rem;
+      height: 2.75rem;
+    }
+  }
+
+  .header-menu {
+    width: $header-menu-width-mobile;
+    margin-right: 1rem;
+  }
+}

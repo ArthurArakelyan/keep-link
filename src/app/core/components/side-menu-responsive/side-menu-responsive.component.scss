@@ -1,0 +1,24 @@
+@import "mixins";
+@import "scss-variables";
+
+:host {
+  position: fixed;
+  z-index: $modal-z-index;
+  visibility: hidden;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: background-color .3s ease-in-out, visibility .3s ease-in-out;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+:host(.open) {
+  visibility: visible;
+  background-color: rgba(0, 0, 0, .6);
+}
+
+.side-menu-responsive {
+  width: $side-menu-width;
+  @include flex(row, flex-start, flex-start);
+}
