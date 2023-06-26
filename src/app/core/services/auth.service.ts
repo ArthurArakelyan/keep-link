@@ -6,6 +6,7 @@ import {
   signInWithEmailAndPassword,
   sendEmailVerification,
   createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
   signOut,
 } from '@angular/fire/auth';
 import { from } from 'rxjs';
@@ -26,6 +27,10 @@ export class AuthService {
 
   onAuthChanged(callback: (user: User | null) => void) {
     return onAuthStateChanged(this.auth, callback);
+  }
+
+  sendForgotPasswordEmail(email: string) {
+    return from(sendPasswordResetEmail(this.auth, email));
   }
 
   logout() {

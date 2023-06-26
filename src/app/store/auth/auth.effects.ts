@@ -20,6 +20,9 @@ import {
   signup,
   signupFulfilled,
   signupRejected,
+  forgotPassword,
+  forgotPasswordFulfilled,
+  forgotPasswordRejected,
   logout,
 } from './auth.actions';
 import { addUser } from '../user';
@@ -29,7 +32,7 @@ import { getFirebaseError } from '../../core/utilities/get-firebase-error';
 
 // Constants
 import { authErrors } from '../../core/constants/auth-errors';
-import { verificationMessage } from '../../core/constants/error-messages';
+import { forgotPasswordEmailMessage, verificationMessage } from '../../core/constants/messages';
 
 @Injectable()
 export class AuthEffects {
@@ -115,6 +118,26 @@ export class AuthEffects {
     }),
   ));
 
+  forgotPassword = createEffect(() => this.actions$.pipe(
+    ofType(forgotPassword),
+    switchMap(({ payload }) => {
+      return this.authService.sendForgotPasswordEmail(payload.email)
+        .pipe(
+          switchMap(() => {
+            this.toast.info(forgotPasswordEmailMessage, undefined, {
+              timeOut: 10000,
+            });
+
+            return of(forgotPasswordFulfilled());
+          }),
+          catchError((error) => {
+            this.toast.error(getFirebaseError(error.toString(), authErrors));
+            return of(forgotPasswordRejected());
+          }),
+        );
+    }),
+  ));
+
   logout = createEffect(() => this.actions$.pipe(
     ofType(logout),
     tap(() => {
@@ -128,6 +151,13 @@ export class AuthEffects {
     ofType(loginFulfilled, signupFulfilled),
     tap(() => {
       this.router.navigate(['/'], { replaceUrl: true });
+    }),
+  ), { dispatch: false });
+
+  redirectOnForgotPassword = createEffect(() => this.actions$.pipe(
+    ofType(forgotPasswordFulfilled),
+    tap(() => {
+      this.router.navigate(['/login']);
     }),
   ), { dispatch: false });
 

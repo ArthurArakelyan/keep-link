@@ -46,6 +46,23 @@ export const signupRejected = createAction(
   '[Auth] Signup Rejected',
 );
 
+export const forgotPassword = createAction(
+  '[Auth] Forgot Password',
+  props<{
+    payload: {
+      email: string;
+    };
+  }>(),
+);
+
+export const forgotPasswordFulfilled = createAction(
+  '[Auth] Forgot Password Fulfilled',
+);
+
+export const forgotPasswordRejected = createAction(
+  '[Auth] Forgot Password Rejected',
+);
+
 export const logout = createAction(
   '[Auth] Logout',
 );

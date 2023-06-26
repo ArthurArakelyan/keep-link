@@ -23,6 +23,10 @@ const appRoutes: Routes = [
     path: 'signup',
     loadChildren: () => import('./pages/signup/signup.module').then((module) => module.SignupModule),
   },
+  {
+    path: 'forgot-password',
+    loadChildren: () => import('./pages/forgot-password/forgot-password.module').then((module) => module.ForgotPasswordModule),
+  },
 ];
 
 @NgModule({

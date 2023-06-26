@@ -7,8 +7,10 @@
 
 .login {
   width: 100%;
+  @include flex(column, flex-start, flex-start);
 }
 .login__fields {
+  width: 100%;
   margin: 2rem 0;
   row-gap: 2rem;
   @include flex(column, flex-start, flex-start);
@@ -23,8 +25,17 @@
   @include font(1rem, 500, var(--primary-text-color));
 }
 
+.login__forgot-password {
+  margin-top: 1.25rem;
+  text-decoration: underline;
+  @include font(0.875rem, 500, var(--primary-text-color));
+}
+
 @media (max-width: 1000px) {
   .login__actions {
     flex-direction: row-reverse;
+  }
+  .login__forgot-password {
+    margin-left: auto;
   }
 }

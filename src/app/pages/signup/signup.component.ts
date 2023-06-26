@@ -22,7 +22,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   submitted: boolean = false;
   loading: boolean = false;
 
-  authSubscription: Subscription | null = null;
+  authSubscription: Subscription | undefined;
 
   signupForm = new FormGroup({
     name: new FormControl('', {

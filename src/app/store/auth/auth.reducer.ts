@@ -9,6 +9,9 @@ import {
   signup,
   signupFulfilled,
   signupRejected,
+  forgotPassword,
+  forgotPasswordFulfilled,
+  forgotPasswordRejected,
   logout,
 } from './auth.actions';
 
@@ -21,6 +24,7 @@ export const initialState: AuthState = {
   loading: {
     login: false,
     signup: false,
+    forgotPassword: false,
   },
 };
 
@@ -91,6 +95,24 @@ export const authReducer = createReducer(
       loading: {
         ...state.loading,
         signup: false,
+      },
+    };
+  }),
+  on(forgotPassword, (state) => {
+    return {
+      ...state,
+      loading: {
+        ...state.loading,
+        forgotPassword: true,
+      },
+    };
+  }),
+  on(forgotPasswordFulfilled, forgotPasswordRejected, (state) => {
+    return {
+      ...state,
+      loading: {
+        ...state.loading,
+        forgotPassword: false,
       },
     };
   }),

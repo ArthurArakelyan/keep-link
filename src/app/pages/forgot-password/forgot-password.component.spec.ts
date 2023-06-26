@@ -5,46 +5,44 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Store, StoreModule } from '@ngrx/store';
 
 // Modules
-import { LoginRoutingModule } from './login-routing.module';
+import { ForgotPasswordRoutingModule } from './forgot-password-routing.module';
 import { SharedModule } from '../../shared/shared.module';
 
 // Components
-import { LoginComponent } from './login.component';
+import { ForgotPasswordComponent } from './forgot-password.component';
 
 // Store
 import { appReducer, AppStore } from '../../store/app.reducer';
 import * as fromAuth from '../../store/auth';
 
-describe('LoginComponent', () => {
-  let component: LoginComponent;
-  let fixture: ComponentFixture<LoginComponent>;
+describe('ForgotPasswordComponent', () => {
+  let component: ForgotPasswordComponent;
+  let fixture: ComponentFixture<ForgotPasswordComponent>;
   let compiled: HTMLElement;
   let store: Store<AppStore>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [LoginComponent],
-      imports: [ReactiveFormsModule, BrowserAnimationsModule, LoginRoutingModule, SharedModule, RouterTestingModule, StoreModule.forRoot(appReducer)],
+      declarations: [ForgotPasswordComponent],
+      imports: [ReactiveFormsModule, BrowserAnimationsModule, ForgotPasswordRoutingModule, SharedModule, RouterTestingModule, StoreModule.forRoot(appReducer)],
     });
 
-    fixture = TestBed.createComponent(LoginComponent);
+    fixture = TestBed.createComponent(ForgotPasswordComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
     compiled = fixture.debugElement.nativeElement;
     store = TestBed.get<Store>(Store);
   });
 
-  it('should create the login', () => {
+  it('should create the forgot password', () => {
     const authContainer = compiled.querySelector('app-auth');
     const form = compiled.querySelector('form');
     const inputs = compiled.querySelectorAll('app-input');
     const submitButton = compiled.querySelector('button[type="submit"]');
-    const forgotPassword = compiled.querySelector('.login__forgot-password');
 
     expect(authContainer).toBeTruthy();
     expect(form).toBeTruthy();
     expect(submitButton).toBeTruthy();
-    expect(forgotPassword).toBeTruthy();
 
     inputs.forEach((input) => {
       expect(input).toBeTruthy();
@@ -54,9 +52,8 @@ describe('LoginComponent', () => {
   it('should be possible to submit when the form is valid', () => {
     const button = compiled.querySelector<HTMLButtonElement>('button[type="submit"]')!;
 
-    component.loginForm.setValue({
+    component.forgotPasswordForm.setValue({
       email: 'admin@mail.loc',
-      password: '123456',
     });
 
     fixture.detectChanges();
@@ -67,17 +64,15 @@ describe('LoginComponent', () => {
 
     store.select(fromAuth.selectAuth)
       .subscribe((authState) => {
-        expect(authState.loading.login).toBeTrue();
-        expect(authState.isAuth).toBeFalse();
+        expect(authState.loading.forgotPassword).toBeTrue();
       });
   });
 
   it('should not be possible to submit when the form is invalid', () => {
     const button = compiled.querySelector<HTMLButtonElement>('button[type="submit"]')!;
 
-    component.loginForm.setValue({
+    component.forgotPasswordForm.setValue({
       email: 'invalid',
-      password: 'weak',
     });
 
     fixture.detectChanges();
@@ -88,8 +83,7 @@ describe('LoginComponent', () => {
 
     store.select(fromAuth.selectAuth)
       .subscribe((authState) => {
-        expect(authState.loading.login).toBeFalse();
-        expect(authState.isAuth).toBeFalse();
+        expect(authState.loading.forgotPassword).toBeFalse();
       });
   });
 });

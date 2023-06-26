@@ -1,5 +1,5 @@
 <div class="side-menu-header">
-  <a routerLink="/" tabindex="0" class="side-menu-header__logo" (click)="onLinkClick()">
+  <a routerLink="/" tabindex="0" class="side-menu-header__logo" (click)="close()">
     <img
       src="/assets/logo.svg"
       alt="Logo"
@@ -29,7 +29,7 @@
         [routerLinkActiveOptions]="{ exact: navLink.exact }"
         tabindex="0"
         class="side-menu__link"
-        (click)="onLinkClick()"
+        (click)="close()"
       >
         <div [ngSwitch]="navLink.icon">
           <app-link-icon *ngSwitchCase="'link'" iconClass="side-menu__link-icon"></app-link-icon>
