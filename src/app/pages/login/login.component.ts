@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   submitted: boolean = false;
   loading: boolean = false;
 
-  authSubscription: Subscription | null = null;
+  authSubscription: Subscription | undefined;
 
   loginForm = new FormGroup({
     email: new FormControl('', {

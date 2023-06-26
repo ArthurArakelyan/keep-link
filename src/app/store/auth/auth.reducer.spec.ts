@@ -3,6 +3,7 @@ import * as fromAuth from './index';
 describe('auth', () => {
   const mockLoginData = { email: 'admin@mail.loc', password: '123456' };
   const mockSignupData = { name: 'Admin', email: 'admin@mail.loc', password: '123456' };
+  const mockForgotPasswordData = { email: 'admin@mail.loc' };
   const mockUid = 'uid';
 
   describe('login', () => {
@@ -98,6 +99,36 @@ describe('auth', () => {
       const state = authReducer(initialState, action);
 
       expect(state.loading.signup).toBeFalse();
+    });
+  });
+
+  describe('forgotPassword', function () {
+    it('should set the forgot password loading to true', () => {
+      const { initialState, authReducer, forgotPassword } = fromAuth;
+      const action = forgotPassword({ payload: mockForgotPasswordData });
+      const state = authReducer(initialState, action);
+
+      expect(state.loading.forgotPassword).toBeTrue();
+    });
+  });
+
+  describe('forgotPasswordFulfilled', function () {
+    it('should set the forgot password loading to false', () => {
+      const { initialState, authReducer, forgotPasswordFulfilled } = fromAuth;
+      const action = forgotPasswordFulfilled();
+      const state = authReducer(initialState, action);
+
+      expect(state.loading.forgotPassword).toBeFalse();
+    });
+  });
+
+  describe('forgotPasswordRejected', function () {
+    it('should set the forgot password loading to false', () => {
+      const { initialState, authReducer, forgotPasswordRejected } = fromAuth;
+      const action = forgotPasswordRejected();
+      const state = authReducer(initialState, action);
+
+      expect(state.loading.forgotPassword).toBeFalse();
     });
   });
 });

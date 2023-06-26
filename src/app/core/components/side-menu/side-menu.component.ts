@@ -19,10 +19,10 @@ export class SideMenuComponent {
   ) {}
 
   onAdd() {
-    this.sideMenuService.close();
+    this.close();
   }
 
-  onLinkClick() {
+  close() {
     this.sideMenuService.close();
   }
 }

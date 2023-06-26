@@ -4,5 +4,6 @@ export interface AuthState {
   loading: {
     login: boolean;
     signup: boolean;
+    forgotPassword: boolean;
   };
 }
