@@ -19,9 +19,9 @@
 }
 
 @mixin ellipsis() {
-  white-space: nowrap;
-  overflow-x: hidden;
+  overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 @mixin absoluteCenter() {
@@ -29,6 +29,12 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+@mixin noTouch() {
+  @media (pointer: coarse) {
+    @content;
+  }
 }
 
 @mixin hover() {

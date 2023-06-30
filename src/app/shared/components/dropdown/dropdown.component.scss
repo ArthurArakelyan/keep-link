@@ -3,9 +3,19 @@
 
 :host::ng-deep {
   .dropdown__item-icon {
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 1.125rem;
+    height: 1.125rem;
     fill: var(--primary-text-color);
+
+    &--logout {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+
+    &--stroke {
+      fill: none !important;
+      stroke: var(--primary-text-color);
+    }
   }
 }
 
@@ -46,6 +56,13 @@
     background-color: var(--white-background-active);
   }
 }
+
+.dropdown__item-icon-wrapper {
+  width: 1.5rem;
+  height: 1.5rem;
+  @include flex(row, center, center);
+}
+
 .dropdown__item-name {
   margin-left: 0.5rem;
   @include font(1rem, 500, var(--primary-text-color));

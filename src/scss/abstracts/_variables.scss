@@ -14,8 +14,11 @@
   // main colors
   --white: #ffffff;
   --black: #000000;
+  --link: #5f6368;
   --gray: #767676;
   --gray-100: #76767619;
+
+  --separator-border-color: rgba(0, 0, 0, .12);
 
   --white-background-hover: rgba(0, 0, 0, 0.03);
   --white-background-active: rgba(0, 0, 0, 0.045);
@@ -45,8 +48,11 @@
   // main colors
   --white: #000000;
   --black: #ffffff;
+  --link: #bdbdbf;
   --gray: #c8c8c8;
   --gray-100: #c8c8c819;
+
+  --separator-border-color: rgba(255, 255, 255, 0.2);
 
   --white-background-hover: rgba(255, 255, 255, 0.03);
   --white-background-active: rgba(255, 255, 255, 0.045);

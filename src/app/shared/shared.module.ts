@@ -12,6 +12,9 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { AvatarComponent } from './components/avatar/avatar.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 
+// Pipes
+import { ShortLinkPipe } from './pipes/short-link/short-link.pipe';
+
 @NgModule({
   declarations: [
     ButtonComponent,
@@ -20,6 +23,7 @@ import { DropdownComponent } from './components/dropdown/dropdown.component';
     LoaderComponent,
     AvatarComponent,
     DropdownComponent,
+    ShortLinkPipe,
   ],
   imports: [
     CommonModule,
@@ -34,6 +38,7 @@ import { DropdownComponent } from './components/dropdown/dropdown.component';
     LoaderComponent,
     AvatarComponent,
     DropdownComponent,
+    ShortLinkPipe,
   ],
 })
 export class SharedModule {

@@ -1,0 +1,13 @@
+@import "mixins";
+@import "scss-variables";
+
+:host {
+  width: 100%;
+  @include flex(column, flex-start, flex-start);
+}
+
+.line {
+  width: 100%;
+  margin: 2rem 0;
+  border-color: var(--gray-100);
+}
