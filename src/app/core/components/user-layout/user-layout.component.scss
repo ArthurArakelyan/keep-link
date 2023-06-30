@@ -1,6 +1,7 @@
 @import "scss-variables";
 
 :host {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
 }
@@ -18,5 +19,19 @@
     padding: 1.5rem;
     min-height: calc(100vh - $header-height);
     margin-top: $header-height;
+  }
+}
+
+@media (max-width: $header-small-breakpoint) {
+  .main {
+    padding: 1.5rem;
+    min-height: calc(100vh - $header-height-mobile);
+    margin-top: $header-height-mobile;
+  }
+}
+
+@media (max-width: $main-padding-small-breakpoint) {
+  .main {
+    padding: 1rem;
   }
 }

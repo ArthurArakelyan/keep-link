@@ -1,0 +1,112 @@
+@import "mixins";
+
+:host {
+  width: calc(33.333333333% - 0.666666667rem);
+  background-color: var(--card-color);
+  border-radius: 0.375rem;
+  box-shadow: 0 0 5px var(--shadow-md-color);
+  @include flex(column, flex-start, flex-start);
+}
+
+:host(:hover) {
+  .actions-bar {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+:host::ng-deep {
+  .actions-bar__button-icon {
+    width: 0.875rem;
+    height: 0.875rem;
+
+    &.fill {
+      fill: var(--primary-text-color);
+    }
+
+    &.stroke {
+      stroke: var(--primary-text-color);
+    }
+  }
+
+  .links__link {
+    &:last-of-type {
+      .links__link-image {
+        border-bottom-left-radius: 0.375rem;
+      }
+    }
+  }
+}
+
+.folder {
+  padding: 1rem 1rem 0 1rem;
+  width: 100%;
+  margin-bottom: 0.1rem;
+  @include flex(column, flex-start, flex-start);
+}
+.folder__name {
+  width: 100%;
+  line-height: 1.35rem;
+  @include font(1.125rem, 700, var(--primary-text-color));
+}
+.folder__description {
+  margin-top: 0.5rem;
+  line-height: 1.25rem;
+  @include font(0.875rem, 400, var(--primary-text-color));
+}
+
+.actions-bar {
+  width: 100%;
+  opacity: 0;
+  visibility: hidden;
+  min-height: 2.5rem;
+  background-color: transparent;
+  padding: 0 0.5rem;
+  gap: 1rem;
+  @include flex(row, center, flex-start);
+  transition: opacity .2s ease, visibility .2s ease;
+
+  @include noTouch() {
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+}
+.actions-bar__button {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: transparent;
+  padding: 0;
+  border: none;
+  @include flex(row, center, center);
+  transition: background-color .2s ease;
+
+  @include hover() {
+    background-color: var(--white-background-hover);
+  }
+
+  @include active() {
+    background-color: var(--white-background-active);
+  }
+}
+
+.links {
+  width: 100%;
+  @include flex(column, flex-start, flex-start);
+}
+.links__link {
+  width: 100%;
+  border-top: 0.063rem solid var(--separator-border-color);
+}
+
+@media (max-width: 1000px) {
+  :host {
+    width: calc(50% - 0.5rem);
+  }
+}
+
+@media (max-width: 600px) {
+  :host {
+    width: 100%;
+  }
+}

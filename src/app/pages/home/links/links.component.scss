@@ -1,0 +1,40 @@
+@import "mixins";
+
+:host {
+  width: 100%;
+  gap: 1rem;
+  flex-wrap: wrap;
+  @include flex(row, flex-start, flex-start);
+}
+
+:host::ng-deep {
+  .link__image {
+    border-top-left-radius: 0.375rem;
+    border-bottom-left-radius: 0.375rem;
+  }
+}
+
+.link {
+  width: calc(25% - 0.75rem);
+  background-color: var(--card-color);
+  border-radius: 0.375rem;
+  box-shadow: 0 0 5px var(--shadow-md-color);
+}
+
+@media (max-width: 1150px) {
+  .link {
+    width: calc(33.333333333% - 0.666666667rem);
+  }
+}
+
+@media (max-width: 870px) {
+  .link {
+    width: calc(50% - 0.5rem);
+  }
+}
+
+@media (max-width: 475px) {
+  .link {
+    width: 100%;
+  }
+}

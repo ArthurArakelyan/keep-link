@@ -1,0 +1,28 @@
+<div class="folder">
+  <h3 class="folder__name">
+    {{ folder.name }}
+  </h3>
+
+  <p *ngIf="folder.description" class="folder__description">
+    {{ folder.description }}
+  </p>
+</div>
+
+<div class="actions-bar">
+  <button class="actions-bar__button" aria-label="Edit" (click)="onEdit()">
+    <app-edit-icon width="14" height="14" iconClass="actions-bar__button-icon fill"></app-edit-icon>
+  </button>
+
+  <button class="actions-bar__button" aria-label="Delete" (click)="onDelete()">
+    <app-delete-icon width="14" height="14" iconClass="actions-bar__button-icon stroke"></app-delete-icon>
+  </button>
+</div>
+
+<div class="links">
+  <app-link
+    *ngFor="let link of folder.links"
+    [link]="link"
+    imageClass="links__link-image"
+    class="links__link"
+  ></app-link>
+</div>
