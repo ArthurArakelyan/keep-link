@@ -1,0 +1,41 @@
+@import "mixins";
+@import "scss-variables";
+
+:host {
+  width: 100%;
+  margin-bottom: 2rem;
+  @include flex(row, center, space-between);
+}
+
+:host::ng-deep {
+  .modal-header-close__icon {
+    fill: var(--primary-text-color);
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+}
+
+.modal-header-title {
+  width: 80%;
+  line-height: 2rem;
+  word-break: break-word;
+  @include font(2rem, 700, var(--primary-text-color));
+}
+
+.modal-header-close {
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  width: 2.25rem;
+  height: 2.25rem;
+  @include flex(row, center, center);
+  transition: background-color .2s ease;
+
+  @include hover() {
+    background-color: var(--white-background-highlited-hover);
+  }
+
+  @include active() {
+    background-color: var(--white-background-highlited-active);
+  }
+}

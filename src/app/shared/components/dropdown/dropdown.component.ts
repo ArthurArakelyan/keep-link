@@ -60,7 +60,7 @@ export class DropdownComponent {
 
   @HostListener('click', ['$event'])
   private onClick(event: MouseEvent) {
-    if (!(<HTMLElement>event.target).className.includes('dropdown')) {
+    if (!(<HTMLElement>event.target).className?.includes?.('dropdown')) {
       this.openDropdown();
     }
   }

@@ -13,6 +13,7 @@ import { RedirectIconComponent } from './icons/redirect-icon/redirect-icon.compo
 import { EditIconComponent } from './icons/edit-icon/edit-icon.component';
 import { DeleteIconComponent } from './icons/delete-icon/delete-icon.component';
 import { MenuIconComponent } from './icons/menu-icon/menu-icon.component';
+import { CloseIconComponent } from './icons/close-icon/close-icon.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { MenuIconComponent } from './icons/menu-icon/menu-icon.component';
     EditIconComponent,
     DeleteIconComponent,
     MenuIconComponent,
+    CloseIconComponent,
   ],
   exports: [
     SearchIconComponent,
@@ -42,6 +44,7 @@ import { MenuIconComponent } from './icons/menu-icon/menu-icon.component';
     EditIconComponent,
     DeleteIconComponent,
     MenuIconComponent,
+    CloseIconComponent,
   ],
 })
 export class IconModule {

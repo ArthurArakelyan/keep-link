@@ -37,7 +37,7 @@ export class LinkComponent {
   }
 
   onLinkClick(e: MouseEvent) {
-    if ((<HTMLElement>e.target).className.includes('dropdown')) {
+    if ((<HTMLElement>e.target).className?.includes?.('dropdown')) {
       e.preventDefault();
     }
   }
