@@ -35,18 +35,18 @@
       class="link__info-action-icon-wrapper"
       iconClass="link__info-action-icon"
     ></app-redirect-icon>
-
-    <app-dropdown
-      *ngIf="action === 'menu'"
-      [options]="dropdownOptions"
-      position="right"
-      class="link__info-action-icon-wrapper link__info-menu-icon-wrapper"
-    >
-      <app-menu-icon
-        width="18"
-        height="18"
-        iconClass="link__info-action-icon"
-      ></app-menu-icon>
-    </app-dropdown>
   </div>
 </a>
+
+<app-dropdown
+  *ngIf="action === 'menu'"
+  [options]="dropdownOptions"
+  position="right"
+  class="link__info-action-icon-wrapper link__info-menu-icon-wrapper"
+>
+  <app-menu-icon
+    width="18"
+    height="18"
+    iconClass="link__info-action-icon"
+  ></app-menu-icon>
+</app-dropdown>
