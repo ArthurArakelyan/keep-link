@@ -4,6 +4,7 @@ import {
   HostBinding,
   HostListener,
   Input,
+  OnInit,
   ViewChild,
 } from '@angular/core';
 
@@ -22,7 +23,7 @@ import { IDropdownOption } from '../../../core/models/dropdown-option.model';
   styleUrls: ['dropdown.component.scss'],
   animations: [fadeTranslateInOut],
 })
-export class DropdownComponent {
+export class DropdownComponent implements OnInit {
   open: boolean = false;
 
   leftStyle: number = 0;
@@ -34,12 +35,13 @@ export class DropdownComponent {
 
   @Input({ required: true }) options: IDropdownOption[] = [];
   @Input() position: 'left' | 'center' | 'right' = 'left';
+  @Input() trigger: 'hover' | 'click' = 'hover';
 
   @ViewChild('dropdown', { static: false }) dropdown: ElementRef<HTMLDivElement> | undefined;
 
   @HostListener('document:click', ['$event'])
   private onGlobalClick(event: MouseEvent): void {
-    if (!this.element.nativeElement.contains(<HTMLElement>event.target)) {
+    if (this.open && !this.element.nativeElement.contains(<HTMLElement>event.target)) {
       this.closeDropdown();
     }
   }
@@ -60,18 +62,34 @@ export class DropdownComponent {
 
   @HostListener('click', ['$event'])
   private onClick(event: MouseEvent) {
+    if (this.trigger !== 'click') {
+      return;
+    }
+
     if (!(<HTMLElement>event.target).className?.includes?.('dropdown')) {
-      this.openDropdown();
+      if (this.open) {
+        this.closeDropdown();
+      } else {
+        this.openDropdown();
+      }
     }
   }
 
   @HostListener('mouseenter')
   private onMouseEnter() {
+    if (this.trigger !== 'hover') {
+      return;
+    }
+
     this.openDropdown();
   }
 
   @HostListener('mouseleave')
   private onMouseLeave() {
+    if (this.trigger !== 'hover') {
+      return;
+    }
+
     this.closeDropdown();
   }
 
@@ -80,6 +98,12 @@ export class DropdownComponent {
   constructor(
     private element: ElementRef<HTMLElement>,
   ) {}
+
+  ngOnInit() {
+    if (window.matchMedia('(pointer: coarse)').matches) {
+      this.trigger = 'click';
+    }
+  }
 
   onOptionClick(action: () => void) {
     this.closeDropdown();

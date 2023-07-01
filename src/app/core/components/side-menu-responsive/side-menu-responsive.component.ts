@@ -64,10 +64,6 @@ export class SideMenuResponsiveComponent implements OnInit, OnDestroy {
       if (this.touchStart - 90 > this.touchEnd) {
         this.sideMenuService.close();
       }
-    } else {
-      if (this.touchStart < 20 && this.touchEnd > 150) {
-        this.sideMenuService.open();
-      }
     }
   }
 

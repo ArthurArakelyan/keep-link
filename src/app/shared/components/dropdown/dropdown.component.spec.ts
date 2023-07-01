@@ -53,7 +53,11 @@ describe('DropdownComponent', () => {
     expect(compiled.querySelector('.dropdown')).toBeNull();
   });
 
-  it('should open the dropdown on click', () => {
+  it('should open the dropdown on click when the trigger is click', () => {
+    component.trigger = 'click';
+
+    fixture.detectChanges();
+
     expect(component.open).toBeFalse();
 
     compiled.click();
@@ -63,7 +67,21 @@ describe('DropdownComponent', () => {
     expect(component.open).toBeTrue();
   });
 
-  it('should open the dropdown on mouseenter', () => {
+  it('should not open the dropdown on click when the trigger is hover', () => {
+    component.trigger = 'hover';
+
+    fixture.detectChanges();
+
+    expect(component.open).toBeFalse();
+
+    compiled.click();
+
+    fixture.detectChanges();
+
+    expect(component.open).toBeFalse();
+  });
+
+  it('should open the dropdown on mouseenter when the trigger is hover', () => {
     expect(component.open).toBeFalse();
 
     compiled.dispatchEvent(new Event('mouseenter', { bubbles: true }));
@@ -71,6 +89,18 @@ describe('DropdownComponent', () => {
     fixture.detectChanges();
 
     expect(component.open).toBeTrue();
+  });
+
+  it('should not open the dropdown on mouseenter when the trigger is click', () => {
+    component.trigger = 'click';
+
+    expect(component.open).toBeFalse();
+
+    compiled.dispatchEvent(new Event('mouseenter', { bubbles: true }));
+
+    fixture.detectChanges();
+
+    expect(component.open).toBeFalse();
   });
 
   it('should open the dropdown on enter when the element is active', () => {
@@ -115,7 +145,7 @@ describe('DropdownComponent', () => {
     expect(component.open).toBeFalse();
   });
 
-  it('should close the dropdown on mouseleave', () => {
+  it('should close the dropdown on mouseleave when the trigger is hover', () => {
     component.open = true;
 
     fixture.detectChanges();
@@ -127,6 +157,21 @@ describe('DropdownComponent', () => {
     fixture.detectChanges();
 
     expect(component.open).toBeFalse();
+  });
+
+  it('should not close the dropdown on mouseleave when the trigger is click', () => {
+    component.trigger = 'click';
+    component.open = true;
+
+    fixture.detectChanges();
+
+    expect(component.open).toBeTrue();
+
+    compiled.dispatchEvent(new Event('mouseleave', { bubbles: true }));
+
+    fixture.detectChanges();
+
+    expect(component.open).toBeTrue();
   });
 
   it('should close the dropdown on esc click', () => {
