@@ -13,6 +13,7 @@ import { AvatarComponent } from './components/avatar/avatar.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { ModalHeaderComponent } from './components/modal/modal-header/modal-header.component';
+import { FabComponent } from './components/fab/fab.component';
 
 // Pipes
 import { ShortLinkPipe } from './pipes/short-link/short-link.pipe';
@@ -28,6 +29,7 @@ import { ShortLinkPipe } from './pipes/short-link/short-link.pipe';
     ShortLinkPipe,
     ModalComponent,
     ModalHeaderComponent,
+    FabComponent,
   ],
   imports: [
     CommonModule,
@@ -45,6 +47,7 @@ import { ShortLinkPipe } from './pipes/short-link/short-link.pipe';
     ShortLinkPipe,
     ModalComponent,
     ModalHeaderComponent,
+    FabComponent,
   ],
 })
 export class SharedModule {

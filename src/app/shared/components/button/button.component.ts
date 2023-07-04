@@ -12,7 +12,7 @@ export class ButtonComponent {
   ripples: IRipple[] = [];
 
   @Input() type: string = 'button';
-  @Input() variant: 'rounded' | '' = '';
+  @Input() variant: 'rounded' | 'circle' | '' = '';
   @Input() loading: boolean = false;
   @Input() disabled: boolean = false;
 
