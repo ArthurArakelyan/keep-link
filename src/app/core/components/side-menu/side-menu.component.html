@@ -11,7 +11,7 @@
 </div>
 
 <nav class="side-menu-content">
-  <div class="side-menu__add">
+  <div *ngIf="showAddButton" class="side-menu__add">
     <app-button variant="rounded" class="side-menu__add-button" (buttonClick)="onAdd()">
       <app-plus-icon width="16" height="16" class="side-menu__add-button-icon" iconClass="side-menu__add-button-icon"></app-plus-icon>
       <span>Add Link</span>
