@@ -1,0 +1,26 @@
+<app-modal
+  [title]="title"
+  (modalClose)="onClose()"
+>
+  <p class="confirm-modal-text">
+    <ng-content></ng-content>
+  </p>
+
+  <div class="confirm-modal-actions">
+    <app-button
+      class="confirm-modal-actions__cancel"
+      (buttonClick)="onClose()"
+    >
+      {{ cancelText }}
+    </app-button>
+
+    <app-button
+      class="confirm-modal-actions__submit"
+      color="red"
+      [loading]="loading"
+      (buttonClick)="onSubmit()"
+    >
+      {{ submitText }}
+    </app-button>
+  </div>
+</app-modal>

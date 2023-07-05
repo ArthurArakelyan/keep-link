@@ -32,3 +32,10 @@
   box-shadow: 0 0 5px var(--shadow-md-color);
   @include flex(column, center, center);
 }
+
+@media (max-width: 750px) {
+  .modal-content {
+    max-width: unset;
+    margin: 2.5rem 1rem;
+  }
+}
