@@ -10,7 +10,6 @@
   padding: 0.7rem 1rem;
   border-radius: 0.25rem;
   letter-spacing: 0.031rem;
-  background-color: $primary-color;
   @include font(1rem, 500, $white, center);
   @include flex(row, center, center);
   transition: background-color .2s ease, box-shadow .2s ease, opacity .2s ease;
@@ -24,7 +23,6 @@
   &:not(:disabled) {
     @include hover() {
       box-shadow: 0 0 0.313rem var(--shadow-md-color);
-      background-color: $primary-color-hover;
     }
 
     @include active() {
@@ -36,6 +34,10 @@
     .button__content {
       opacity: 0.6;
     }
+  }
+
+  &:disabled {
+    cursor: default;
   }
 
   // variants
@@ -52,11 +54,35 @@
     border-radius: 50%;
     box-shadow: var(--fab-shadow);
   }
-}
 
-.button:disabled {
-  cursor: default;
-  background-color: $primary-color-600;
+  // colors
+  &--primary {
+    background-color: $primary-color;
+
+    &:disabled {
+      background-color: $primary-color-600;
+    }
+
+    &:not(:disabled) {
+      @include hover() {
+        background-color: $primary-color-hover;
+      }
+    }
+  }
+
+  &--red {
+    background-color: $red;
+
+    &:disabled {
+      background-color: $red-600;
+    }
+
+    &:not(:disabled) {
+      @include hover() {
+        background-color: $red-hover;
+      }
+    }
+  }
 }
 
 .button__content {

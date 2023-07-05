@@ -1,0 +1,13 @@
+@import "mixins";
+
+.confirm-modal-text {
+  margin-bottom: 2.5rem;
+  line-height: 2rem;
+  @include font(1.5rem, 400, var(--primary-text-color), center);
+}
+
+.confirm-modal-actions {
+  width: 100%;
+  gap: 1rem;
+  @include flex(row, center, flex-end);
+}

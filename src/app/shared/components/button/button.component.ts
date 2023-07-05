@@ -13,6 +13,7 @@ export class ButtonComponent {
 
   @Input() type: string = 'button';
   @Input() variant: 'rounded' | 'circle' | '' = '';
+  @Input() color: 'primary' | 'red' = 'primary';
   @Input() loading: boolean = false;
   @Input() disabled: boolean = false;
 
