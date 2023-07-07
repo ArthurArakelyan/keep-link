@@ -1,4 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
+
+// Store
+import { AppStore } from '../../../store/app.reducer';
+import { selectFolder } from '../../../store/folder';
 
 // Models
 import { IFolder } from '../../../core/models/folder.model';
@@ -8,76 +14,22 @@ import { IFolder } from '../../../core/models/folder.model';
   templateUrl: 'folders.component.html',
   styleUrls: ['folders.component.scss'],
 })
-export class FoldersComponent {
-  folders: IFolder[] = [
-    {
-      id: 'test',
-      name: 'Folder',
-      description: 'eget dolor morbi non arcu risus quis varius quam quisque id diam vel quam elementum pulvinar etiam non quam lacus',
-      links: [
-        {
-          id: 'test1',
-          name: 'Google',
-          link: 'https://www.google.com/',
-        },
-        {
-          id: 'test2',
-          name: 'Google Google Google Google Google Google Google',
-          link: 'https://www.google.com/',
-          image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_Homepage.svg/1200px-Google_Homepage.svg.png',
-        },
-        {
-          id: 'test3',
-          name: 'Google',
-          link: 'https://www.google.com/',
-          image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_Homepage.svg/1200px-Google_Homepage.svg.png',
-        },
-      ],
-    },
-    {
-      id: 'test 2',
-      name: 'Folder 2',
-      links: [
-        {
-          id: 'test1',
-          name: 'Google',
-          link: 'https://www.google.com/',
-        },
-        {
-          id: 'test2',
-          name: 'Google Google Google Google Google Google Google',
-          link: 'https://www.google.com/',
-          image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_Homepage.svg/1200px-Google_Homepage.svg.png',
-        },
-        {
-          id: 'test3',
-          name: 'Google Google Google Google Google Google Google',
-          link: 'https://www.google.com/',
-        },
-        {
-          id: 'test4',
-          name: 'Google Google Google Google Google Google Google',
-          link: 'https://www.google.com/',
-          image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_Homepage.svg/1200px-Google_Homepage.svg.png',
-        },
-      ],
-    },
-    {
-      id: 'test 3',
-      name: 'Folder 3',
-      links: [
-        {
-          id: 'test1',
-          name: 'Google',
-          link: 'https://www.google.com/',
-        },
-        {
-          id: 'test2',
-          name: 'Google Google Google Google Google Google Google',
-          link: 'https://www.google.com/',
-          image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_Homepage.svg/1200px-Google_Homepage.svg.png',
-        },
-      ],
-    },
-  ];
+export class FoldersComponent implements OnInit, OnDestroy {
+  folders: IFolder[] = [];
+
+  folderStoreSubscription: Subscription | undefined;
+
+  constructor(
+    private store: Store<AppStore>,
+  ) {}
+
+  ngOnInit() {
+    this.folderStoreSubscription = this.store.select(selectFolder).subscribe((folderState) => {
+      this.folders = folderState.list;
+    });
+  }
+
+  ngOnDestroy() {
+    this.folderStoreSubscription?.unsubscribe();
+  }
 }

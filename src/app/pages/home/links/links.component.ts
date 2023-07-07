@@ -1,4 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
+
+// Store
+import { AppStore } from '../../../store/app.reducer';
+import { selectLink } from '../../../store/link';
 
 // Models
 import { ILink } from '../../../core/models/link.model';
@@ -8,28 +14,22 @@ import { ILink } from '../../../core/models/link.model';
   templateUrl: 'links.component.html',
   styleUrls: ['links.component.scss'],
 })
-export class LinksComponent {
-  links: ILink[] = [
-    {
-      id: '1',
-      name: 'Google',
-      link: 'https://www.google.com/',
-      image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_Homepage.svg/1200px-Google_Homepage.svg.png',
-    },
-    {
-      id: '2',
-      name: 'Google',
-      link: 'https://www.google.com/',
-    },
-    {
-      id: '3',
-      name: 'Google',
-      link: 'https://www.google.com/',
-    },
-    {
-      id: '4',
-      name: 'Google',
-      link: 'https://www.google.com/',
-    },
-  ];
+export class LinksComponent implements OnInit, OnDestroy {
+  links: ILink[] = [];
+
+  linkStoreSubscription: Subscription | undefined;
+
+  constructor(
+    private store: Store<AppStore>,
+  ) {}
+
+  ngOnInit() {
+    this.linkStoreSubscription = this.store.select(selectLink).subscribe((linkState) => {
+      this.links = linkState.list;
+    });
+  }
+
+  ngOnDestroy() {
+    this.linkStoreSubscription?.unsubscribe();
+  }
 }
