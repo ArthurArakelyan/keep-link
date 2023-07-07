@@ -5,8 +5,8 @@ import { Subscription, take } from 'rxjs';
 
 // Store
 import { AppStore } from './store/app.reducer';
-import { changeTheme, selectTheme } from './store/theme';
-import { changeAuth, selectAuth } from './store/auth';
+import { ThemeState, changeTheme, selectTheme, initialState as themeInitialState } from './store/theme';
+import { AuthState, changeAuth, selectAuth, initialState as authInitialState } from './store/auth';
 
 // Services
 import { AuthService } from './core/services/auth.service';
@@ -15,6 +15,7 @@ import { SizeService } from './core/services/size.service';
 // Utilities
 import { addColorSchemeGlobalStyle } from './core/utilities/add-color-scheme-global-style';
 import { getPreferredTheme } from './core/utilities/get-preferred-theme';
+import { getStoreSync } from './core/utilities/get-store-sync';
 
 // Models
 import { ThemeType } from './core/models/theme.model';
@@ -25,8 +26,8 @@ import { ThemeType } from './core/models/theme.model';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit, OnDestroy {
-  isAuth: boolean = false;
-  theme: ThemeType = 'light';
+  isAuth: boolean = getStoreSync<AuthState>('auth', authInitialState).isAuth;
+  theme: ThemeType = getStoreSync<ThemeState>('theme', themeInitialState).theme;
 
   private authSubscription: Subscription | undefined;
   private themeSubscription: Subscription | undefined;
