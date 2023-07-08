@@ -14,6 +14,8 @@ import { EditIconComponent } from './icons/edit-icon/edit-icon.component';
 import { DeleteIconComponent } from './icons/delete-icon/delete-icon.component';
 import { MenuIconComponent } from './icons/menu-icon/menu-icon.component';
 import { CloseIconComponent } from './icons/close-icon/close-icon.component';
+import { ChevronDownIconComponent } from './icons/chevron-down-icon/chevron-down-icon.component';
+import { FolderIconComponent } from './icons/folder/folder-icon.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import { CloseIconComponent } from './icons/close-icon/close-icon.component';
     DeleteIconComponent,
     MenuIconComponent,
     CloseIconComponent,
+    ChevronDownIconComponent,
+    FolderIconComponent,
   ],
   exports: [
     SearchIconComponent,
@@ -45,6 +49,8 @@ import { CloseIconComponent } from './icons/close-icon/close-icon.component';
     DeleteIconComponent,
     MenuIconComponent,
     CloseIconComponent,
+    ChevronDownIconComponent,
+    FolderIconComponent,
   ],
 })
 export class IconModule {

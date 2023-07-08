@@ -54,7 +54,7 @@ describe('AvatarComponent', () => {
 
     fixture.detectChanges();
 
-    await timeout(100);
+    await timeout(200);
 
     fixture.detectChanges();
 

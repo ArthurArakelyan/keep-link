@@ -1,0 +1,55 @@
+<button
+  type="button"
+  class="select"
+  [tabindex]="disabled ? -1 : 0"
+  [disabled]="disabled"
+  (click)="onClick()"
+>
+  <span
+    [ngStyle]="{ backgroundColor: placeholderBackgroundColor }"
+    [ngClass]="{ 'select__placeholder--divided': value }"
+    class="select__placeholder"
+  >
+    {{ placeholder }}
+  </span>
+
+  <div *ngIf="value" class="select__value">
+    <div *ngIf="value.icon" [ngSwitch]="value.icon" class="select__value-icon-wrapper">
+      <app-link-icon *ngSwitchCase="'link'" iconClass="select__value-icon"></app-link-icon>
+      <app-folder-icon *ngSwitchCase="'folder'" iconClass="select__value-icon"></app-folder-icon>
+    </div>
+
+    <span class="select__value-name">
+      {{ value.value }}
+    </span>
+  </div>
+
+  <app-chevron-down-icon
+    width="28"
+    height="28"
+    iconClass="select__chevron"
+    class="select__chevron-wrapper"
+  ></app-chevron-down-icon>
+</button>
+
+<div
+  *ngIf="open"
+  class="select-options"
+  [@fadeTranslateInOut]
+>
+  <app-option
+    *ngFor="let option of options; let i = index"
+    [option]="option"
+    [selected]="option.key === value?.key"
+    [focused]="i === focused"
+    (optionClick)="onSelect($event)"
+  ></app-option>
+</div>
+
+<p
+  *ngIf="showError && errorMessage"
+  [@fadeInOut]
+  class="select-error"
+>
+  {{ errorMessage }}
+</p>
