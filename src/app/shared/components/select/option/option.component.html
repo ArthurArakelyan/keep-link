@@ -1,0 +1,18 @@
+<button
+  type="button"
+  class="option"
+  [ngClass]="{ 'option--selected': selected }"
+  [disabled]="disabled"
+  [tabindex]="disabled ? -1 : 0"
+  (click)="onClick()"
+  #optionElement
+>
+  <div *ngIf="option.icon" [ngSwitch]="option.icon" class="option__icon-wrapper">
+    <app-link-icon *ngSwitchCase="'link'" iconClass="option__icon"></app-link-icon>
+    <app-folder-icon *ngSwitchCase="'folder'" iconClass="option__icon"></app-folder-icon>
+  </div>
+
+  <span class="option__name">
+    {{ option.value }}
+  </span>
+</button>

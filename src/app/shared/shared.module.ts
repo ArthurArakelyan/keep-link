@@ -15,6 +15,8 @@ import { ModalComponent } from './components/modal/modal.component';
 import { ModalHeaderComponent } from './components/modal/modal-header/modal-header.component';
 import { FabComponent } from './components/fab/fab.component';
 import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
+import { SelectComponent } from './components/select/select.component';
+import { OptionComponent } from './components/select/option/option.component';
 
 // Pipes
 import { ShortLinkPipe } from './pipes/short-link/short-link.pipe';
@@ -32,6 +34,8 @@ import { ShortLinkPipe } from './pipes/short-link/short-link.pipe';
     ModalHeaderComponent,
     FabComponent,
     ConfirmModalComponent,
+    SelectComponent,
+    OptionComponent,
   ],
   imports: [
     CommonModule,
@@ -51,6 +55,8 @@ import { ShortLinkPipe } from './pipes/short-link/short-link.pipe';
     ModalHeaderComponent,
     FabComponent,
     ConfirmModalComponent,
+    SelectComponent,
+    OptionComponent,
   ],
 })
 export class SharedModule {
