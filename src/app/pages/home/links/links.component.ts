@@ -17,7 +17,7 @@ import { ILink } from '../../../core/models/link.model';
 export class LinksComponent implements OnInit, OnDestroy {
   links: ILink[] = [];
 
-  linkStoreSubscription: Subscription | undefined;
+  private linkStoreSubscription: Subscription | undefined;
 
   constructor(
     private store: Store<AppStore>,

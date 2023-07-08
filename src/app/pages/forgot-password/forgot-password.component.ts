@@ -19,7 +19,7 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
   submitted: boolean = false;
   loading: boolean = false;
 
-  authSubscription: Subscription | undefined;
+  private authSubscription: Subscription | undefined;
 
   forgotPasswordForm = new FormGroup({
     email: new FormControl('', {

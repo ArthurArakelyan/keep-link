@@ -17,7 +17,7 @@ import { IFolder } from '../../../core/models/folder.model';
 export class FoldersComponent implements OnInit, OnDestroy {
   folders: IFolder[] = [];
 
-  folderStoreSubscription: Subscription | undefined;
+  private folderStoreSubscription: Subscription | undefined;
 
   constructor(
     private store: Store<AppStore>,
