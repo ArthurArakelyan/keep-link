@@ -1,0 +1,57 @@
+@import "mixins";
+
+:host {
+  width: 100%;
+}
+
+:host::ng-deep {
+  .option__icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    fill: var(--primary-text-color);
+  }
+}
+
+.option {
+  width: 100%;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  padding: 0.5rem 1rem;
+  overflow: hidden;
+  @include flex(row, center, flex-start);
+  transition: background-color .2s ease;
+
+  &--selected {
+    background-color: var(--white-background-highlited) !important;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: default;
+    background-color: transparent !important;
+  }
+
+  &:focus-visible {
+    background-color: var(--white-background-active);
+  }
+
+  @include hover() {
+    background-color: var(--white-background-hover);
+  }
+
+  @include active() {
+    background-color: var(--white-background-active);
+  }
+}
+
+.option__name {
+  flex: 1;
+  max-width: 100%;
+  @include font(1rem, 500, var(--primary-text-color));
+  @include ellipsis();
+}
+
+.option__icon-wrapper {
+  margin-right: 0.75rem;
+}
