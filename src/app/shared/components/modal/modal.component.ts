@@ -1,4 +1,13 @@
-import { Component, EventEmitter, HostBinding, HostListener, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  HostBinding,
+  HostListener,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 
 // Constants
 import { keys } from '../../../core/constants/keys';
@@ -24,10 +33,7 @@ export class ModalComponent implements OnInit, OnDestroy {
     }
   }
 
-  @HostBinding('@fadeTranslateInOut')
-  get fadeInOut() {
-    return true;
-  }
+  @HostBinding('@fadeTranslateInOut') get fadeInOut() { return true; }
 
   ngOnInit() {
     document.body.style.overflow = 'hidden';

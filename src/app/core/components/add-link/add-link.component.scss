@@ -1,0 +1,24 @@
+@import "mixins";
+
+.add-link {
+  width: 100%;
+  @include flex(column, flex-start, flex-start);
+}
+
+.add-link__form {
+  width: 100%;
+  margin-top: 2rem;
+  row-gap: 2rem;
+  @include flex(column, flex-start, flex-start);
+}
+
+.add-link__separator {
+  width: 100%;
+  height: 0.063rem;
+  margin-top: 2rem;
+  background-color: var(--gray-100);
+}
+
+.add-link__submit {
+  margin-left: auto;
+}

@@ -3,5 +3,74 @@
   title="Add Link"
   (modalClose)="onClose()"
 >
+  <div class="add-link">
+    <app-select
+      placeholder="Type"
+      placeholderBackgroundColor="var(--card-color)"
+      defaultValue="link"
+      [options]="typeOptions"
+      (select)="onSelectType($event)"
+    ></app-select>
 
+    <div class="add-link__separator" aria-hidden="true"></div>
+
+    <form
+      *ngIf="type === 'link'"
+      class="add-link__form"
+      [formGroup]="linkForm"
+      (ngSubmit)="onLinkSubmit()"
+    >
+      <app-input
+        placeholder="Name"
+        name="name"
+        placeholderBackgroundColor="var(--card-color)"
+        formControlName="name"
+        [showError]="linkForm.controls.name.invalid && submitted"
+        [error]="linkForm.controls.name.errors"
+      ></app-input>
+
+      <app-input
+        placeholder="Link"
+        name="link"
+        inputMode="url"
+        placeholderBackgroundColor="var(--card-color)"
+        formControlName="link"
+        [showError]="linkForm.controls.link.invalid && submitted"
+        [error]="linkForm.controls.link.errors"
+      ></app-input>
+
+      <app-button type="submit" class="add-link__submit">
+        Add
+      </app-button>
+    </form>
+
+    <form
+      *ngIf="type === 'folder'"
+      [formGroup]="folderForm"
+      class="add-link__form"
+      (ngSubmit)="onFolderSubmit()"
+    >
+      <app-input
+        placeholder="Name"
+        name="name"
+        placeholderBackgroundColor="var(--card-color)"
+        formControlName="name"
+        [showError]="folderForm.controls.name.invalid && submitted"
+        [error]="folderForm.controls.name.errors"
+      ></app-input>
+
+      <app-input
+        placeholder="Description"
+        name="description"
+        placeholderBackgroundColor="var(--card-color)"
+        formControlName="description"
+        [showError]="folderForm.controls.description.invalid && submitted"
+        [error]="folderForm.controls.description.errors"
+      ></app-input>
+
+      <app-button type="submit" class="add-link__submit">
+        Add
+      </app-button>
+    </form>
+  </div>
 </app-modal>

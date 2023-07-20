@@ -1,11 +1,14 @@
 import {
   Component,
   ElementRef,
+  EventEmitter,
   forwardRef,
   HostBinding,
   HostListener,
   Input,
   OnChanges,
+  OnInit,
+  Output,
   SimpleChanges,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ValidationErrors } from '@angular/forms';
@@ -34,7 +37,7 @@ import { IOption } from '../../../core/models/option.model';
   }],
   animations: [fadeTranslateInOut, fadeInOut],
 })
-export class SelectComponent implements ControlValueAccessor, OnChanges {
+export class SelectComponent implements ControlValueAccessor, OnInit, OnChanges {
   value: IOption | null = null;
   open: boolean = false;
   errorMessage: string = '';
@@ -49,6 +52,9 @@ export class SelectComponent implements ControlValueAccessor, OnChanges {
   @Input() showError: boolean = false;
   @Input() error: ValidationErrors | null | undefined;
   @Input() placeholderBackgroundColor: string = 'var(--background-color)';
+  @Input() defaultValue: string = '';
+
+  @Output() select = new EventEmitter<string | null>();
 
   @HostBinding('class.open') get classOpen() { return this.open; }
   @HostBinding('class.selected') get classSelected() { return this.value !== null; }
@@ -79,6 +85,10 @@ export class SelectComponent implements ControlValueAccessor, OnChanges {
     private element: ElementRef<HTMLElement>,
   ) {}
 
+  ngOnInit() {
+    this.initializeDefaultValue();
+  }
+
   ngOnChanges(changes: SimpleChanges) {
     if (changes['error']) {
       const error = getErrorMessage(changes['error'].currentValue);
@@ -98,10 +108,16 @@ export class SelectComponent implements ControlValueAccessor, OnChanges {
 
     this.onChange(this.value ? this.value.key : null);
 
+    this.select.emit(this.value ? this.value.key : null);
+
     this.closeSelect();
   }
 
-  onArrow(arrow: string) {
+  toggleSelect() {
+    this.open ? this.closeSelect() : this.openSelect();
+  }
+
+  private onArrow(arrow: string) {
     if (document.activeElement) {
       const buttons = this.element.nativeElement.querySelectorAll('app-option button');
 
@@ -128,11 +144,7 @@ export class SelectComponent implements ControlValueAccessor, OnChanges {
     }
   }
 
-  toggleSelect() {
-    this.open ? this.closeSelect() : this.openSelect();
-  }
-
-  openSelect() {
+  private openSelect() {
     if (this.disabled) {
       return;
     }
@@ -146,12 +158,12 @@ export class SelectComponent implements ControlValueAccessor, OnChanges {
     }, 0);
   }
 
-  closeSelect() {
+  private closeSelect() {
     this.open = false;
     this.focused = -1;
   }
 
-  calculateVerticalPosition() {
+  private calculateVerticalPosition() {
     try {
       const { top, height } = this.element.nativeElement.getBoundingClientRect();
       const screenHeight = window.innerHeight;
@@ -164,7 +176,7 @@ export class SelectComponent implements ControlValueAccessor, OnChanges {
     }
   }
 
-  scrollToOption() {
+  private scrollToOption() {
     if (!this.value || this.options.length <= 6) {
       return;
     }
@@ -173,6 +185,18 @@ export class SelectComponent implements ControlValueAccessor, OnChanges {
 
     if (selectedOption) {
       selectedOption.scrollIntoView();
+    }
+  }
+
+  private initializeDefaultValue() {
+    if (!this.defaultValue) {
+      return;
+    }
+
+    const foundOption = this.options.find((option) => option.key === this.defaultValue);
+
+    if (foundOption) {
+      this.value = foundOption;
     }
   }
 

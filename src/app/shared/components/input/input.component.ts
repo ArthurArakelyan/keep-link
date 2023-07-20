@@ -37,6 +37,7 @@ export class InputComponent implements ControlValueAccessor, OnChanges {
   @Input({ required: true }) placeholder: string = '';
   @Input() name: string = '';
   @Input() type: string = 'text';
+  @Input() inputMode: string = 'text';
   @Input() error: ValidationErrors | null | undefined;
   @Input() showError: boolean = false;
   @Input() placeholderBackgroundColor: string = 'var(--background-color)';

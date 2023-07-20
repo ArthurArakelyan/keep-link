@@ -15,4 +15,5 @@ export const validationMessages = {
   maxlength: (data: { requiredLength: number }) => `Text is too long (maximum is ${data.requiredLength})`,
   minlength: (data: { requiredLength: number }) => `At least ${data.requiredLength} characters needed`,
   match: (data: { message: string }) => data.message,
+  url: (data: { message: string }) => data.message,
 };
