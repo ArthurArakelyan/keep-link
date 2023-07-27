@@ -1,4 +1,6 @@
 <app-folder
   *ngFor="let folder of folders"
   [folder]="folder"
+  (edit)="onEdit($event)"
+  (delete)="onDelete($event)"
 ></app-folder>

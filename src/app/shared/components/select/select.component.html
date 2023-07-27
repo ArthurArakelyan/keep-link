@@ -1,6 +1,11 @@
 <button
   type="button"
+  role="combobox"
   class="select"
+  [attr.aria-labelledby]="labelId"
+  [attr.aria-controls]="containerId"
+  [attr.aria-owns]="containerId"
+  [attr.aria-expanded]="open.toString()"
   [tabindex]="disabled ? -1 : 0"
   [disabled]="disabled"
   (click)="onClick()"
@@ -8,6 +13,7 @@
   <span
     [ngStyle]="{ backgroundColor: placeholderBackgroundColor }"
     [ngClass]="{ 'select__placeholder--divided': value }"
+    [id]="labelId"
     class="select__placeholder"
   >
     {{ placeholder }}
@@ -33,8 +39,11 @@
 </button>
 
 <div
-  *ngIf="open"
+  *ngIf="open && options.length"
+  role="listbox"
   class="select-options"
+  [attr.aria-labelledby]="labelId"
+  [id]="containerId"
   [@fadeTranslateInOut]
 >
   <app-option
@@ -46,10 +55,22 @@
   ></app-option>
 </div>
 
+<div
+  *ngIf="open && !options.length"
+  class="select-options"
+  role="alert"
+  [@fadeTranslateInOut]
+>
+  <span class="select-options__empty">
+    No folders
+  </span>
+</div>
+
 <p
   *ngIf="showError && errorMessage"
-  [@fadeInOut]
+  role="alert"
   class="select-error"
+  [@fadeInOut]
 >
   {{ errorMessage }}
 </p>

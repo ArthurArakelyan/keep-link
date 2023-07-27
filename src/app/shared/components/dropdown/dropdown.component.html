@@ -4,6 +4,8 @@
 
 <div
   *ngIf="open"
+  role="listbox"
+  [id]="id"
   [ngStyle]="{ marginTop: height + 'px', left: leftStyle + 'px', top: top + 'px' }"
   [@fadeTranslateInOut]
   class="dropdown"

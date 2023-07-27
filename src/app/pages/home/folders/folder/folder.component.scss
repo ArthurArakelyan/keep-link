@@ -9,9 +9,8 @@
 }
 
 :host(:hover) {
-  .actions-bar {
+  .actions-bar__button {
     opacity: 1;
-    visibility: visible;
   }
 }
 
@@ -36,6 +35,10 @@
       }
     }
   }
+
+  .links-empty__button {
+    width: 100%;
+  }
 }
 
 .folder {
@@ -57,18 +60,16 @@
 
 .actions-bar {
   width: 100%;
-  opacity: 0;
-  visibility: hidden;
   min-height: 2.5rem;
   background-color: transparent;
   padding: 0 0.5rem;
   gap: 1rem;
   @include flex(row, center, flex-start);
-  transition: opacity .2s ease, visibility .2s ease;
 
   @include noHover() {
-    visibility: visible !important;
-    opacity: 1 !important;
+    .actions-bar__button {
+      opacity: 1 !important;
+    }
   }
 }
 .actions-bar__button {
@@ -77,9 +78,14 @@
   border-radius: 50%;
   background-color: transparent;
   padding: 0;
+  opacity: 0;
   border: none;
   @include flex(row, center, center);
-  transition: background-color .2s ease;
+  transition: background-color .2s ease, opacity .2s ease;
+
+  &:focus-visible {
+    opacity: 1 !important;
+  }
 
   @include hover() {
     background-color: var(--white-background-hover);
@@ -97,6 +103,16 @@
 .links__link {
   width: 100%;
   border-top: 0.063rem solid var(--separator-border-color);
+}
+
+.links-empty {
+  width: 100%;
+  border-top: 0.063rem solid var(--separator-border-color);
+  padding: 1rem;
+  @include flex(column, flex-start, flex-start);
+}
+.links-empty__button-wrapper {
+  width: 100%;
 }
 
 @media (max-width: 1000px) {

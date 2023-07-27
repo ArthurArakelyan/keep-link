@@ -1,5 +1,6 @@
 <span
   class="input-placeholder"
+  [id]="labelId"
   [ngStyle]="{ backgroundColor: placeholderBackgroundColor }"
 >
   {{ placeholder }}
@@ -9,7 +10,10 @@
   [type]="type"
   [name]="name"
   [value]="value"
+  [id]="inputId"
+  [attr.aria-labelledby]="labelId"
   [attr.aria-label]="placeholder"
+  [attr.inputmode]="inputMode"
   (input)="onInput($event)"
   (focus)="onFocus()"
   (blur)="onBlur()"
@@ -19,8 +23,9 @@
 
 <p
   *ngIf="showError && errorMessage"
-  [@fadeInOut]
   class="input-error"
+  role="alert"
+  [@fadeInOut]
 >
   {{ errorMessage }}
 </p>

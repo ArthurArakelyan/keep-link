@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 // Services
@@ -23,6 +24,8 @@ export class SideMenuComponent implements OnInit, OnDestroy {
   constructor(
     private sideMenuService: SideMenuService,
     private sizeService: SizeService,
+    private router: Router,
+    private route: ActivatedRoute,
   ) {}
 
   ngOnInit() {
@@ -36,7 +39,16 @@ export class SideMenuComponent implements OnInit, OnDestroy {
   }
 
   onAdd() {
-    this.close();
+    this.router.navigate(
+      [],
+      {
+        relativeTo: this.route,
+        queryParamsHandling: 'merge',
+        queryParams: {
+          addLink: '',
+        },
+      },
+    );
   }
 
   close() {

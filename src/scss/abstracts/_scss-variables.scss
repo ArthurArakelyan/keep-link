@@ -26,10 +26,10 @@ $side-menu-width: 11.25rem;
 
 // z-indexes
 $negative-z-index: -1;
-$zero-z-index: 0;
 $component-z-index: 1;
 $popup-z-index: 2;
-$modal-z-index: 3;
+$popup-advanced-z-index: 3;
+$modal-z-index: 4;
 
 // breakpoints
 $hide-side-menu-breakpoint: 768px;

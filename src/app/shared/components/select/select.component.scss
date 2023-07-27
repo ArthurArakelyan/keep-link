@@ -143,6 +143,14 @@
   transition: border-color .2s ease;
 }
 
+.select-options__empty {
+  padding: 0.5rem 1rem;
+  width: 100%;
+  display: flex;
+  @include font(1.2rem, 500, var(--primary-text-color));
+  @include ellipsis();
+}
+
 .select-error {
   position: absolute;
   top: 100%;

@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 // Modules
 import { SharedModule } from '../../../shared/shared.module';
@@ -18,16 +19,19 @@ describe('LinksComponent', () => {
   const createLink = (name = 'test', link = 'https://www.google.com/', image = 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_Homepage.svg/1200px-Google_Homepage.svg.png'): ILink => {
     return {
       id: Math.random().toString(),
+      userId: '1',
+      folderId: null,
       name,
       link,
       image,
+      createdAt: 0,
     };
   };
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [LinksComponent, LinkComponent],
-      imports: [SharedModule],
+      imports: [SharedModule, RouterTestingModule],
     });
 
     fixture = TestBed.createComponent(LinksComponent);

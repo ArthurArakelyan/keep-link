@@ -14,7 +14,7 @@ export const confirmPasswordValidator = (control: AbstractControl): ValidationEr
 
   return {
     match: {
-      message: 'The password doesn\'t match!',
+      message: 'The password doesn\'t match',
     },
   };
 };

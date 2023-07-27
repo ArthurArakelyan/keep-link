@@ -18,11 +18,25 @@
   </button>
 </div>
 
-<div class="links">
+<div
+  *ngIf="links.length; else emptyLinks"
+  class="links"
+>
   <app-link
-    *ngFor="let link of folder.links"
+    *ngFor="let link of links"
     [link]="link"
     imageClass="links__link-image"
     class="links__link"
   ></app-link>
 </div>
+<ng-template #emptyLinks>
+  <div class="links-empty">
+    <app-button
+      class="links-empty__button-wrapper"
+      buttonClass="links-empty__button"
+      (buttonClick)="onAddLink()"
+    >
+      Add Link
+    </app-button>
+  </div>
+</ng-template>

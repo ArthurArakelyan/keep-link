@@ -1,7 +1,8 @@
 <button
-  class="button"
+  class="{{ 'button ' + buttonClass }}"
   [type]="type"
   [disabled]="loading || disabled"
+  [attr.tabindex]="(loading || disabled) ? '-1' : '0'"
   [ngClass]="{ 'button--primary': color === 'primary', 'button--red': color === 'red', 'button--loading': loading, 'button--rounded': variant === 'rounded', 'button--circle': variant === 'circle' }"
   (click)="onClick($event)"
   (mousedown)="onMouseDown($event)"

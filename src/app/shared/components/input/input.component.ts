@@ -36,10 +36,14 @@ export class InputComponent implements ControlValueAccessor, OnChanges {
 
   @Input({ required: true }) placeholder: string = '';
   @Input() name: string = '';
+  @Input() inputId: string | undefined;
   @Input() type: string = 'text';
+  @Input() inputMode: string = 'text';
   @Input() error: ValidationErrors | null | undefined;
   @Input() showError: boolean = false;
   @Input() placeholderBackgroundColor: string = 'var(--background-color)';
+
+  get labelId() { return `${this.inputId || this.placeholder}-label`; }
 
   @HostBinding('class.focus') get classFocus() { return this.focused; }
   @HostBinding('class.divide') get classDivide() { return this.divided; }
@@ -97,6 +101,10 @@ export class InputComponent implements ControlValueAccessor, OnChanges {
 
   writeValue(value: string) {
     this.value = value;
+
+    if (value) {
+      this.divided = true;
+    }
   }
 
   registerOnTouched(fn: () => void) {
