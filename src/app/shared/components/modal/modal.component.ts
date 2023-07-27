@@ -1,7 +1,6 @@
 import {
   Component,
   EventEmitter,
-  HostBinding,
   HostListener,
   Input,
   OnDestroy,
@@ -12,14 +11,10 @@ import {
 // Constants
 import { keys } from '../../../core/constants/keys';
 
-// Animations
-import { fadeTranslateInOut } from '../../../core/animations/fade-translate-in-out.animation';
-
 @Component({
   selector: 'app-modal',
   templateUrl: 'modal.component.html',
   styleUrls: ['modal.component.scss'],
-  animations: [fadeTranslateInOut],
 })
 export class ModalComponent implements OnInit, OnDestroy {
   @Input({ required: true }) title: string = '';
@@ -32,8 +27,6 @@ export class ModalComponent implements OnInit, OnDestroy {
       this.onClose();
     }
   }
-
-  @HostBinding('@fadeTranslateInOut') get fadeInOut() { return true; }
 
   ngOnInit() {
     document.body.style.overflow = 'hidden';
@@ -55,9 +48,7 @@ export class ModalComponent implements OnInit, OnDestroy {
     }
   }
 
-  onContentWrapperKeyDown(e: KeyboardEvent) {
-    if (document.activeElement !== e.currentTarget) {
-      return;
-    }
+  onContentWrapperKeyDown() {
+
   }
 }

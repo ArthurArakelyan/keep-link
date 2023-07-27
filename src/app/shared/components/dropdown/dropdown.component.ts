@@ -34,10 +34,19 @@ export class DropdownComponent implements OnInit {
   dropdownWidth: number = 0;
 
   @Input({ required: true }) options: IDropdownOption[] = [];
+  @Input({ required: true }) id: string = '';
+  @Input({ required: true }) label: string = '';
   @Input() position: 'left' | 'center' | 'right' = 'left';
   @Input() trigger: 'hover' | 'click' = 'hover';
 
   @ViewChild('dropdown', { static: false }) dropdown: ElementRef<HTMLDivElement> | undefined;
+
+  @HostBinding('attr.tabindex') tabindex = '0';
+  @HostBinding('attr.role') role = 'combobox';
+  @HostBinding('attr.aria-label') get ariaLabel() { return this.label; }
+  @HostBinding('attr.aria-controls') get ariaControls() { return this.id; }
+  @HostBinding('attr.aria-owns') get ariaOwns() { return this.id; }
+  @HostBinding('attr.aria-expanded') get ariaExpanded() { return this.open.toString(); }
 
   @HostListener('document:click', ['$event'])
   private onGlobalClick(event: MouseEvent): void {
@@ -92,8 +101,6 @@ export class DropdownComponent implements OnInit {
 
     this.closeDropdown();
   }
-
-  @HostBinding('attr.tabindex') tabindex = '0';
 
   constructor(
     private element: ElementRef<HTMLElement>,

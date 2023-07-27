@@ -31,6 +31,7 @@ describe('ModalComponent', () => {
   });
 
   it('should create the modal', () => {
+    expect(compiled.querySelector('.modal-overlay')).toBeInstanceOf(HTMLElement);
     expect(compiled.querySelector('.modal-content-wrapper')).toBeInstanceOf(HTMLElement);
     expect(compiled.querySelector('.modal-content')).toBeInstanceOf(HTMLElement);
     expect(compiled.querySelector('app-modal-header')).toBeInstanceOf(HTMLElement);

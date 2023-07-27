@@ -17,6 +17,7 @@ import { FabComponent } from './components/fab/fab.component';
 import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
 import { SelectComponent } from './components/select/select.component';
 import { OptionComponent } from './components/select/option/option.component';
+import { PageLoaderComponent } from './components/page-loader/page-loader.component';
 
 // Pipes
 import { ShortLinkPipe } from './pipes/short-link/short-link.pipe';
@@ -36,6 +37,7 @@ import { ShortLinkPipe } from './pipes/short-link/short-link.pipe';
     ConfirmModalComponent,
     SelectComponent,
     OptionComponent,
+    PageLoaderComponent,
   ],
   imports: [
     CommonModule,
@@ -57,6 +59,7 @@ import { ShortLinkPipe } from './pipes/short-link/short-link.pipe';
     ConfirmModalComponent,
     SelectComponent,
     OptionComponent,
+    PageLoaderComponent,
   ],
 })
 export class SharedModule {

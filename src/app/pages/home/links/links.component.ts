@@ -1,10 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
-
-// Store
-import { AppStore } from '../../../store/app.reducer';
-import { selectLink } from '../../../store/link';
+import { Component, Input } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 // Models
 import { ILink } from '../../../core/models/link.model';
@@ -14,22 +9,29 @@ import { ILink } from '../../../core/models/link.model';
   templateUrl: 'links.component.html',
   styleUrls: ['links.component.scss'],
 })
-export class LinksComponent implements OnInit, OnDestroy {
-  links: ILink[] = [];
-
-  private linkStoreSubscription: Subscription | undefined;
+export class LinksComponent {
+  @Input({ required: true }) links: ILink[] = [];
 
   constructor(
-    private store: Store<AppStore>,
+    private router: Router,
+    private route: ActivatedRoute,
   ) {}
 
-  ngOnInit() {
-    this.linkStoreSubscription = this.store.select(selectLink).subscribe((linkState) => {
-      this.links = linkState.list;
-    });
+  onEdit(id: string) {
+    this.router.navigate(
+      [],
+      {
+        relativeTo: this.route,
+        queryParamsHandling: 'merge',
+        queryParams: {
+          addLink: '',
+          link: id,
+        },
+      },
+    );
   }
 
-  ngOnDestroy() {
-    this.linkStoreSubscription?.unsubscribe();
+  onDelete(id: string) {
+
   }
 }

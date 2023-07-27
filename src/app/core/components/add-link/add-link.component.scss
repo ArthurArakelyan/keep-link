@@ -5,6 +5,17 @@
   @include flex(column, flex-start, flex-start);
 }
 
+.add-link__select {
+  z-index: $popup-advanced-z-index;
+}
+
+.add-link__separator {
+  width: 100%;
+  height: 0.063rem;
+  margin-top: 2rem;
+  background-color: var(--gray-100);
+}
+
 .add-link__form {
   width: 100%;
   margin-top: 2rem;
@@ -12,10 +23,9 @@
   @include flex(column, flex-start, flex-start);
 }
 
-.add-link__separator {
+.add-link__form-separator {
   width: 100%;
   height: 0.063rem;
-  margin-top: 2rem;
   background-color: var(--gray-100);
 }
 

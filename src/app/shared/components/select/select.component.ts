@@ -53,8 +53,12 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnChanges 
   @Input() error: ValidationErrors | null | undefined;
   @Input() placeholderBackgroundColor: string = 'var(--background-color)';
   @Input() defaultValue: string = '';
+  @Input() canSelectNothing: boolean = true;
 
-  @Output() select = new EventEmitter<string | null>();
+  @Output() selectOption = new EventEmitter<string | null>();
+
+  get containerId() { return `${this.placeholder}-container`; }
+  get labelId() { return `${this.placeholder}-label`; }
 
   @HostBinding('class.open') get classOpen() { return this.open; }
   @HostBinding('class.selected') get classSelected() { return this.value !== null; }
@@ -104,11 +108,11 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnChanges 
   }
 
   onSelect(value: IOption) {
-    this.value = this.value?.key === value.key ? null : value;
+    this.value = (this.canSelectNothing && (this.value?.key === value.key)) ? null : value;
 
     this.onChange(this.value ? this.value.key : null);
 
-    this.select.emit(this.value ? this.value.key : null);
+    this.selectOption.emit(this.value ? this.value.key : null);
 
     this.closeSelect();
   }

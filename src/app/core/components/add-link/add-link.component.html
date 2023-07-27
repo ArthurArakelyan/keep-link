@@ -1,28 +1,39 @@
 <app-modal
-  *ngIf="open"
-  title="Add Link"
+  [title]="modalTitle"
   (modalClose)="onClose()"
 >
   <div class="add-link">
     <app-select
       placeholder="Type"
       placeholderBackgroundColor="var(--card-color)"
-      defaultValue="link"
+      class="add-link__select"
+      [canSelectNothing]="false"
+      [defaultValue]="type"
       [options]="typeOptions"
-      (select)="onSelectType($event)"
+      (selectOption)="onSelectType($event)"
     ></app-select>
 
-    <div class="add-link__separator" aria-hidden="true"></div>
+    <div class="add-link__separator" role="separator"></div>
 
     <form
       *ngIf="type === 'link'"
-      class="add-link__form"
+      class="add-link__form add-link__form-link"
       [formGroup]="linkForm"
       (ngSubmit)="onLinkSubmit()"
     >
+      <app-select
+        placeholder="Folder"
+        placeholderBackgroundColor="var(--card-color)"
+        formControlName="folderId"
+        [options]="folderOptions"
+      ></app-select>
+
+      <div class="add-link__form-separator" role="separator"></div>
+
       <app-input
         placeholder="Name"
         name="name"
+        inputId="link-name"
         placeholderBackgroundColor="var(--card-color)"
         formControlName="name"
         [showError]="linkForm.controls.name.invalid && submitted"
@@ -33,21 +44,26 @@
         placeholder="Link"
         name="link"
         inputMode="url"
+        inputId="link-url"
         placeholderBackgroundColor="var(--card-color)"
         formControlName="link"
         [showError]="linkForm.controls.link.invalid && submitted"
         [error]="linkForm.controls.link.errors"
       ></app-input>
 
-      <app-button type="submit" class="add-link__submit">
-        Add
+      <app-button
+        type="submit"
+        class="add-link__submit"
+        [loading]="addLinkLoading || editLinkLoading"
+      >
+        {{ link ? 'Edit' : 'Add' }}
       </app-button>
     </form>
 
     <form
       *ngIf="type === 'folder'"
       [formGroup]="folderForm"
-      class="add-link__form"
+      class="add-link__form add-link__form-folder"
       (ngSubmit)="onFolderSubmit()"
     >
       <app-input
@@ -55,6 +71,7 @@
         name="name"
         placeholderBackgroundColor="var(--card-color)"
         formControlName="name"
+        inputId="folder-name"
         [showError]="folderForm.controls.name.invalid && submitted"
         [error]="folderForm.controls.name.errors"
       ></app-input>
@@ -64,12 +81,17 @@
         name="description"
         placeholderBackgroundColor="var(--card-color)"
         formControlName="description"
+        inputId="folder-description"
         [showError]="folderForm.controls.description.invalid && submitted"
         [error]="folderForm.controls.description.errors"
       ></app-input>
 
-      <app-button type="submit" class="add-link__submit">
-        Add
+      <app-button
+        type="submit"
+        class="add-link__submit"
+        [loading]="addFolderLoading || editFolderLoading"
+      >
+        {{ folder ? 'Edit' : 'Add' }}
       </app-button>
     </form>
   </div>

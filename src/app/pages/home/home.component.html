@@ -1,8 +1,19 @@
-<app-folders></app-folders>
+<div
+  *ngIf="!loading; else loader"
+  class="home"
+>
+  <app-folders [folders]="folders"></app-folders>
 
-<hr class="line" />
+  <hr
+    *ngIf="folders.length && links.length"
+    class="home__line"
+  />
 
-<app-links></app-links>
+  <app-links [links]="links"></app-links>
+</div>
+<ng-template #loader>
+  <app-page-loader></app-page-loader>
+</ng-template>
 
 <app-fab
   label="Add link"

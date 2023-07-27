@@ -5,5 +5,10 @@ export interface LinkState {
   list: ILink[];
   loading: {
     getLinks: boolean;
+    addLink: boolean;
+    editLink: boolean;
+  };
+  error: {
+    getLinks: boolean;
   };
 }

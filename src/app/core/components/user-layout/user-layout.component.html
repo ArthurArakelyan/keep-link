@@ -9,4 +9,4 @@
   <router-outlet></router-outlet>
 </main>
 
-<app-add-link></app-add-link>
+<app-add-link *ngIf="isAddLinkModalOpen" [@modalTranslate]></app-add-link>

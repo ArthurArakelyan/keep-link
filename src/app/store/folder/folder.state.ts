@@ -5,5 +5,10 @@ export interface FolderState {
   list: IFolder[];
   loading: {
     getFolders: boolean;
+    addFolder: boolean;
+    editFolder: boolean;
+  };
+  errors: {
+    getFolders: boolean;
   };
 }

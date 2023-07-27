@@ -17,6 +17,8 @@ import { LinkComponent } from './link/link.component';
 
 // Store
 import { appReducer, AppStore } from '../../store/app.reducer';
+import { getFoldersFulfilled } from '../../store/folder';
+import { getLinksFulfilled } from '../../store/link';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -38,6 +40,26 @@ describe('HomeComponent', () => {
   });
 
   it('should create the home', () => {
+    expect(compiled.querySelector('app-fab')).toBeInstanceOf(HTMLElement);
+  });
+
+  it('should show the loader when the links and folders are loading', () => {
+    expect(compiled.querySelector('app-page-loader')).toBeInstanceOf(HTMLElement);
+    expect(compiled.querySelector('app-folders')).toBeFalsy();
+    expect(compiled.querySelector('app-links')).toBeFalsy();
+  });
+
+  it('should show links and folders when they are loaded', () => {
+    store.dispatch(getFoldersFulfilled({
+      payload: [],
+    }));
+
+    store.dispatch(getLinksFulfilled({
+      payload: [],
+    }));
+
+    fixture.detectChanges();
+
     expect(compiled.querySelector('app-folders')).toBeInstanceOf(HTMLElement);
     expect(compiled.querySelector('app-links')).toBeInstanceOf(HTMLElement);
   });

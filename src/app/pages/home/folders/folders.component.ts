@@ -1,10 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
-
-// Store
-import { AppStore } from '../../../store/app.reducer';
-import { selectFolder } from '../../../store/folder';
+import { Component, Input } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 // Models
 import { IFolder } from '../../../core/models/folder.model';
@@ -14,22 +9,29 @@ import { IFolder } from '../../../core/models/folder.model';
   templateUrl: 'folders.component.html',
   styleUrls: ['folders.component.scss'],
 })
-export class FoldersComponent implements OnInit, OnDestroy {
-  folders: IFolder[] = [];
-
-  private folderStoreSubscription: Subscription | undefined;
+export class FoldersComponent {
+  @Input({ required: true }) folders: IFolder[] = [];
 
   constructor(
-    private store: Store<AppStore>,
+    private router: Router,
+    private route: ActivatedRoute,
   ) {}
 
-  ngOnInit() {
-    this.folderStoreSubscription = this.store.select(selectFolder).subscribe((folderState) => {
-      this.folders = folderState.list;
-    });
+  onEdit(id: string) {
+    this.router.navigate(
+      [],
+      {
+        relativeTo: this.route,
+        queryParamsHandling: 'merge',
+        queryParams: {
+          addLink: '',
+          folder: id,
+        },
+      },
+    );
   }
 
-  ngOnDestroy() {
-    this.folderStoreSubscription?.unsubscribe();
+  onDelete(id: string) {
+
   }
 }

@@ -16,6 +16,7 @@ export class ButtonComponent {
   @Input() color: 'primary' | 'red' = 'primary';
   @Input() loading: boolean = false;
   @Input() disabled: boolean = false;
+  @Input() buttonClass: string = '';
 
   @Output() buttonClick = new EventEmitter<MouseEvent>();
 

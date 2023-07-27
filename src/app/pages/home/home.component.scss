@@ -6,7 +6,12 @@
   @include flex(column, flex-start, flex-start);
 }
 
-.line {
+.home {
+  width: 100%;
+  @include flex(column, flex-start, flex-start);
+}
+
+.home__line {
   width: 100%;
   margin: 2rem 0;
   border-color: var(--gray-100);

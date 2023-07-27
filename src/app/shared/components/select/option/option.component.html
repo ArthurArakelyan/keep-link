@@ -1,6 +1,9 @@
 <button
   type="button"
   class="option"
+  role="option"
+  [id]="option.key"
+  [attr.aria-selected]="selected.toString()"
   [ngClass]="{ 'option--selected': selected }"
   [disabled]="disabled"
   [tabindex]="disabled ? -1 : 0"

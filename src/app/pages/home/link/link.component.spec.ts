@@ -23,9 +23,12 @@ describe('LinkComponent', () => {
   const createLink = (name = 'test', link = 'https://www.google.com/', image = 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_Homepage.svg/1200px-Google_Homepage.svg.png'): ILink => {
     return {
       id: Math.random().toString(),
+      userId: '1',
+      folderId: null,
       name,
       link,
       image,
+      createdAt: 0,
     };
   };
 
@@ -61,7 +64,7 @@ describe('LinkComponent', () => {
     expect(compiled.querySelector('app-dropdown')).toBeInstanceOf(HTMLElement);
     expect(compiled.querySelector('app-menu-icon')).toBeInstanceOf(HTMLElement);
 
-    component.link.image = undefined;
+    component.link.image = '';
 
     fixture.detectChanges();
 

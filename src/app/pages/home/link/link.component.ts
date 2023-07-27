@@ -29,8 +29,12 @@ export class LinkComponent {
   @Input() action: 'menu' | 'redirect' | null  = 'redirect';
   @Input() imageClass: string | undefined;
 
-  @Output() edit = new EventEmitter();
-  @Output() delete = new EventEmitter();
+  @Output() edit = new EventEmitter<string>();
+  @Output() delete = new EventEmitter<string>();
+
+  get dropdownId() {
+    return `${this.link.id}-link-dropdown`;
+  }
 
   onImageError() {
     this.imageError = true;
@@ -43,10 +47,10 @@ export class LinkComponent {
   }
 
   private onEdit() {
-    this.edit.emit();
+    this.edit.emit(this.link.id);
   }
 
   private onDelete() {
-    this.delete.emit();
+    this.delete.emit(this.link.id);
   }
 }

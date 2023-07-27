@@ -40,8 +40,10 @@
 
 <app-dropdown
   *ngIf="action === 'menu'"
-  [options]="dropdownOptions"
   position="right"
+  label="Link actions"
+  [id]="dropdownId"
+  [options]="dropdownOptions"
   class="link__info-action-icon-wrapper link__info-menu-icon-wrapper"
 >
   <app-menu-icon
