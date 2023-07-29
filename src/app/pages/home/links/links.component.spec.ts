@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { StoreModule } from '@ngrx/store';
 
 // Modules
 import { SharedModule } from '../../../shared/shared.module';
@@ -7,6 +9,9 @@ import { SharedModule } from '../../../shared/shared.module';
 // Components
 import { LinksComponent } from './links.component';
 import { LinkComponent } from '../link/link.component';
+
+// Store
+import { appReducer } from '../../../store/app.reducer';
 
 // Models
 import { ILink } from '../../../core/models/link.model';
@@ -31,7 +36,7 @@ describe('LinksComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [LinksComponent, LinkComponent],
-      imports: [SharedModule, RouterTestingModule],
+      imports: [SharedModule, RouterTestingModule, BrowserAnimationsModule, StoreModule.forRoot(appReducer)],
     });
 
     fixture = TestBed.createComponent(LinksComponent);

@@ -50,3 +50,18 @@ export const editLinkFulfilled = createAction(
 export const editLinkRejected = createAction(
   '[Link] Edit link rejected',
 );
+
+export const deleteLink = createAction(
+  '[Link] Delete link',
+  props<{
+    payload: string;
+  }>(),
+);
+
+export const deleteLinkFulfilled = createAction(
+  '[Link] Delete link fulfilled',
+);
+
+export const deleteLinkRejected = createAction(
+  '[Link] Delete link rejected',
+);

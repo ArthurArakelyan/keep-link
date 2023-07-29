@@ -11,6 +11,9 @@ import {
   editLink,
   editLinkFulfilled,
   editLinkRejected,
+  deleteLink,
+  deleteLinkFulfilled,
+  deleteLinkRejected,
 } from './link.actions';
 import { logout } from '../auth';
 
@@ -23,6 +26,7 @@ export const initialState: LinkState = {
     getLinks: false,
     addLink: false,
     editLink: false,
+    deleteLink: false,
   },
   error: {
     getLinks: false,
@@ -104,6 +108,24 @@ export const linkReducer = createReducer(
       loading: {
         ...state.loading,
         editLink: false,
+      },
+    };
+  }),
+  on(deleteLink, (state) => {
+    return {
+      ...state,
+      loading: {
+        ...state.loading,
+        deleteLink: true,
+      },
+    };
+  }),
+  on(deleteLinkFulfilled, deleteLinkRejected, (state) => {
+    return {
+      ...state,
+      loading: {
+        ...state.loading,
+        deleteLink: false,
       },
     };
   }),

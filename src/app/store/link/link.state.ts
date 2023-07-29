@@ -7,6 +7,7 @@ export interface LinkState {
     getLinks: boolean;
     addLink: boolean;
     editLink: boolean;
+    deleteLink: boolean;
   };
   error: {
     getLinks: boolean;

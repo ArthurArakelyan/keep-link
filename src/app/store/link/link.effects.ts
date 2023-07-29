@@ -16,7 +16,13 @@ import {
   getLinksRejected,
   addLink,
   addLinkFulfilled,
-  addLinkRejected, editLink, editLinkRejected, editLinkFulfilled,
+  addLinkRejected,
+  editLink,
+  editLinkRejected,
+  editLinkFulfilled,
+  deleteLink,
+  deleteLinkFulfilled,
+  deleteLinkRejected,
 } from './link.actions';
 
 // Utilities
@@ -109,6 +115,30 @@ export class LinkEffects {
           catchError((error) => {
             this.toast.error(error.message);
             return of(editLinkRejected());
+          }),
+        );
+    }),
+  ));
+
+  deleteLink = createEffect(() => this.actions$.pipe(
+    ofType(deleteLink),
+    switchMap(({ payload }) => {
+      return this.linkService.deleteLink(payload)
+        .pipe(
+          switchMap(() => {
+            this.store.dispatch(getLinks());
+
+            return this.actions$.pipe(
+              ofType(getLinksFulfilled, getLinksRejected),
+              switchMap(() => {
+                this.toast.success(getSuccessActionMessage(this.itemName, 'deleted'));
+                return of(deleteLinkFulfilled());
+              }),
+            );
+          }),
+          catchError((error) => {
+            this.toast.error(error.message);
+            return of(deleteLinkRejected());
           }),
         );
     }),

@@ -7,3 +7,14 @@
   (edit)="onEdit($event)"
   (delete)="onDelete($event)"
 ></app-link>
+
+<app-confirm-modal
+  *ngIf="deleteId"
+  [@modalTranslate]
+  title="Confirm Delete"
+  [loading]="deleteLoading"
+  (confirmModalClose)="onDeleteCancel()"
+  (confirmModalSubmit)="onDeleteSubmit()"
+>
+  Are you sure? Do you want to delete this link?
+</app-confirm-modal>
