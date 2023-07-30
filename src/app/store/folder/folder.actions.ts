@@ -50,3 +50,18 @@ export const editFolderFulfilled = createAction(
 export const editFolderRejected = createAction(
   '[Folder] Edit folder rejected',
 );
+
+export const deleteFolder = createAction(
+  '[Folder] Delete folder',
+  props<{
+    payload: string;
+  }>(),
+);
+
+export const deleteFolderFulfilled = createAction(
+  '[Folder] Delete folder fulfilled',
+);
+
+export const deleteFolderRejected = createAction(
+  '[Folder] Delete folder rejected',
+);

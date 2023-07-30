@@ -11,6 +11,9 @@ import {
   editFolder,
   editFolderFulfilled,
   editFolderRejected,
+  deleteFolder,
+  deleteFolderFulfilled,
+  deleteFolderRejected,
 } from './folder.actions';
 import { logout } from '../auth';
 
@@ -23,6 +26,7 @@ export const initialState: FolderState = {
     getFolders: false,
     addFolder: false,
     editFolder: false,
+    deleteFolder: false,
   },
   errors: {
     getFolders: false,
@@ -104,6 +108,24 @@ export const folderReducer = createReducer(
       loading: {
         ...state.loading,
         editFolder: false,
+      },
+    };
+  }),
+  on(deleteFolder, (state) => {
+    return {
+      ...state,
+      loading: {
+        ...state.loading,
+        deleteFolder: true,
+      },
+    };
+  }),
+  on(deleteFolderFulfilled, deleteFolderRejected, (state) => {
+    return {
+      ...state,
+      loading: {
+        ...state.loading,
+        deleteFolder: false,
       },
     };
   }),

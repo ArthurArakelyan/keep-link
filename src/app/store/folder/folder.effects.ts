@@ -20,6 +20,9 @@ import {
   editFolder,
   editFolderFulfilled,
   editFolderRejected,
+  deleteFolder,
+  deleteFolderFulfilled,
+  deleteFolderRejected,
 } from './folder.actions';
 
 // Utilities
@@ -113,6 +116,30 @@ export class FolderEffects {
           return of(editFolderRejected());
         }),
       );
+    }),
+  ));
+
+  deleteFolder = createEffect(() => this.actions$.pipe(
+    ofType(deleteFolder),
+    switchMap(({ payload }) => {
+      return this.folderService.deleteFolder(payload)
+        .pipe(
+          switchMap(() => {
+            this.store.dispatch(getFolders());
+
+            return this.actions$.pipe(
+              ofType(getFoldersFulfilled, getFoldersRejected),
+              switchMap(() => {
+                this.toast.success(getSuccessActionMessage(this.itemName, 'deleted'));
+                return of(deleteFolderFulfilled());
+              }),
+            );
+          }),
+          catchError((error) => {
+            this.toast.error(error.message);
+            return of(deleteFolderRejected());
+          }),
+        );
     }),
   ));
 

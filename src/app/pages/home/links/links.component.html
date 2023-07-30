@@ -1,17 +1,18 @@
-<app-link
-  *ngFor="let link of links"
-  [link]="link"
-  action="menu"
-  class="link"
-  imageClass="link__image"
-  (edit)="onEdit($event)"
-  (delete)="onDelete($event)"
-></app-link>
+<div class="links">
+  <app-link
+    *ngFor="let link of links"
+    [link]="link"
+    action="menu"
+    class="link"
+    imageClass="link__image"
+    (edit)="onEdit($event)"
+    (delete)="onDelete($event)"
+  ></app-link>
+</div>
 
 <app-confirm-modal
   *ngIf="deleteId"
   [@modalTranslate]
-  title="Confirm Delete"
   [loading]="deleteLoading"
   (confirmModalClose)="onDeleteCancel()"
   (confirmModalSubmit)="onDeleteSubmit()"
