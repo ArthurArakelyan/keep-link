@@ -1,6 +1,18 @@
-<app-folder
-  *ngFor="let folder of folders"
-  [folder]="folder"
-  (edit)="onEdit($event)"
-  (delete)="onDelete($event)"
-></app-folder>
+<div class="folders">
+  <app-folder
+    *ngFor="let folder of folders"
+    [folder]="folder"
+    (edit)="onEdit($event)"
+    (delete)="onDelete($event)"
+  ></app-folder>
+</div>
+
+<app-confirm-modal
+  *ngIf="deleteId"
+  [@modalTranslate]
+  [loading]="deleteLoading"
+  (confirmModalClose)="onDeleteCancel()"
+  (confirmModalSubmit)="onDeleteSubmit()"
+>
+  Are you sure? Do you want to delete this folder?
+</app-confirm-modal>

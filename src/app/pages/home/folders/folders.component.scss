@@ -2,6 +2,10 @@
 
 :host {
   width: 100%;
+}
+
+.folders {
+  width: 100%;
   gap: 1rem;
   flex-wrap: wrap;
   @include flex(row, flex-start, flex-start);

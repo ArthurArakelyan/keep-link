@@ -7,6 +7,7 @@ export interface FolderState {
     getFolders: boolean;
     addFolder: boolean;
     editFolder: boolean;
+    deleteFolder: boolean;
   };
   errors: {
     getFolders: boolean;

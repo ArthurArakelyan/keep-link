@@ -1,6 +1,11 @@
 @import "mixins";
 @import "scss-variables";
 
+:host {
+  width: 0;
+  height: 0;
+}
+
 .modal-overlay {
   display: block;
   position: fixed;
