@@ -1,11 +1,17 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
+import { combineLatest, Subscription } from 'rxjs';
 
 // Store
 import { AppStore } from '../../../store/app.reducer';
-import { deleteFolder, selectFolder } from '../../../store/folder';
+import { deleteFolder, selectFolder, selectFolders } from '../../../store/folder';
+
+// Services
+import { SizeService } from '../../../core/services/size.service';
+
+// Utilities
+import { alignFolders } from '../../../core/utilities/align-folders';
 
 // Animations
 import { modalTranslateAnimation } from '../../../core/animations/modal-translate.animation';
@@ -20,18 +26,19 @@ import { IFolder } from '../../../core/models/folder.model';
   animations: [modalTranslateAnimation],
 })
 export class FoldersComponent implements OnInit, OnDestroy {
+  alignedFolders: IFolder[][] = [];
   deleteId: string | null = null;
   deleteLoading: boolean = false;
 
-  @Input({ required: true }) folders: IFolder[] = [];
-
   private folderStoreSubscription: Subscription | undefined;
   private queryParamsSubscription: Subscription | undefined;
+  private sizeAndFolderSubscription: Subscription | undefined;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private store: Store<AppStore>,
+    private sizeService: SizeService,
   ) {}
 
   ngOnInit() {
@@ -46,11 +53,19 @@ export class FoldersComponent implements OnInit, OnDestroy {
     this.queryParamsSubscription = this.route.queryParams.subscribe((queryParams) => {
       this.deleteId = typeof queryParams['deleteFolder'] === 'string' ? queryParams['deleteFolder'] : null;
     });
+
+    this.sizeAndFolderSubscription = combineLatest([
+      this.store.select(selectFolders),
+      this.sizeService.size$,
+    ]).subscribe(([folders, size]) => {
+      this.alignedFolders = alignFolders(folders, size);
+    });
   }
 
   ngOnDestroy() {
     this.folderStoreSubscription?.unsubscribe();
     this.queryParamsSubscription?.unsubscribe();
+    this.sizeAndFolderSubscription?.unsubscribe();
   }
 
   onEdit(id: string) {

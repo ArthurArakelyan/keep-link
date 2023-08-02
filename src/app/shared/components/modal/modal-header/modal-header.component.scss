@@ -39,3 +39,9 @@
     background-color: var(--white-background-highlited-active);
   }
 }
+
+@media (max-width: 600px) {
+  .modal-header-title {
+    font-size: 1.75rem;
+  }
+}

@@ -28,7 +28,7 @@ export const initialState: FolderState = {
     editFolder: false,
     deleteFolder: false,
   },
-  errors: {
+  error: {
     getFolders: false,
   },
 };
@@ -42,8 +42,8 @@ export const folderReducer = createReducer(
         ...state.loading,
         getFolders: true,
       },
-      errors: {
-        ...state.errors,
+      error: {
+        ...state.error,
         getFolders: false,
       },
     };
@@ -56,8 +56,8 @@ export const folderReducer = createReducer(
         ...state.loading,
         getFolders: false,
       },
-      errors: {
-        ...state.errors,
+      error: {
+        ...state.error,
         getFolders: false,
       },
     };
@@ -69,8 +69,8 @@ export const folderReducer = createReducer(
         ...state.loading,
         getFolders: false,
       },
-      errors: {
-        ...state.errors,
+      error: {
+        ...state.error,
         getFolders: true,
       },
     };

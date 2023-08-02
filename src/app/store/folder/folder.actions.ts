@@ -65,3 +65,18 @@ export const deleteFolderFulfilled = createAction(
 export const deleteFolderRejected = createAction(
   '[Folder] Delete folder rejected',
 );
+
+export const deleteFolderLinks = createAction(
+  '[Folder] Delete folder links',
+  props<{
+    payload: string;
+  }>(),
+);
+
+export const deleteFolderLinksFulfilled = createAction(
+  '[Folder] Delete folder links fulfilled',
+);
+
+export const deleteFolderLinksRejected = createAction(
+  '[Folder] Delete folder links rejected',
+);

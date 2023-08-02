@@ -1,10 +1,15 @@
 <div class="folders">
-  <app-folder
-    *ngFor="let folder of folders"
-    [folder]="folder"
-    (edit)="onEdit($event)"
-    (delete)="onDelete($event)"
-  ></app-folder>
+  <div
+    *ngFor="let folderCol of alignedFolders"
+    class="folders__col"
+  >
+    <app-folder
+      *ngFor="let folder of folderCol"
+      [folder]="folder"
+      (edit)="onEdit($event)"
+      (delete)="onDelete($event)"
+    ></app-folder>
+  </div>
 </div>
 
 <app-confirm-modal

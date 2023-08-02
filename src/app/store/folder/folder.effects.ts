@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { ToastrService } from 'ngx-toastr';
-import { catchError, of, switchMap, withLatestFrom } from 'rxjs';
+import { catchError, of, switchMap, take, withLatestFrom, combineLatest, delay } from 'rxjs';
 
 // Services
 import { FolderService } from '../../core/services/folder.service';
+import { LinkService } from '../../core/services/link.service';
 
 // Store
 import { AppStore } from '../app.reducer';
@@ -23,7 +24,11 @@ import {
   deleteFolder,
   deleteFolderFulfilled,
   deleteFolderRejected,
+  deleteFolderLinks,
+  deleteFolderLinksFulfilled,
+  deleteFolderLinksRejected,
 } from './folder.actions';
+import { getLinks, getLinksFulfilled, getLinksRejected, selectLinksWithFolder } from '../link';
 
 // Utilities
 import { getSuccessActionMessage } from '../../core/utilities/get-success-action-message';
@@ -125,13 +130,20 @@ export class FolderEffects {
       return this.folderService.deleteFolder(payload)
         .pipe(
           switchMap(() => {
-            this.store.dispatch(getFolders());
+            this.store.dispatch(deleteFolderLinks({ payload }));
 
             return this.actions$.pipe(
-              ofType(getFoldersFulfilled, getFoldersRejected),
+              ofType(deleteFolderLinksFulfilled, deleteFolderLinksRejected),
               switchMap(() => {
-                this.toast.success(getSuccessActionMessage(this.itemName, 'deleted'));
-                return of(deleteFolderFulfilled());
+                this.store.dispatch(getFolders());
+
+                return this.actions$.pipe(
+                  ofType(getFoldersFulfilled, getFoldersRejected),
+                  switchMap(() => {
+                    this.toast.success(getSuccessActionMessage(this.itemName, 'deleted'));
+                    return of(deleteFolderFulfilled());
+                  }),
+                );
               }),
             );
           }),
@@ -143,9 +155,49 @@ export class FolderEffects {
     }),
   ));
 
+  deleteFolderLinks = createEffect(() => this.actions$.pipe(
+    ofType(deleteFolderLinks),
+    switchMap(({ payload }) => {
+      return this.store.select(selectLinksWithFolder)
+        .pipe(
+          take(1),
+          switchMap((linksWithFolder) => {
+            const links = linksWithFolder.filter((link) => {
+              return link.folderId === payload;
+            });
+
+            if (links.length === 0) {
+              return of(deleteFolderLinksFulfilled()).pipe(
+                delay(0),
+              );
+            }
+
+            return combineLatest(links.map((link) => {
+              return this.linkService.deleteLink(link.id);
+            })).pipe(
+              switchMap(() => {
+                this.store.dispatch(getLinks());
+
+                return this.actions$.pipe(
+                  ofType(getLinksFulfilled, getLinksRejected),
+                  switchMap(() => {
+                    return of(deleteFolderLinksFulfilled());
+                  }),
+                );
+              }),
+              catchError(() => {
+                return of(deleteFolderLinksRejected());
+              }),
+            );
+          }),
+        );
+    }),
+  ));
+
   constructor(
     private actions$: Actions,
     private store: Store<AppStore>,
+    private linkService: LinkService,
     private folderService: FolderService,
     private toast: ToastrService,
   ) {}

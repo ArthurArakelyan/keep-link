@@ -1,7 +1,7 @@
 @import "mixins";
 
 :host {
-  width: calc(33.333333333% - 0.666666667rem);
+  width: 100%;
   background-color: var(--card-color);
   border-radius: 0.375rem;
   box-shadow: 0 0 5px var(--shadow-md-color);
@@ -113,16 +113,4 @@
 }
 .links-empty__button-wrapper {
   width: 100%;
-}
-
-@media (max-width: 1000px) {
-  :host {
-    width: calc(50% - 0.5rem);
-  }
-}
-
-@media (max-width: 600px) {
-  :host {
-    width: 100%;
-  }
 }

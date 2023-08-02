@@ -3,7 +3,7 @@
 
 :host {
   position: fixed;
-  z-index: $component-z-index;
+  z-index: $advanced-component-z-index;
   right: 0;
   width: calc(100% - $side-menu-width);
   height: $header-height;
