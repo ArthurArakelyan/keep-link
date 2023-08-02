@@ -3,6 +3,9 @@ import { ActionReducer, INIT, UPDATE } from '@ngrx/store';
 // Store
 import { AppStore } from '../app.reducer';
 
+// Utilities
+import { persistStore } from '../../core/utilities/persist-store';
+
 // Constants
 import { localStorageStoreKey } from '../../core/constants/local-storage-keys';
 
@@ -24,7 +27,7 @@ export const hydrationMetaReducer = (
 
     const nextState = reducer(state, action);
 
-    localStorage.setItem(localStorageStoreKey, JSON.stringify(nextState));
+    persistStore(nextState);
 
     return nextState;
   };

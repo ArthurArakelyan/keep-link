@@ -9,7 +9,7 @@ export interface FolderState {
     editFolder: boolean;
     deleteFolder: boolean;
   };
-  errors: {
+  error: {
     getFolders: boolean;
   };
 }
