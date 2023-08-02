@@ -22,7 +22,9 @@ describe('FabComponent', () => {
   beforeEach(() => {
     sizeServiceStub = {
       size$: new BehaviorSubject<ISize>({
+        _1000: true,
         _768: true,
+        _600: true,
       }),
     };
 
@@ -56,7 +58,9 @@ describe('FabComponent', () => {
 
   it('should not show the fab when the screen width is greater than 768', () => {
     sizeServiceStub.size$?.next({
+      _1000: false,
       _768: false,
+      _600: false,
     });
 
     fixture.detectChanges();

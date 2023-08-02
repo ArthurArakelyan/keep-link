@@ -2,14 +2,14 @@
   *ngIf="!loading; else loader"
   class="home"
 >
-  <app-folders [folders]="folders"></app-folders>
+  <app-folders></app-folders>
 
   <hr
     *ngIf="folders.length && links.length"
     class="home__line"
   />
 
-  <app-links [links]="links"></app-links>
+  <app-links></app-links>
 </div>
 <ng-template #loader>
   <app-page-loader></app-page-loader>

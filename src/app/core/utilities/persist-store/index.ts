@@ -18,7 +18,7 @@ export const persistStore = (state: AppStore) => {
         const statePropertyToBeChanged = reducer[<keyof typeof reducer>reducerKey];
 
         if (typeof statePropertyToBeChanged === 'object' && !Array.isArray(statePropertyToBeChanged)) {
-          for (const propertyKey in <Record<any, any>>statePropertyToBeChanged) {
+          for (const propertyKey in <Record<string, unknown>>statePropertyToBeChanged) {
             (<unknown>statePropertyToBeChanged[<keyof typeof statePropertyToBeChanged>propertyKey]) = false;
           }
         }

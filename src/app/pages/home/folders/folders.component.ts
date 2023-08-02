@@ -30,8 +30,6 @@ export class FoldersComponent implements OnInit, OnDestroy {
   deleteId: string | null = null;
   deleteLoading: boolean = false;
 
-  @Input({ required: true }) folders: IFolder[] = [];
-
   private folderStoreSubscription: Subscription | undefined;
   private queryParamsSubscription: Subscription | undefined;
   private sizeAndFolderSubscription: Subscription | undefined;

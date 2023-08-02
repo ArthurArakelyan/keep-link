@@ -2,7 +2,7 @@ import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testin
 import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ActivatedRoute } from '@angular/router';
-import { StoreModule } from '@ngrx/store';
+import { Store, StoreModule } from '@ngrx/store';
 
 // Modules
 import { SharedModule } from '../../../shared/shared.module';
@@ -12,7 +12,8 @@ import { LinksComponent } from './links.component';
 import { LinkComponent } from '../link/link.component';
 
 // Store
-import { appReducer } from '../../../store/app.reducer';
+import { appReducer, AppStore } from '../../../store/app.reducer';
+import { getLinksFulfilled } from '../../../store/link';
 
 // Models
 import { ILink } from '../../../core/models/link.model';
@@ -21,6 +22,7 @@ describe('LinksComponent', () => {
   let component: LinksComponent;
   let fixture: ComponentFixture<LinksComponent>;
   let compiled: HTMLElement;
+  let store: Store<AppStore>;
   let route: ActivatedRoute;
 
   const createLink = (name = 'test', link = 'https://www.google.com/', image = 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_Homepage.svg/1200px-Google_Homepage.svg.png'): ILink => {
@@ -43,10 +45,14 @@ describe('LinksComponent', () => {
 
     fixture = TestBed.createComponent(LinksComponent);
     component = fixture.componentInstance;
-    component.links = [createLink(), createLink('', ''), createLink('', '', ''), createLink('test', '', ''), createLink('', '', 'https://www.google.com/')];
     fixture.detectChanges();
     compiled = fixture.debugElement.nativeElement;
     route = TestBed.get<ActivatedRoute>(ActivatedRoute);
+    store = TestBed.get<Store>(Store);
+
+    store.dispatch(getLinksFulfilled({ payload: [createLink(), createLink('', ''), createLink('', '', ''), createLink('test', '', ''), createLink('', '', 'https://www.google.com/')] }));
+
+    fixture.detectChanges();
   });
 
   it('should create the links', () => {

@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 
 // Store
 import { AppStore } from '../../../store/app.reducer';
-import { deleteLink, selectLink } from '../../../store/link';
+import { deleteLink, selectLink, selectLinksWithoutFolder } from '../../../store/link';
 
 // Animations
 import { modalTranslateAnimation } from '../../../core/animations/modal-translate.animation';
@@ -20,11 +20,11 @@ import { ILink } from '../../../core/models/link.model';
   animations: [modalTranslateAnimation],
 })
 export class LinksComponent implements OnInit, OnDestroy {
+  links: ILink[] = [];
   deleteId: string | null = null;
   deleteLoading: boolean = false;
 
-  @Input({ required: true }) links: ILink[] = [];
-
+  private linksWithoutFolderSubscription: Subscription | undefined;
   private linkStoreSubscription: Subscription | undefined;
   private queryParamsSubscription: Subscription | undefined;
 
@@ -35,6 +35,10 @@ export class LinksComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    this.linksWithoutFolderSubscription = this.store.select(selectLinksWithoutFolder).subscribe((links) => {
+      this.links = links;
+    });
+
     this.linkStoreSubscription = this.store.select(selectLink).subscribe((linkState) => {
       if (this.deleteLoading && !linkState.loading.deleteLink) {
         this.onDeleteCancel();
@@ -49,6 +53,7 @@ export class LinksComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.linksWithoutFolderSubscription?.unsubscribe();
     this.linkStoreSubscription?.unsubscribe();
     this.queryParamsSubscription?.unsubscribe();
   }

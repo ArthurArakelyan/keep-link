@@ -2,7 +2,7 @@ import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testin
 import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ActivatedRoute } from '@angular/router';
-import { StoreModule } from '@ngrx/store';
+import { Store, StoreModule } from '@ngrx/store';
 
 // Modules
 import { SharedModule } from '../../../shared/shared.module';
@@ -13,7 +13,8 @@ import { FolderComponent } from './folder/folder.component';
 import { LinkComponent } from '../link/link.component';
 
 // Store
-import { appReducer } from '../../../store/app.reducer';
+import { appReducer, AppStore } from '../../../store/app.reducer';
+import { getFoldersFulfilled } from '../../../store/folder';
 
 // Models
 import { IFolder } from '../../../core/models/folder.model';
@@ -23,6 +24,7 @@ describe('FoldersComponent', () => {
   let component: FoldersComponent;
   let fixture: ComponentFixture<FoldersComponent>;
   let compiled: HTMLElement;
+  let store: Store<AppStore>;
   let route: ActivatedRoute;
 
   const createLink = (name = 'test', link = 'https://www.google.com/', image = 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_Homepage.svg/1200px-Google_Homepage.svg.png'): ILink => {
@@ -55,16 +57,20 @@ describe('FoldersComponent', () => {
 
     fixture = TestBed.createComponent(FoldersComponent);
     component = fixture.componentInstance;
-    component.folders = [createFolder(), createFolder('', '', [])];
     fixture.detectChanges();
     compiled = fixture.debugElement.nativeElement;
     route = TestBed.get<ActivatedRoute>(ActivatedRoute);
+    store = TestBed.get<Store>(Store);
+
+    store.dispatch(getFoldersFulfilled({ payload: [createFolder(), createFolder('', '', [])] }));
+
+    fixture.detectChanges();
   });
 
   it('should create the folders', () => {
     const folders = compiled.querySelectorAll('app-folder');
 
-    expect(folders.length).toBe(component.folders.length);
+    expect(folders.length).toBe(component.alignedFolders.length);
 
     folders.forEach((folder) => {
       expect(folder).toBeInstanceOf(HTMLElement);
