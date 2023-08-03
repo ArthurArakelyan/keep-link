@@ -10,4 +10,4 @@ export interface ILink {
 
 export type ILinkWithoutId = Omit<ILink, 'id'>;
 
-export type ILinkCreateData = Omit<Omit<ILinkWithoutId, 'createdAt'>, 'userId'>;
+export type ILinkCreateData = Omit<Omit<Omit<ILinkWithoutId, 'createdAt'>, 'userId'>, 'image'>;

@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
-import { catchError, of, switchMap, withLatestFrom } from 'rxjs';
+import { catchError, of, switchMap, timeout, withLatestFrom } from 'rxjs';
 
 // Services
 import { LinkService } from '../../core/services/link.service';
+
+// Environment
+import { environment } from '../../../environments/environment';
 
 // Store
 import { AppStore } from '../app.reducer';
@@ -30,9 +34,11 @@ import { getSuccessActionMessage } from '../../core/utilities/get-success-action
 
 // Constants
 import { authErrorMessage } from '../../core/constants/error-messages';
+import { baseRequestTimeout } from '../../core/constants/timeout';
 
 // Models
 import { ILinkWithoutId } from '../../core/models/link.model';
+import { IGetLinkOgImageResponse } from '../../core/models/response.model';
 
 @Injectable()
 export class LinkEffects {
@@ -69,54 +75,76 @@ export class LinkEffects {
         return of(addLinkRejected());
       }
 
-      const link: ILinkWithoutId = {
-        ...action.payload,
-        userId,
-        createdAt: Date.now(),
+      const handleOgImageResponse = (response: IGetLinkOgImageResponse) => {
+        const link: ILinkWithoutId = {
+          ...action.payload,
+          userId,
+          image: response?.success && response.data?.ogImage ? response.data.ogImage : '',
+          createdAt: Date.now(),
+        };
+
+        return this.linkService.addLink(link)
+          .pipe(
+            switchMap(() => {
+              this.store.dispatch(getLinks());
+
+              return this.actions$.pipe(
+                ofType(getLinksFulfilled, getLinksRejected),
+                switchMap(() => {
+                  this.toast.success(getSuccessActionMessage(this.itemName, 'added'));
+                  return of(addLinkFulfilled());
+                }),
+              );
+            }),
+            catchError((error) => {
+              this.toast.error(error.message);
+              return of(addLinkRejected());
+            }),
+          );
       };
 
-      return this.linkService.addLink(link)
-        .pipe(
-          switchMap(() => {
-            this.store.dispatch(getLinks());
-
-            return this.actions$.pipe(
-              ofType(getLinksFulfilled, getLinksRejected),
-              switchMap(() => {
-                this.toast.success(getSuccessActionMessage(this.itemName, 'added'));
-                return of(addLinkFulfilled());
-              }),
-            );
-          }),
-          catchError((error) => {
-            this.toast.error(error.message);
-            return of(addLinkRejected());
-          }),
-        );
+      return this.http.get<IGetLinkOgImageResponse>(`${environment.apiUrl}get-og?url=${action.payload.link}`).pipe(
+        timeout(baseRequestTimeout),
+        switchMap(handleOgImageResponse),
+        catchError(handleOgImageResponse),
+      );
     }),
   ));
 
   editLink = createEffect(() => this.actions$.pipe(
     ofType(editLink),
     switchMap(({ payload }) => {
-      return this.linkService.editLink(payload.id, payload.link)
-        .pipe(
-          switchMap(() => {
-            this.store.dispatch(getLinks());
+      const handleOgImageResponse = (response: IGetLinkOgImageResponse) => {
+        const newLink: ILinkWithoutId = {
+          ... payload.link,
+          image: response?.success && response.data?.ogImage ? response.data.ogImage : '',
+        };
 
-            return this.actions$.pipe(
-              ofType(getLinksFulfilled, getLinksRejected),
-              switchMap(() => {
-                this.toast.success(getSuccessActionMessage(this.itemName, 'updated'));
-                return of(editLinkFulfilled());
-              }),
-            );
-          }),
-          catchError((error) => {
-            this.toast.error(error.message);
-            return of(editLinkRejected());
-          }),
-        );
+        return this.linkService.editLink(payload.id, newLink)
+          .pipe(
+            switchMap(() => {
+              this.store.dispatch(getLinks());
+
+              return this.actions$.pipe(
+                ofType(getLinksFulfilled, getLinksRejected),
+                switchMap(() => {
+                  this.toast.success(getSuccessActionMessage(this.itemName, 'updated'));
+                  return of(editLinkFulfilled());
+                }),
+              );
+            }),
+            catchError((error) => {
+              this.toast.error(error.message);
+              return of(editLinkRejected());
+            }),
+          );
+      };
+
+      return this.http.get<IGetLinkOgImageResponse>(`${environment.apiUrl}get-og?url=${payload.link.link}`).pipe(
+        timeout(baseRequestTimeout),
+        switchMap(handleOgImageResponse),
+        catchError(handleOgImageResponse),
+      );
     }),
   ));
 
@@ -149,5 +177,6 @@ export class LinkEffects {
     private store: Store<AppStore>,
     private linkService: LinkService,
     private toast: ToastrService,
+    private http: HttpClient,
   ) {}
 }
