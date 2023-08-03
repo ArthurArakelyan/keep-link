@@ -218,7 +218,6 @@ export class AddLinkComponent implements OnInit, OnDestroy {
           name: linkFormValue.name!,
           link: linkFormValue.link!,
           folderId: linkFormValue.folderId!,
-          image: '',
         },
       }));
     }

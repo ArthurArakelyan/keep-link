@@ -10,6 +10,7 @@
     <img
       [src]="link.image"
       [alt]="link.name"
+      loading="lazy"
       class="link__image"
       [ngClass]="imageClass"
       (error)="onImageError()"

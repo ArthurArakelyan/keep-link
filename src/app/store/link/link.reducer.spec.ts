@@ -60,7 +60,6 @@ describe('link', () => {
         name: 'name',
         link: 'https://google.com',
         folderId: null,
-        image: '',
       };
 
       const { initialState, linkReducer, addLink } = fromLink;

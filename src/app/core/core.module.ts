@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 // Modules
 import { SharedModule } from '../shared/shared.module';
-import { AppRoutingModule } from '../app-routing.module';
 
 // Components
 import { HeaderComponent } from './components/header/header.component';
@@ -26,16 +26,10 @@ import { AddLinkComponent } from './components/add-link/add-link.component';
   imports: [
     CommonModule,
     SharedModule,
-    AppRoutingModule,
     ReactiveFormsModule,
+    RouterModule,
   ],
   exports: [
-    CommonModule,
-    ReactiveFormsModule,
-    HeaderComponent,
-    HeaderMenuComponent,
-    SideMenuComponent,
-    SideMenuResponsiveComponent,
     UserLayoutComponent,
   ],
 })
