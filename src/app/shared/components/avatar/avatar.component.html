@@ -3,6 +3,16 @@
   [alt]="alt"
   [width]="width"
   [height]="height"
+  [attr.aria-hidden]="!avatarSrc"
+  [ngClass]="{ 'avatar--hidden': !avatarSrc }"
   class="avatar"
   (error)="onError()"
 />
+
+<div
+  *ngIf="!avatarSrc && name"
+  [ngStyle]="{ backgroundColor: avatarColor }"
+  class="avatar-letter"
+>
+  {{ nameLetters }}
+</div>

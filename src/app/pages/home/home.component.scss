@@ -16,3 +16,9 @@
   margin: 2rem 0;
   border-color: var(--gray-100);
 }
+
+@media (max-width: 768px) {
+  :host {
+    margin-bottom: 4.5rem;
+  }
+}

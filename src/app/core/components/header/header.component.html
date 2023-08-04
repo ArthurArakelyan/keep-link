@@ -26,10 +26,11 @@
   [options]="avatarDropdownOptions"
 >
   <app-avatar
-    src=""
+    [name]="userName"
+    [src]="userAvatar"
     alt="Avatar"
-    width="50"
-    height="50"
+    width="48"
+    height="48"
     class="avatar__image"
   />
 </app-dropdown>

@@ -25,9 +25,11 @@ import { IDropdownOption } from '../../../core/models/dropdown-option.model';
 })
 export class DropdownComponent implements OnInit {
   open: boolean = false;
+  verticalPosition: 'top' | 'bottom' = 'bottom';
 
   leftStyle: number = 0;
   top: number = 0;
+  bottom: number = 0;
   left: number = 0;
   width: number = 0;
   height: number = 0;
@@ -131,9 +133,17 @@ export class DropdownComponent implements OnInit {
   }
 
   private initializeRect() {
+    const verticalPosition = this.calculateVerticalPosition();
     const rect = this.element.nativeElement.getBoundingClientRect();
 
-    this.top = rect.top;
+    if (verticalPosition === 'bottom') {
+      this.top = rect.top;
+      this.bottom = 0;
+    } else if (verticalPosition === 'top') {
+      this.bottom = window.innerHeight - rect.top;
+      this.top = 0;
+    }
+
     this.left = rect.left;
     this.width = rect.width;
     this.height = rect.height;
@@ -157,5 +167,27 @@ export class DropdownComponent implements OnInit {
     } else if (this.position === 'left') {
       this.leftStyle = this.left;
     }
+  }
+
+  private calculateVerticalPosition() {
+    try {
+      const { top, height } = this.element.nativeElement.getBoundingClientRect();
+      const screenHeight = window.innerHeight;
+
+      const position = (height + top + this.maxHeight()) > screenHeight
+        ? 'top'
+        : 'bottom';
+
+      this.verticalPosition = position;
+
+      return position;
+    } catch (e) {
+      console.error(e);
+      return 'bottom';
+    }
+  }
+
+  private maxHeight() {
+    return (this.options.length * 40) + 16;
   }
 }
