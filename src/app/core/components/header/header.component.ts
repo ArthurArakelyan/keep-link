@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 // Store
 import { AppStore } from '../../../store/app.reducer';
 import { logout } from '../../../store/auth';
+import { selectUser } from '../../../store/user';
 
 // Services
 import { SizeService } from '../../services/size.service';
@@ -19,8 +20,11 @@ import { IDropdownOption } from '../../models/dropdown-option.model';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   showMenu: boolean = false;
+  userName: string = '';
+  userAvatar: string = '';
 
   private sizeSubscription: Subscription | undefined;
+  private userSubscription: Subscription | undefined;
 
   avatarDropdownOptions: IDropdownOption[] = [
     {
@@ -39,10 +43,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.sizeSubscription = this.sizeService.size$.subscribe((size) => {
       this.showMenu = size._768;
     });
+
+    this.userSubscription = this.store.select(selectUser).subscribe((userState) => {
+      if (userState.user) {
+        this.userName = userState.user.name;
+        this.userAvatar = userState.user.avatar;
+      }
+    });
   }
 
   ngOnDestroy() {
     this.sizeSubscription?.unsubscribe();
+    this.userSubscription?.unsubscribe();
   }
 
   onFocusSearch(searchElement: HTMLInputElement) {

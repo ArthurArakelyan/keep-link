@@ -11,7 +11,6 @@ describe('AvatarComponent', () => {
   let fixture: ComponentFixture<AvatarComponent>;
   let compiled: HTMLElement;
 
-  const defaultSrc = 'assets/avatar.png';
   const testSrc = 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs=';
 
   beforeEach(() => {
@@ -34,6 +33,7 @@ describe('AvatarComponent', () => {
     const width = '40';
     const height = '40';
 
+    component.name = 'Test';
     component.avatarSrc = testSrc;
     component.alt = alt;
     component.width = width;
@@ -49,8 +49,18 @@ describe('AvatarComponent', () => {
     expect(image.getAttribute('height')).toBe(height);
   });
 
-  it('should fallback to default image when the src is wrong', async(async () => {
+  it('should show the avatar image when the src is correct', () => {
+    component.avatarSrc = testSrc;
+
+    fixture.detectChanges();
+
+    expect(compiled.querySelector('img')!.className.includes('avatar--hidden')).toBeFalse();
+    expect(compiled.querySelector('.avatar-letter')).toBeNull();
+  });
+
+  it('should fallback to letter avatar when the src is wrong', async(async () => {
     component.src = 'error';
+    component.name = 'Test';
 
     fixture.detectChanges();
 
@@ -58,8 +68,21 @@ describe('AvatarComponent', () => {
 
     fixture.detectChanges();
 
-    const image = compiled.querySelector('img')!;
+    expect(compiled.querySelector('img')!.className.includes('avatar--hidden')).toBeTrue();
+    expect(compiled.querySelector('.avatar-letter')).toBeInstanceOf(HTMLDivElement);
+  }));
 
-    expect(image.src.includes(defaultSrc)).toBeTrue();
+  it('should not show anything when the src is wrong and name is not provided', async(async () => {
+    component.src = 'error';
+    component.name = '';
+
+    fixture.detectChanges();
+
+    await timeout(200);
+
+    fixture.detectChanges();
+
+    expect(compiled.querySelector('img')!.className.includes('avatar--hidden')).toBeTrue();
+    expect(compiled.querySelector('.avatar-letter')).toBeNull();
   }));
 });
