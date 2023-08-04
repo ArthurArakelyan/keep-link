@@ -1,6 +1,6 @@
 export const environment = {
   prod: true,
-  apiUrl: 'https://keep-link.onrender.com/api/',
+  apiUrl: 'https://keep-link-server.vercel.app/api/',
   firebase: {
     apiKey: "AIzaSyCgLZPt0fj-TOrvJSuhVhPsPToJLd7LIq8",
     authDomain: "keep-link-ae2c0.firebaseapp.com",
