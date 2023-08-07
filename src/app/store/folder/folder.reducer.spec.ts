@@ -32,16 +32,16 @@ describe('folder', () => {
     });
 
     it('should set the getFolders error to false', () => {
-      const { initialState, folderReducer, getFolders } = fromFolder;
-      const action = getFolders();
+      const { initialState, folderReducer, getFoldersFulfilled } = fromFolder;
+      const action = getFoldersFulfilled({ payload: [] });
       const state = folderReducer(initialState, action);
 
       expect(state.error.getFolders).toBeFalse();
     });
 
     it('should set the getFolders requested to true', () => {
-      const { initialState, folderReducer, getFolders } = fromFolder;
-      const action = getFolders();
+      const { initialState, folderReducer, getFoldersFulfilled } = fromFolder;
+      const action = getFoldersFulfilled({ payload: [] });
       const state = folderReducer(initialState, action);
 
       expect(state.requested.getFolders).toBeTrue();
@@ -76,8 +76,8 @@ describe('folder', () => {
     });
 
     it('should set the getFolders error to true', () => {
-      const { initialState, folderReducer, getFolders } = fromFolder;
-      const action = getFolders();
+      const { initialState, folderReducer, getFoldersRejected } = fromFolder;
+      const action = getFoldersRejected();
       const state = folderReducer(initialState, action);
 
       expect(state.error.getFolders).toBeTrue();
