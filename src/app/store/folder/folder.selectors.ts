@@ -11,3 +11,10 @@ export const selectFolders = createSelector(
     return state.list;
   },
 );
+
+export const selectFolderRequested = createSelector(
+  selectFolder,
+  (state) => {
+    return state.requested;
+  },
+);

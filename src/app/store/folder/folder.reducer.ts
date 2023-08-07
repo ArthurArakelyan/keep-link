@@ -31,6 +31,9 @@ export const initialState: FolderState = {
   error: {
     getFolders: false,
   },
+  requested: {
+    getFolders: false,
+  },
 };
 
 export const folderReducer = createReducer(
@@ -59,6 +62,10 @@ export const folderReducer = createReducer(
       error: {
         ...state.error,
         getFolders: false,
+      },
+      requested: {
+        ...state.requested,
+        getFolders: true,
       },
     };
   }),

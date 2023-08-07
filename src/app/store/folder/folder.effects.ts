@@ -87,6 +87,7 @@ export class FolderEffects {
 
             return this.actions$.pipe(
               ofType(getFoldersFulfilled, getFoldersRejected),
+              take(1),
               switchMap(() => {
                 this.toast.success(getSuccessActionMessage(this.itemName, 'added'));
                 return of(addFolderFulfilled());
@@ -110,6 +111,7 @@ export class FolderEffects {
 
           return this.actions$.pipe(
             ofType(getFoldersFulfilled, getFoldersRejected),
+            take(1),
             switchMap(() => {
               this.toast.success(getSuccessActionMessage(this.itemName, 'updated'));
               return of(editFolderFulfilled());
@@ -134,11 +136,13 @@ export class FolderEffects {
 
             return this.actions$.pipe(
               ofType(deleteFolderLinksFulfilled, deleteFolderLinksRejected),
+              take(1),
               switchMap(() => {
                 this.store.dispatch(getFolders());
 
                 return this.actions$.pipe(
                   ofType(getFoldersFulfilled, getFoldersRejected),
+                  take(1),
                   switchMap(() => {
                     this.toast.success(getSuccessActionMessage(this.itemName, 'deleted'));
                     return of(deleteFolderFulfilled());
@@ -180,6 +184,7 @@ export class FolderEffects {
 
                 return this.actions$.pipe(
                   ofType(getLinksFulfilled, getLinksRejected),
+                  take(1),
                   switchMap(() => {
                     return of(deleteFolderLinksFulfilled());
                   }),

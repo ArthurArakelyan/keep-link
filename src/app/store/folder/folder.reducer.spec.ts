@@ -12,6 +12,14 @@ describe('folder', () => {
 
       expect(state.loading.getFolders).toBeTrue();
     });
+
+    it('should set the getFolders error to false', () => {
+      const { initialState, folderReducer, getFolders } = fromFolder;
+      const action = getFolders();
+      const state = folderReducer(initialState, action);
+
+      expect(state.error.getFolders).toBeFalse();
+    });
   });
 
   describe('getFoldersFulfilled', () => {
@@ -21,6 +29,22 @@ describe('folder', () => {
       const state = folderReducer(initialState, action);
 
       expect(state.loading.getFolders).toBeFalse();
+    });
+
+    it('should set the getFolders error to false', () => {
+      const { initialState, folderReducer, getFolders } = fromFolder;
+      const action = getFolders();
+      const state = folderReducer(initialState, action);
+
+      expect(state.error.getFolders).toBeFalse();
+    });
+
+    it('should set the getFolders requested to true', () => {
+      const { initialState, folderReducer, getFolders } = fromFolder;
+      const action = getFolders();
+      const state = folderReducer(initialState, action);
+
+      expect(state.requested.getFolders).toBeTrue();
     });
 
     it('should set the list to fetched list from payload', () => {
@@ -49,6 +73,14 @@ describe('folder', () => {
       const state = folderReducer(initialState, action);
 
       expect(state.loading.getFolders).toBeFalse();
+    });
+
+    it('should set the getFolders error to true', () => {
+      const { initialState, folderReducer, getFolders } = fromFolder;
+      const action = getFolders();
+      const state = folderReducer(initialState, action);
+
+      expect(state.error.getFolders).toBeTrue();
     });
   });
 

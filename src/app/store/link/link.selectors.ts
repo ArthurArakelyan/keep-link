@@ -18,3 +18,10 @@ export const selectLinksWithFolder = createSelector(
     return state.list.filter((link) => link.folderId);
   },
 );
+
+export const selectLinkRequested = createSelector(
+  selectLink,
+  (state) => {
+    return state.requested;
+  },
+);

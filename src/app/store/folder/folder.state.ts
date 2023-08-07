@@ -12,4 +12,7 @@ export interface FolderState {
   error: {
     getFolders: boolean;
   };
+  requested: {
+    getFolders: boolean;
+  };
 }
