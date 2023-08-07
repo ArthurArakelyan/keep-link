@@ -12,6 +12,14 @@ describe('link', () => {
 
       expect(state.loading.getLinks).toBeTrue();
     });
+
+    it('should set the getLinks error to false', () => {
+      const { initialState, linkReducer, getLinks } = fromLink;
+      const action = getLinks();
+      const state = linkReducer(initialState, action);
+
+      expect(state.error.getLinks).toBeFalse();
+    });
   });
 
   describe('getLinksFulfilled', () => {
@@ -21,6 +29,22 @@ describe('link', () => {
       const state = linkReducer(initialState, action);
 
       expect(state.loading.getLinks).toBeFalse();
+    });
+
+    it('should set the getLinks error to false', () => {
+      const { initialState, linkReducer, getLinksFulfilled } = fromLink;
+      const action = getLinksFulfilled({ payload: [] });
+      const state = linkReducer(initialState, action);
+
+      expect(state.error.getLinks).toBeFalse();
+    });
+
+    it('should set the getLinks requested to true', () => {
+      const { initialState, linkReducer, getLinksFulfilled } = fromLink;
+      const action = getLinksFulfilled({ payload: [] });
+      const state = linkReducer(initialState, action);
+
+      expect(state.requested.getLinks).toBeTrue();
     });
 
     it('should set the list to fetched list from payload', () => {
@@ -51,6 +75,14 @@ describe('link', () => {
       const state = linkReducer(initialState, action);
 
       expect(state.loading.getLinks).toBeFalse();
+    });
+
+    it('should set the getLinks error to true', () => {
+      const { initialState, linkReducer, getLinksRejected } = fromLink;
+      const action = getLinksRejected();
+      const state = linkReducer(initialState, action);
+
+      expect(state.error.getLinks).toBeTrue();
     });
   });
 

@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
-import { catchError, of, switchMap, timeout, withLatestFrom } from 'rxjs';
+import { catchError, of, switchMap, take, timeout, withLatestFrom } from 'rxjs';
 
 // Services
 import { LinkService } from '../../core/services/link.service';
@@ -90,6 +90,7 @@ export class LinkEffects {
 
               return this.actions$.pipe(
                 ofType(getLinksFulfilled, getLinksRejected),
+                take(1),
                 switchMap(() => {
                   this.toast.success(getSuccessActionMessage(this.itemName, 'added'));
                   return of(addLinkFulfilled());
@@ -127,6 +128,7 @@ export class LinkEffects {
 
               return this.actions$.pipe(
                 ofType(getLinksFulfilled, getLinksRejected),
+                take(1),
                 switchMap(() => {
                   this.toast.success(getSuccessActionMessage(this.itemName, 'updated'));
                   return of(editLinkFulfilled());
@@ -158,6 +160,7 @@ export class LinkEffects {
 
             return this.actions$.pipe(
               ofType(getLinksFulfilled, getLinksRejected),
+              take(1),
               switchMap(() => {
                 this.toast.success(getSuccessActionMessage(this.itemName, 'deleted'));
                 return of(deleteLinkFulfilled());

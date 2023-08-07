@@ -12,4 +12,7 @@ export interface LinkState {
   error: {
     getLinks: boolean;
   };
+  requested: {
+    getLinks: boolean;
+  };
 }

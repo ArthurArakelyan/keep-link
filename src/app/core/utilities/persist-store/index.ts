@@ -14,7 +14,7 @@ export const persistStore = (state: AppStore) => {
     const reducer = newState[<keyof AppStore>key];
 
     for (const reducerKey in reducer) {
-      if (reducerKey === 'loading' || reducerKey === 'error') {
+      if (reducerKey === 'loading' || reducerKey === 'error' || reducerKey === 'requested') {
         const statePropertyToBeChanged = reducer[<keyof typeof reducer>reducerKey];
 
         if (typeof statePropertyToBeChanged === 'object' && !Array.isArray(statePropertyToBeChanged)) {

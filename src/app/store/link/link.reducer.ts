@@ -31,6 +31,9 @@ export const initialState: LinkState = {
   error: {
     getLinks: false,
   },
+  requested: {
+    getLinks: false,
+  },
 };
 
 export const linkReducer = createReducer(
@@ -59,6 +62,10 @@ export const linkReducer = createReducer(
       error: {
         ...state.error,
         getLinks: false,
+      },
+      requested: {
+        ...state.requested,
+        getLinks: true,
       },
     };
   }),

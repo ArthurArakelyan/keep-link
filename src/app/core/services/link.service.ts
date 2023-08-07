@@ -3,11 +3,9 @@ import { where, orderBy } from '@angular/fire/firestore';
 
 // Services
 import { FirestoreService } from './firestore.service';
-import { StorageService } from './storage.service';
 
 // Models
 import { ILink, ILinkWithoutId } from '../models/link.model';
-import { FileType } from '../models/file.model';
 
 @Injectable({ providedIn: 'root' })
 export class LinkService {
@@ -15,7 +13,6 @@ export class LinkService {
 
   constructor(
     private firestoreService: FirestoreService,
-    private storageService: StorageService,
   ) {}
 
   getLinks(userId: string) {
@@ -40,17 +37,5 @@ export class LinkService {
 
   deleteLink(id: string) {
     return this.firestoreService.delete(this.path, id);
-  }
-
-  getLinkImage(id: string) {
-    return this.storageService.get(`${this.path}/${id}`);
-  }
-
-  addLinkImage(image: FileType, id: string) {
-    return this.storageService.add(`${this.path}/${id}`, image, id);
-  }
-
-  deleteLinkImage(id: string) {
-    return this.storageService.delete(`${this.path}/${id}`);
   }
 }

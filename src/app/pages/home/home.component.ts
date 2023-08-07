@@ -1,16 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
+import { Subscription, take, tap } from 'rxjs';
 
 // Store
 import { AppStore } from '../../store/app.reducer';
-import { getFolders, selectFolder } from '../../store/folder';
-import { getLinks, selectLink, selectLinksWithoutFolder } from '../../store/link';
-
-// Models
-import { IFolder } from '../../core/models/folder.model';
-import { ILink } from '../../core/models/link.model';
+import { getFolders, selectFolder, selectFolderRequested } from '../../store/folder';
+import { getLinks, selectLink, selectLinkRequested, selectLinksWithoutFolder } from '../../store/link';
 
 @Component({
   selector: 'app-home',
@@ -18,8 +14,8 @@ import { ILink } from '../../core/models/link.model';
   styleUrls: ['home.component.scss'],
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  folders: IFolder[] = [];
-  links: ILink[] = [];
+  foldersLength: number = 0;
+  linksLength: number = 0;
   getFoldersLoading: boolean = false;
   getLinksLoading: boolean = false;
 
@@ -28,7 +24,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   private linksWithoutFolderSubscription: Subscription | undefined;
 
   get loading() {
-    return (this.getLinksLoading || this.getFoldersLoading) && (!this.folders.length && !this.links.length);
+    return (this.getLinksLoading || this.getFoldersLoading) && (!this.foldersLength && !this.linksLength);
   }
 
   constructor(
@@ -39,7 +35,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.folderStoreSubscription = this.store.select(selectFolder).subscribe((folderState) => {
-      this.folders = folderState.list;
+      this.foldersLength = folderState.list.length;
       this.getFoldersLoading = folderState.loading.getFolders;
     });
 
@@ -48,11 +44,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
 
     this.linksWithoutFolderSubscription = this.store.select(selectLinksWithoutFolder).subscribe((links) => {
-      this.links = links;
+      this.linksLength = links.length;
     });
 
-    this.store.dispatch(getLinks());
-    this.store.dispatch(getFolders());
+    this.getLinks();
+    this.getFolders();
   }
 
   ngOnDestroy() {
@@ -73,5 +69,25 @@ export class HomeComponent implements OnInit, OnDestroy {
         },
       },
     );
+  }
+
+  private getLinks() {
+    this.store.select(selectLinkRequested).pipe(
+      take(1),
+    ).subscribe((linksRequested) => {
+      if (!linksRequested.getLinks) {
+        this.store.dispatch(getLinks());
+      }
+    });
+  }
+
+  private getFolders() {
+    this.store.select(selectFolderRequested).pipe(
+      take(1),
+    ).subscribe((folderRequested) => {
+      if (!folderRequested.getFolders) {
+        this.store.dispatch(getFolders());
+      }
+    });
   }
 }
