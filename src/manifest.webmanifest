@@ -1,10 +1,11 @@
 {
   "name": "Keep Link",
   "short_name": "Keep Link",
-  "description": "Save your interesting and useful links in this Angular app",
+  "description": "Save your interesting and useful links in this app",
   "theme_color": "#121212",
   "background_color": "#121212",
   "display": "standalone",
+  "categories": ["productivity", "utilities", "education"],
   "scope": "./",
   "start_url": "./",
   "icons": [
@@ -55,6 +56,21 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable any"
+    }
+  ],
+  "shortcuts" : [
+    {
+      "name": "Create link",
+      "url": "/?addLink=",
+      "description": "List of events planned for today"
+    },
+    {
+      "name": "Profile",
+      "url": "/profile"
+    },
+    {
+      "name": "Settings",
+      "url": "/settings"
     }
   ]
 }

@@ -1,4 +1,4 @@
-<div class="folder">
+<button class="folder" (click)="onOpenFolder()">
   <h3 class="folder__name">
     {{ folder.name }}
   </h3>
@@ -6,7 +6,7 @@
   <p *ngIf="folder.description" class="folder__description">
     {{ folder.description }}
   </p>
-</div>
+</button>
 
 <div class="actions-bar">
   <button class="actions-bar__button" aria-label="Edit" (click)="onEdit()">
@@ -25,7 +25,7 @@
   <app-link
     *ngFor="let link of links"
     [link]="link"
-    imageClass="links__link-image"
+    [imageClass]="restLinksCount <= 0 ? 'links__link-image-last' : ''"
     class="links__link"
   ></app-link>
 </div>
@@ -40,3 +40,13 @@
     </app-button>
   </div>
 </ng-template>
+
+<button
+  *ngIf="restLinksCount > 0"
+  class="links-rest"
+  (click)="onOpenFolder()"
+>
+  <span class="links-rest__text">
+    + {{ restLinksCount }} MORE
+  </span>
+</button>

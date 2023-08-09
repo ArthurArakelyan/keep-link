@@ -1,7 +1,6 @@
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ActivatedRoute } from '@angular/router';
 import { Store, StoreModule } from '@ngrx/store';
 
 // Modules
@@ -11,6 +10,8 @@ import { SharedModule } from '../../../shared/shared.module';
 import { FoldersComponent } from './folders.component';
 import { FolderComponent } from './folder/folder.component';
 import { LinkComponent } from '../link/link.component';
+import { FolderModalComponent } from './folder-modal/folder-modal.component';
+import { FolderModalActionsBarComponent } from './folder-modal/folder-modal-actions-bar/folder-modal-actions-bar.component';
 
 // Store
 import { appReducer, AppStore } from '../../../store/app.reducer';
@@ -25,7 +26,6 @@ describe('FoldersComponent', () => {
   let fixture: ComponentFixture<FoldersComponent>;
   let compiled: HTMLElement;
   let store: Store<AppStore>;
-  let route: ActivatedRoute;
 
   const createLink = (name = 'test', link = 'https://www.google.com/', image = 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_Homepage.svg/1200px-Google_Homepage.svg.png'): ILink => {
     return {
@@ -39,10 +39,10 @@ describe('FoldersComponent', () => {
     };
   };
 
-  const createFolder = (name = 'test', description = 'test', links = [createLink(), createLink('', ''), createLink('', '', ''), createLink('test', '', ''), createLink('', '', 'https://www.google.com/')]): IFolder => {
+  const createFolder = (name = 'test', description = 'test', links = [createLink(), createLink('', ''), createLink('', '', ''), createLink('test', '', ''), createLink('', '', 'https://www.google.com/')], id = Math.random().toString()): IFolder => {
     return {
       userId: '1',
-      id: Math.random().toString(),
+      id,
       name,
       description,
       createdAt: 0,
@@ -51,7 +51,7 @@ describe('FoldersComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [FoldersComponent, FolderComponent, LinkComponent],
+      declarations: [FoldersComponent, FolderComponent, LinkComponent, FolderModalComponent, FolderModalActionsBarComponent],
       imports: [SharedModule, RouterTestingModule, StoreModule.forRoot(appReducer), BrowserAnimationsModule],
     });
 
@@ -59,10 +59,9 @@ describe('FoldersComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
     compiled = fixture.debugElement.nativeElement;
-    route = TestBed.get<ActivatedRoute>(ActivatedRoute);
     store = TestBed.get<Store>(Store);
 
-    store.dispatch(getFoldersFulfilled({ payload: [createFolder(), createFolder('', '', [])] }));
+    store.dispatch(getFoldersFulfilled({ payload: [createFolder(), createFolder('', '', [], '1')] }));
 
     fixture.detectChanges();
   });
@@ -77,30 +76,46 @@ describe('FoldersComponent', () => {
     });
   });
 
-  it('should show the confirm modal when there is deleteFolder in queryParams', fakeAsync(() => {
-    component.onDelete('1');
+  it('should show the folder modal when there is folderId in queryParams and there is no hideFolder in queryParams', () => {
+    component.folderId = '1';
+    component.hideFolder = false;
 
-    tick();
+    fixture.detectChanges();
+
+    expect(compiled.querySelector('app-folder-modal')).toBeInstanceOf(HTMLElement);
+  });
+
+  it('should not show the folder modal when there is no folderId in queryParams', () => {
+    component.folderId = null;
+    component.hideFolder = false;
+
+    fixture.detectChanges();
+
+    expect(compiled.querySelector('app-folder-modal')).toBeNull();
+  });
+
+  it('should not show the folder modal when there is folderId in queryParams and hideFolder', () => {
+    component.folderId = '1';
+    component.hideFolder = true;
+
+    fixture.detectChanges();
+
+    expect(compiled.querySelector('app-folder-modal')).toBeNull();
+  });
+
+  it('should show the confirm modal when there is deleteFolder in queryParams', () => {
+    component.deleteId = '1';
+
     fixture.detectChanges();
 
     expect(compiled.querySelector('app-confirm-modal')).toBeInstanceOf(HTMLElement);
+  });
 
-    route.queryParams.subscribe((queryParams) => {
-      expect(queryParams['deleteFolder']).toBeTruthy();
-    });
-  }));
+  it('should not show the confirm modal when there is no deleteFolder in queryParams', () => {
+    component.deleteId = null;
 
-  it('should not show the confirm modal when there is no deleteFolder in queryParams', fakeAsync(() => {
-    component.onDelete('1');
-    component.onDeleteCancel();
-
-    tick();
     fixture.detectChanges();
 
     expect(compiled.querySelector('app-confirm-modal')).toBeNull();
-
-    route.queryParams.subscribe((queryParams) => {
-      expect(queryParams['deleteFolder']).toBeFalsy();
-    });
-  }));
+  });
 });

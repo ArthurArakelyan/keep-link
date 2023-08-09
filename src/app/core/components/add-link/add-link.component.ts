@@ -128,7 +128,7 @@ export class AddLinkComponent implements OnInit, OnDestroy {
     });
 
     this.queryParamsSubscription = this.route.queryParams.subscribe((queryParams) => {
-      // folder
+      // link folder id
       const linkFolder = queryParams['linkFolder'];
 
       if (linkFolder) {
@@ -136,8 +136,8 @@ export class AddLinkComponent implements OnInit, OnDestroy {
       }
 
       // edit
-      const link = queryParams['link'];
-      const folder = queryParams['folder'];
+      const link = queryParams['editLink'];
+      const folder = queryParams['editFolder'];
 
       if (link) {
         this.type = 'link';
@@ -180,8 +180,9 @@ export class AddLinkComponent implements OnInit, OnDestroy {
         queryParams: {
           addLink: undefined,
           linkFolder: undefined,
-          link: undefined,
-          folder: undefined,
+          editLink: undefined,
+          editFolder: undefined,
+          hideFolder: undefined,
         },
       },
     );

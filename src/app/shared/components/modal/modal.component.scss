@@ -42,5 +42,12 @@
   .modal-content {
     max-width: unset;
     margin: 2.5rem 1rem;
+
+    &--fullscreen {
+      justify-content: flex-start;
+      min-height: 100vh;
+      margin: 0;
+      border-radius: 0;
+    }
   }
 }

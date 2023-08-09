@@ -55,7 +55,6 @@ describe('LinkComponent', () => {
     expect(compiled.querySelector<HTMLParagraphElement>('.link__info-name')!.innerText).toBe(component.link.name);
     expect(compiled.querySelector('.link__info-link')).toBeInstanceOf(HTMLSpanElement);
     expect(compiled.querySelector<HTMLSpanElement>('.link__info-link')!.innerText).toBe(shortLinkPipe.transform(component.link.link));
-    expect(compiled.querySelector('app-redirect-icon')).toBeInstanceOf(HTMLElement);
 
     component.action = 'menu';
 

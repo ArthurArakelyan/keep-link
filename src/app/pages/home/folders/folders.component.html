@@ -12,6 +12,12 @@
   </div>
 </div>
 
+<app-folder-modal
+  *ngIf="folderId && !hideFolder"
+  [folderId]="folderId"
+  [@modalTranslate]
+></app-folder-modal>
+
 <app-confirm-modal
   *ngIf="deleteId"
   [@modalTranslate]

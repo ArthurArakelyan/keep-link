@@ -66,7 +66,7 @@ export class LinksComponent implements OnInit, OnDestroy {
         queryParamsHandling: 'merge',
         queryParams: {
           addLink: '',
-          link: id,
+          editLink: id,
         },
       },
     );
@@ -94,6 +94,7 @@ export class LinksComponent implements OnInit, OnDestroy {
         replaceUrl: true,
         queryParams: {
           deleteLink: undefined,
+          hideFolder: undefined,
         },
       },
     );

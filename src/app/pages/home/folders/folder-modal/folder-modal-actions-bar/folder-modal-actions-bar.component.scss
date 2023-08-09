@@ -1,0 +1,43 @@
+@import "mixins";
+
+:host {
+  width: 100%;
+  margin-top: auto;
+  transform: translateY(0.8rem);
+  gap: 1rem;
+  @include flex(row, center, flex-start);
+}
+
+:host::ng-deep {
+  .folder-modal-actions-bar__button-icon {
+    width: 0.875rem;
+    height: 0.875rem;
+
+    &.fill {
+      fill: var(--primary-text-color);
+    }
+
+    &.stroke {
+      stroke: var(--primary-text-color);
+    }
+  }
+}
+
+.folder-modal-actions-bar__button {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: transparent;
+  padding: 0;
+  border: none;
+  @include flex(row, center, center);
+  transition: background-color .2s ease, opacity .2s ease;
+
+  @include hover() {
+    background-color: var(--white-background-hover);
+  }
+
+  @include active() {
+    background-color: var(--white-background-active);
+  }
+}

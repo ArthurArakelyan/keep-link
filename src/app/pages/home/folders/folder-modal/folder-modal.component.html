@@ -1,0 +1,28 @@
+<app-modal
+  *ngIf="folder"
+  [title]="folder.name"
+  [fullscreen]="true"
+  (modalClose)="onClose()"
+>
+  <p *ngIf="folder.description" class="folder-modal-description">
+    {{ folder.description }}
+  </p>
+
+  <div class="folder-modal-links">
+    <app-link
+      *ngFor="let link of links"
+      [link]="link"
+      action="menu"
+      linkClass="folder-modal-link"
+      imageClass="folder-modal-link__image"
+      (edit)="onEditLink($event)"
+      (delete)="onDeleteLink($event)"
+    ></app-link>
+  </div>
+
+  <app-folder-modal-actions-bar
+    (addLink)="onAddLink()"
+    (edit)="onEditFolder()"
+    (delete)="onDeleteFolder()"
+  ></app-folder-modal-actions-bar>
+</app-modal>

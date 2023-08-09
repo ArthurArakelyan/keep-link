@@ -18,8 +18,11 @@ import { keys } from '../../../core/constants/keys';
 })
 export class ModalComponent implements OnInit, OnDestroy {
   @Input({ required: true }) title: string = '';
+  @Input() fullscreen: boolean = false;
 
   @Output() modalClose = new EventEmitter();
+
+  private hideScrollTimeout: ReturnType<typeof setTimeout> | null = null;
 
   @HostListener('document:keydown', ['$event'])
   onGlobalKeyDown(e: KeyboardEvent) {
@@ -30,6 +33,14 @@ export class ModalComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     document.body.style.overflow = 'hidden';
+
+     this.hideScrollTimeout = setTimeout(() => {
+      document.body.style.overflow = 'hidden';
+
+       this.hideScrollTimeout = setTimeout(() => {
+         document.body.style.overflow = 'hidden';
+       }, 100);
+    }, 200);
   }
 
   ngOnDestroy() {

@@ -1,0 +1,33 @@
+@import "mixins";
+
+:host::ng-deep {
+  .folder-modal-link {
+    border-radius: 0.5rem;
+    background: var(--card-color);
+    box-shadow: 0 0 0.188rem var(--shadow-md-color);
+  }
+  .folder-modal-link__image {
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+  }
+}
+
+.folder-modal-description {
+  transform: translateY(-0.5rem);
+  width: 100%;
+  line-height: 1.5rem;
+  margin-bottom: 1rem;
+  @include font(1rem, 400, var(--primary-text-color));
+}
+
+.folder-modal-links {
+  width: 100%;
+  row-gap: 0.938rem;
+  @include flex(column, flex-start, flex-start);
+}
+
+@media (max-width: 768px) {
+  .folder-modal-description {
+    font-size: 0.875rem;
+  }
+}
