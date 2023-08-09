@@ -1,5 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
+// Utilities
+import { copy } from '../../../core/utilities/copy';
+
 // Models
 import { ILink } from '../../../core/models/link.model';
 import { IDropdownOption } from '../../../core/models/dropdown-option.model';
@@ -14,6 +17,11 @@ export class LinkComponent {
 
   dropdownOptions: IDropdownOption[] = [
     {
+      name: 'Copy',
+      icon: 'copy',
+      action: () => this.onCopy(),
+    },
+    {
       name: 'Edit',
       icon: 'edit',
       action: () => this.onEdit(),
@@ -26,8 +34,9 @@ export class LinkComponent {
   ];
 
   @Input({ required: true }) link!: ILink;
-  @Input() action: 'menu' | 'redirect' | null  = 'redirect';
+  @Input() action: 'menu' | null  = null;
   @Input() imageClass: string | undefined;
+  @Input() linkClass: string | undefined;
 
   @Output() edit = new EventEmitter<string>();
   @Output() delete = new EventEmitter<string>();
@@ -44,6 +53,10 @@ export class LinkComponent {
     if ((<HTMLElement>e.target).className?.includes?.('dropdown')) {
       e.preventDefault();
     }
+  }
+
+  private onCopy() {
+    copy(this.link.link);
   }
 
   private onEdit() {

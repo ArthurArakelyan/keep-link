@@ -10,6 +10,8 @@ import { FoldersComponent } from './folders/folders.component';
 import { FolderComponent } from './folders/folder/folder.component';
 import { LinksComponent } from './links/links.component';
 import { LinkComponent } from './link/link.component';
+import { FolderModalComponent } from './folders/folder-modal/folder-modal.component';
+import { FolderModalActionsBarComponent } from './folders/folder-modal/folder-modal-actions-bar/folder-modal-actions-bar.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,7 @@ import { LinkComponent } from './link/link.component';
     FolderComponent,
     LinksComponent,
     LinkComponent,
+    FolderModalComponent,FolderModalActionsBarComponent,
   ],
   imports: [
     SharedModule,

@@ -1,13 +1,8 @@
 @import "mixins";
 
 :host {
-  position: fixed;
-  z-index: $popup-z-index;
-  bottom: 1rem;
-  right: 1rem;
-  width: 3.5rem;
-  height: 3.5rem;
-  @include flex(row, center, center);
+  width: 0;
+  height: 0;
 }
 
 :host::ng-deep {
@@ -19,6 +14,16 @@
 }
 
 .fab {
+  position: fixed;
+  z-index: $popup-z-index;
+  bottom: 1rem;
+  right: 1rem;
+  width: 3.5rem;
+  height: 3.5rem;
+  @include flex(row, center, center);
+}
+
+.fab__button {
   width: 100%;
   height: 100%;
 }

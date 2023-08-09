@@ -7,6 +7,9 @@ import { Subscription } from 'rxjs';
 import { AppStore } from '../../../../store/app.reducer';
 import { selectLinksWithFolder } from '../../../../store/link';
 
+// Constants
+import { folderLinksMax } from '../../../../core/constants/count';
+
 // Models
 import { IFolder } from '../../../../core/models/folder.model';
 import { ILink } from '../../../../core/models/link.model';
@@ -18,6 +21,7 @@ import { ILink } from '../../../../core/models/link.model';
 })
 export class FolderComponent implements OnInit, OnDestroy {
   links: ILink[] = [];
+  restLinksCount: number = 0;
 
   @Input({ required: true }) folder!: IFolder;
 
@@ -34,14 +38,32 @@ export class FolderComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.linksWithFolderSubscription = this.store.select(selectLinksWithFolder).subscribe((links) => {
-      this.links = links.filter((link) => {
+      const filteredLinks = links.filter((link) => {
         return link.folderId === this.folder.id;
       });
+
+      this.links = filteredLinks.slice(0, folderLinksMax);
+
+      this.restLinksCount = filteredLinks.length - folderLinksMax;
     });
   }
 
   ngOnDestroy() {
     this.linksWithFolderSubscription?.unsubscribe();
+  }
+
+  onOpenFolder() {
+    this.router.navigate(
+      [],
+      {
+        relativeTo: this.route,
+        queryParamsHandling: 'merge',
+        queryParams: {
+          folder: this.folder.id,
+          hideFolder: undefined,
+        },
+      },
+    );
   }
 
   onEdit() {

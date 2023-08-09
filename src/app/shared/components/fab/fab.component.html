@@ -1,13 +1,17 @@
-<app-button
+<div
   *ngIf="show"
-  [disabled]="disabled"
-  [loading]="loading"
-  [attr.aria-label]="label"
-  variant="circle"
   class="fab"
-  (buttonClick)="onClick($event)"
 >
-  <div [ngSwitch]="icon">
-    <app-plus-icon *ngSwitchCase="'plus'" iconClass="fab__icon"></app-plus-icon>
-  </div>
-</app-button>
+  <app-button
+    [disabled]="disabled"
+    [loading]="loading"
+    [attr.aria-label]="label"
+    variant="circle"
+    class="fab__button"
+    (buttonClick)="onClick($event)"
+  >
+    <div [ngSwitch]="icon">
+      <app-plus-icon *ngSwitchCase="'plus'" iconClass="fab__icon"></app-plus-icon>
+    </div>
+  </app-button>
+</div>

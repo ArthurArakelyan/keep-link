@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { StoreModule } from '@ngrx/store';
+import { Store, StoreModule } from '@ngrx/store';
 
 // Modules
 import { SharedModule } from '../../../../shared/shared.module';
@@ -10,7 +10,11 @@ import { FolderComponent } from './folder.component';
 import { LinkComponent } from '../../link/link.component';
 
 // Store
-import { appReducer } from '../../../../store/app.reducer';
+import { appReducer, AppStore } from '../../../../store/app.reducer';
+import { getLinksFulfilled } from '../../../../store/link';
+
+// Constants
+import { folderLinksMax } from '../../../../core/constants/count';
 
 // Models
 import { ILink } from '../../../../core/models/link.model';
@@ -20,6 +24,7 @@ describe('FolderComponent', () => {
   let component: FolderComponent;
   let fixture: ComponentFixture<FolderComponent>;
   let compiled: HTMLElement;
+  let store: Store<AppStore>;
 
   const createLink = (name = 'test', link = 'https://www.google.com/', image = 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_Homepage.svg/1200px-Google_Homepage.svg.png'): ILink => {
     return {
@@ -54,6 +59,7 @@ describe('FolderComponent', () => {
     component.folder = createFolder();
     fixture.detectChanges();
     compiled = fixture.debugElement.nativeElement;
+    store = TestBed.get<Store>(Store);
   });
 
   it('should create the folder', () => {
@@ -87,5 +93,23 @@ describe('FolderComponent', () => {
     links.forEach((link) => {
       expect(link).toBeInstanceOf(HTMLElement);
     });
+  });
+
+  it(`should show the rest folders count when folders length is greater than ${folderLinksMax}`, () => {
+    const links: ILink[] = [];
+    const rest = 2;
+
+    for (let i = 0; i < folderLinksMax; i++) {
+      links.push(createLink());
+    }
+
+    component.links = links;
+    component.restLinksCount = rest;
+
+    fixture.detectChanges();
+
+    expect(compiled.querySelectorAll('.links app-link').length).toBe(folderLinksMax);
+    expect(compiled.querySelector('.links-rest')).toBeInstanceOf(HTMLButtonElement);
+    expect(compiled.querySelector<HTMLSpanElement>('.links-rest__text')!.innerText).toContain(rest.toString());
   });
 });

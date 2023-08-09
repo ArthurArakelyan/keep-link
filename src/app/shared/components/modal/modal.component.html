@@ -6,7 +6,10 @@
     (click)="onContentWrapperClick($event)"
     (keydown)="onContentWrapperKeyDown()"
   >
-    <div class="modal-content">
+    <div
+      [ngClass]="{ 'modal-content--fullscreen': fullscreen }"
+      class="modal-content"
+    >
       <app-modal-header
         [title]="title"
         (modalHeaderClose)="onClose()"

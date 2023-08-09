@@ -27,6 +27,8 @@ import { IFolder } from '../../../core/models/folder.model';
 })
 export class FoldersComponent implements OnInit, OnDestroy {
   alignedFolders: IFolder[][] = [];
+  folderId: string | null = null;
+  hideFolder: boolean = false;
   deleteId: string | null = null;
   deleteLoading: boolean = false;
 
@@ -51,7 +53,9 @@ export class FoldersComponent implements OnInit, OnDestroy {
     });
 
     this.queryParamsSubscription = this.route.queryParams.subscribe((queryParams) => {
+      this.folderId = (typeof queryParams['folder'] === 'string' && typeof queryParams['addLink'] !== 'string') ? queryParams['folder'] : null;
       this.deleteId = typeof queryParams['deleteFolder'] === 'string' ? queryParams['deleteFolder'] : null;
+      this.hideFolder = typeof queryParams['hideFolder'] === 'string';
     });
 
     this.sizeAndFolderSubscription = combineLatest([
@@ -76,7 +80,7 @@ export class FoldersComponent implements OnInit, OnDestroy {
         queryParamsHandling: 'merge',
         queryParams: {
           addLink: '',
-          folder: id,
+          editFolder: id,
         },
       },
     );
@@ -104,6 +108,7 @@ export class FoldersComponent implements OnInit, OnDestroy {
         replaceUrl: true,
         queryParams: {
           deleteFolder: undefined,
+          hideFolder: undefined,
         },
       },
     );
@@ -113,6 +118,19 @@ export class FoldersComponent implements OnInit, OnDestroy {
     if (!this.deleteId) {
       return;
     }
+
+    this.router.navigate(
+      [],
+      {
+        relativeTo: this.route,
+        queryParamsHandling: 'merge',
+        replaceUrl: true,
+        queryParams: {
+          folder: undefined,
+          hideFolder: undefined,
+        },
+      },
+    );
 
     this.store.dispatch(deleteFolder({ payload: this.deleteId }));
   }
