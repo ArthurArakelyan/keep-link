@@ -238,4 +238,13 @@ describe('SelectComponent', () => {
 
     expect(errorElement.innerText).toBe(errorMessage);
   });
+
+  it('show the search field', () => {
+    component.open = true;
+    component.showSearch = true;
+
+    fixture.detectChanges();
+
+    expect(compiled.querySelector('.select-options__search-input')).toBeInstanceOf(HTMLInputElement);
+  });
 });

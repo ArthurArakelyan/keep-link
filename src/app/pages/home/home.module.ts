@@ -20,7 +20,8 @@ import { FolderModalActionsBarComponent } from './folders/folder-modal/folder-mo
     FolderComponent,
     LinksComponent,
     LinkComponent,
-    FolderModalComponent,FolderModalActionsBarComponent,
+    FolderModalComponent,
+    FolderModalActionsBarComponent,
   ],
   imports: [
     SharedModule,

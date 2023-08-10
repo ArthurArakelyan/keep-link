@@ -39,31 +39,44 @@
 </button>
 
 <div
-  *ngIf="open && options.length"
+  *ngIf="open"
   role="listbox"
   class="select-options"
   [attr.aria-labelledby]="labelId"
   [id]="containerId"
   [@fadeTranslateInOut]
 >
-  <app-option
-    *ngFor="let option of options; let i = index"
-    [option]="option"
-    [selected]="option.key === value?.key"
-    [focused]="i === focused"
-    (optionClick)="onSelect($event)"
-  ></app-option>
-</div>
+  <div
+    *ngIf="showSearch"
+    class="select-options__search"
+  >
+    <app-search-icon
+      class="select-options__search-icon-wrapper"
+    ></app-search-icon>
 
-<div
-  *ngIf="open && !options.length"
-  class="select-options"
-  role="alert"
-  [@fadeTranslateInOut]
->
-  <span class="select-options__empty">
-    No folders
-  </span>
+    <input
+      type="text"
+      placeholder="Search"
+      class="select-options__search-input"
+      [value]="searchValue"
+      (input)="onSearchInput($event)"
+    />
+  </div>
+
+  <ng-container *ngIf="options.length; else emptyOptions">
+    <app-option
+      *ngFor="let option of options; let i = index"
+      [option]="option"
+      [selected]="option.key === value?.key"
+      [focused]="i === focused"
+      (optionClick)="onSelect($event)"
+    ></app-option>
+  </ng-container>
+  <ng-template #emptyOptions>
+    <span class="select-options__empty">
+      No folders
+    </span>
+  </ng-template>
 </div>
 
 <p

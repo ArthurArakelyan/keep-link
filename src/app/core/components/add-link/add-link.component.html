@@ -26,7 +26,9 @@
         placeholder="Folder"
         placeholderBackgroundColor="var(--card-color)"
         formControlName="folderId"
-        [options]="folderOptions"
+        [showSearch]="true"
+        [options]="folderOptionsFiltered"
+        (search)="onFolderSearch($event)"
       ></app-select>
 
       <div class="add-link__form-separator" role="separator"></div>

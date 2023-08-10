@@ -232,4 +232,26 @@ describe('AddLinkComponent', () => {
         expect(linkState.loading.editFolder).toBeTrue();
       });
   });
+
+  it('should filter folders on folder search', () => {
+    const options = [
+      { key: '1', value: 'Test' },
+      { key: '2', value: 'A' },
+      { key: '3', value: 'B' },
+    ];
+
+    component.folderOptions = options;
+    component.folderOptionsFiltered = options;
+
+    fixture.detectChanges();
+
+    const searchValue = 'Test';
+
+    component.onFolderSearch(searchValue);
+
+    fixture.detectChanges();
+
+    expect(component.folderOptionsFiltered.length).toBe(1);
+    expect(component.folderOptionsFiltered[0].value).toBe(searchValue);
+  });
 });

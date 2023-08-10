@@ -43,6 +43,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnChanges 
   errorMessage: string = '';
   verticalPosition: 'top' | 'bottom' = 'bottom';
   focused: number = -1;
+  searchValue: string = '';
 
   private readonly maxHeight: number = 232;
 
@@ -54,8 +55,10 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnChanges 
   @Input() placeholderBackgroundColor: string = 'var(--background-color)';
   @Input() defaultValue: string = '';
   @Input() canSelectNothing: boolean = true;
+  @Input() showSearch: boolean = false;
 
   @Output() selectOption = new EventEmitter<string | null>();
+  @Output() search = new EventEmitter<string>();
 
   get containerId() { return `${this.placeholder}-container`; }
   get labelId() { return `${this.placeholder}-label`; }
@@ -115,6 +118,11 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnChanges 
     this.selectOption.emit(this.value ? this.value.key : null);
 
     this.closeSelect();
+  }
+
+  onSearchInput(e: Event) {
+    this.searchValue = (<HTMLInputElement>e.target).value;
+    this.search.emit(this.searchValue);
   }
 
   toggleSelect() {

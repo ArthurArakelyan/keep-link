@@ -60,17 +60,25 @@
   ],
   "shortcuts" : [
     {
-      "name": "Create link",
+      "name": "Create new link",
+      "short_name": "Create link",
+      "description": "Create new link or folder",
       "url": "/?addLink=",
-      "description": "List of events planned for today"
+      "icons": [{ "src": "/assets/shortcut-icons/link.png", "sizes": "96x96" }]
     },
     {
       "name": "Profile",
-      "url": "/profile"
+      "short_name": "Profile",
+      "description": "View profile page",
+      "url": "/profile",
+      "icons": [{ "src": "/assets/shortcut-icons/profile.png", "sizes": "96x96" }]
     },
     {
       "name": "Settings",
-      "url": "/settings"
+      "short_name": "Settings",
+      "description": "View settings page",
+      "url": "/settings",
+      "icons": [{ "src": "/assets/shortcut-icons/settings.png", "sizes": "96x96" }]
     }
   ]
 }

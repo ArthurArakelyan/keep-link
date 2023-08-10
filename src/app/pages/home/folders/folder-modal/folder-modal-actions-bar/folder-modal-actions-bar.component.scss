@@ -41,3 +41,17 @@
     background-color: var(--white-background-active);
   }
 }
+
+@media (max-width: 750px) {
+  :host {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  :host::ng-deep {
+    .folder-modal-actions-bar__button-icon {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+}
