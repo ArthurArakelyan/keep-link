@@ -28,6 +28,7 @@ import { IOptionalId } from '../../models/id.model';
 })
 export class AddLinkComponent implements OnInit, OnDestroy {
   folderOptions: IOption[] = [];
+  folderOptionsFiltered: IOption[] = [];
   folders: IFolder[] = [];
   links: ILink[] = [];
 
@@ -113,6 +114,8 @@ export class AddLinkComponent implements OnInit, OnDestroy {
           value: folder.name,
         };
       });
+
+      this.folderOptionsFiltered = this.folderOptions;
 
       this.folders = folderState.list;
 
@@ -260,5 +263,11 @@ export class AddLinkComponent implements OnInit, OnDestroy {
 
   onSelectType(type: string | null) {
     this.type = <typeof this.type>type!;
+  }
+
+  onFolderSearch(value: string) {
+    this.folderOptionsFiltered = this.folderOptions.filter((folder) => {
+      return folder.value.toLowerCase().includes(value.toLowerCase());
+    });
   }
 }
