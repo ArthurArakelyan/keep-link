@@ -239,7 +239,7 @@ describe('SelectComponent', () => {
     expect(errorElement.innerText).toBe(errorMessage);
   });
 
-  it('show the search field', () => {
+  it('should show the search field', () => {
     component.open = true;
     component.showSearch = true;
 
