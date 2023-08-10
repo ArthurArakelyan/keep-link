@@ -68,17 +68,6 @@
     padding-right: 1rem;
   }
 
-  .search {
-    width: 50%;
-  }
-
-  .avatar__image {
-    width: 2.5rem;
-    height: 2.5rem;
-  }
-}
-
-@media (max-width: 420px) {
   :host::ng-deep {
     .search__icon {
       width: 1.25rem;
@@ -86,11 +75,18 @@
     }
   }
 
+  .search {
+    width: 50%;
+  }
   .search__icon {
     margin-bottom: 0.22rem;
   }
   .search__input {
     margin-left: 0.75rem;
   }
-}
 
+  .avatar__image {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}
