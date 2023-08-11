@@ -29,3 +29,25 @@ export const addUserFulfilled = createAction(
 export const addUserRejected = createAction(
   '[User] Add user rejected',
 );
+
+export const editUserName = createAction(
+  '[User] Edit user name',
+  props<{
+    payload: {
+      name: string;
+    };
+  }>(),
+);
+
+export const editUserNameFulfilled = createAction(
+  '[User] Edit user name fulfilled',
+  props<{
+    payload: {
+      name: string;
+    };
+  }>(),
+);
+
+export const editUserNameRejected = createAction(
+  '[User] Edit user name rejected',
+);

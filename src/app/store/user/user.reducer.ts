@@ -5,6 +5,9 @@ import {
   getUserFulfilled,
   getUserRejected,
   addUserFulfilled,
+  editUserName,
+  editUserNameFulfilled,
+  editUserNameRejected,
 } from './user.actions';
 import { logout } from '../auth';
 
@@ -13,6 +16,9 @@ import { UserState } from './user.state';
 
 export const initialState: UserState = {
   user: null,
+  loading: {
+    editUserName: false,
+  },
 };
 
 export const userReducer = createReducer(
@@ -33,6 +39,37 @@ export const userReducer = createReducer(
     return {
       ...state,
       user: action.payload,
+    };
+  }),
+  on(editUserName, (state) => {
+    return {
+      ...state,
+      loading: {
+        ...state.loading,
+        editUserName: true,
+      },
+    };
+  }),
+  on(editUserNameFulfilled, (state, action) => {
+    return {
+      ...state,
+      user: state.user ? {
+        ...state.user,
+        name: action.payload.name,
+      } : null,
+      loading: {
+        ...state.loading,
+        editUserName: false,
+      },
+    };
+  }),
+  on(editUserNameRejected, (state) => {
+    return {
+      ...state,
+      loading: {
+        ...state.loading,
+        editUserName: false,
+      },
     };
   }),
   on(logout, () => {

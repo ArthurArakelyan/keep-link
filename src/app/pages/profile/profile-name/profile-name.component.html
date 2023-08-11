@@ -1,0 +1,17 @@
+<form class="profile-name" [formGroup]="nameForm" (ngSubmit)="onSubmit()">
+  <app-input
+    placeholder="Name"
+    inputId="name"
+    type="text"
+    formControlName="name"
+    placeholderBackgroundColor="var(--background-color)"
+  ></app-input>
+
+  <app-button
+    type="submit"
+    [loading]="false"
+    class="profile-name__submit"
+  >
+    Save
+  </app-button>
+</form>

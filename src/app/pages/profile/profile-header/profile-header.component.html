@@ -1,0 +1,14 @@
+<ng-container *ngIf="user">
+  <app-avatar
+    [name]="user.name"
+    [src]="user.avatar"
+    [alt]="user.name"
+    [width]="56"
+    [height]="56"
+    class="profile-header-avatar"
+  />
+
+  <span class="profile-header-name">
+    {{ user.name }}
+  </span>
+</ng-container>

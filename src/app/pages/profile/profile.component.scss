@@ -1,0 +1,16 @@
+@import "mixins";
+
+:host {
+  width: 100%;
+}
+
+.profile-tabs-wrapper {
+  margin-top: 1.5rem;
+  width: 100%;
+  @include flex(row, flex-start, space-between);
+}
+
+.profile-tabs-wrapper__page {
+  width: 55%;
+  @include flex(row, flex-start, flex-start);
+}

@@ -10,6 +10,7 @@ import { UserService } from '../../core/services/user.service';
 // Store
 import { AppStore } from '../app.reducer';
 import { selectAuthId } from '../auth';
+import { selectUser } from './user.selectors';
 
 // Actions
 import {
@@ -19,7 +20,11 @@ import {
   addUser,
   addUserFulfilled,
   addUserRejected,
+  editUserName, editUserNameRejected,
 } from './user.actions';
+
+// Constants
+import { authErrorMessage } from '../../core/constants/error-messages';
 
 @Injectable()
 export class UserEffects {
@@ -76,6 +81,23 @@ export class UserEffects {
       this.userService.addedUser$.next(true);
     }),
   ), { dispatch: false });
+
+  editUserName = createEffect(() => this.actions$.pipe(
+    ofType(editUserName),
+    switchMap(({ payload }) => {
+      return this.store.select(selectUser).pipe(
+        take(1),
+        switchMap(({ user }) => {
+          if (!user) {
+            this.toast.error(authErrorMessage);
+            return of(editUserNameRejected());
+          }
+
+          return this.userService.editUser();
+        }),
+      );
+    }),
+  ));
 
   constructor(
     private actions$: Actions,

@@ -1,0 +1,25 @@
+@import "mixins";
+
+:host {
+  width: 100%;
+  @include flex(row, center, flex-start);
+}
+
+:host::ng-deep {
+  .avatar-letter {
+    font-size: 1.5rem;
+  }
+}
+
+.profile-header-avatar {
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+.profile-header-name {
+  flex: 1;
+  margin-left: 1.5rem;
+  letter-spacing: 0.3px;
+  @include ellipsis();
+  @include font(1.6rem, 500, var(--primary-text-color));
+}

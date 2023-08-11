@@ -6,7 +6,7 @@ import { FirestoreService } from './firestore.service';
 import { StorageService } from './storage.service';
 
 // Models
-import { IUser } from '../models/user.model';
+import { IUser, IUserWithoutId } from '../models/user.model';
 import { FileType } from '../models/file.model';
 
 @Injectable({ providedIn: 'root' })
@@ -28,11 +28,11 @@ export class UserService {
     return this.firestoreService.getDoc<IUser>(this.path, id);
   }
 
-  addUser(user: IUser, id?: string) {
+  addUser(user: IUserWithoutId, id?: string) {
     return this.firestoreService.add(this.path, user, id);
   }
 
-  editUser(id: string, user: IUser) {
+  editUser(id: string, user: IUserWithoutId) {
     return this.firestoreService.edit(this.path, user, id);
   }
 
