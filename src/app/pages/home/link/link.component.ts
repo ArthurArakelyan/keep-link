@@ -36,6 +36,7 @@ export class LinkComponent {
   @Input({ required: true }) link!: ILink;
   @Input() action: 'menu' | null  = null;
   @Input() imageClass: string | undefined;
+  @Input() imageWrapperClass: string | undefined;
   @Input() linkClass: string | undefined;
 
   @Output() edit = new EventEmitter<string>();
