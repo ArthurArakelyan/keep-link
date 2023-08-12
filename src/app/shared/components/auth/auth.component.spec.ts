@@ -25,7 +25,7 @@ describe('AuthComponent', () => {
   it('should have a title', () => {
     const title = 'Title';
 
-    component.title = title;
+    component.authTitle = title;
 
     fixture.detectChanges();
 
