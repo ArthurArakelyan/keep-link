@@ -51,3 +51,35 @@ export const editUserNameFulfilled = createAction(
 export const editUserNameRejected = createAction(
   '[User] Edit user name rejected',
 );
+
+export const editUserAvatar = createAction(
+  '[User] Edit user avatar',
+  props<{
+    payload: File;
+  }>(),
+);
+
+export const editUserAvatarFulfilled = createAction(
+  '[User] Edit user avatar fulfilled',
+  props<{
+    payload: {
+      avatar: string;
+    };
+  }>(),
+);
+
+export const editUserAvatarRejected = createAction(
+  '[User] Edit user avatar rejected',
+);
+
+export const deleteUserAvatar = createAction(
+  '[User] Delete user avatar',
+);
+
+export const deleteUserAvatarFulfilled = createAction(
+  '[User] Delete user avatar fulfilled',
+);
+
+export const deleteUserAvatarRejected = createAction(
+  '[User] Delete user avatar rejected',
+);

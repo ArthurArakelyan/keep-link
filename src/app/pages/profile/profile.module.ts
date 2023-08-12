@@ -10,6 +10,7 @@ import { ProfileComponent } from './profile.component';
 import { ProfileHeaderComponent } from './profile-header/profile-header.component';
 import { ProfileTabsComponent } from './profile-tabs/profile-tabs.component';
 import { ProfileNameComponent } from './profile-name/profile-name.component';
+import { ProfileAvatarComponent } from './profile-avatar/profile-avatar.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { ProfileNameComponent } from './profile-name/profile-name.component';
     ProfileHeaderComponent,
     ProfileTabsComponent,
     ProfileNameComponent,
+    ProfileAvatarComponent,
   ],
   imports: [
     SharedModule,

@@ -1,0 +1,99 @@
+@import "mixins";
+
+:host {
+  width: 100%;
+  @include flex(row, flex-start, space-between);
+}
+
+:host::ng-deep {
+  .profile-avatar-actions__upload-icon {
+    width: 1.35rem;
+    height: 1.35rem;
+    fill: $white;
+    margin-right: 0.6rem;
+  }
+
+  .profile-avatar-actions__delete-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    fill: $white;
+    margin-right: 0.75rem;
+  }
+
+  .profile-avatar-actions__button-button {
+    width: 100%;
+  }
+
+  .avatar-letter {
+    font-size: 5rem;
+  }
+}
+
+.profile-avatar-actions {
+  row-gap: 1.5rem;
+  @include flex(column, flex-start, flex-start);
+}
+
+.profile-avatar-actions__button {
+  width: 100%;
+}
+
+.profile-avatar-actions__file {
+  visibility: hidden;
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+.profile-avatar-wrapper {
+  position: relative;
+  width: 12.5rem;
+  height: 12.5rem;
+}
+
+.profile-avatar {
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 1100px) {
+  :host {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .profile-avatar-actions {
+    gap: 1rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .profile-avatar-actions__button {
+    width: fit-content;
+  }
+
+  .profile-avatar-wrapper {
+    margin-top: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  :host {
+    flex-direction: column-reverse;
+  }
+
+  .profile-avatar-actions {
+    width: 100%;
+    gap: 1.5rem;
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+
+  .profile-avatar-actions__button {
+    width: 100%;
+  }
+
+  .profile-avatar-wrapper {
+    margin: 0 auto 2.5rem auto;
+  }
+}

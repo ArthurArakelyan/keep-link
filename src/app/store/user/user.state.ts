@@ -4,5 +4,7 @@ export interface UserState {
   user: IUser | null;
   loading: {
     editUserName: boolean;
+    editUserAvatar: boolean;
+    deleteUserAvatar: boolean;
   };
 }

@@ -17,6 +17,7 @@ import { CloseIconComponent } from './icons/close-icon/close-icon.component';
 import { ChevronDownIconComponent } from './icons/chevron-down-icon/chevron-down-icon.component';
 import { FolderIconComponent } from './icons/folder-icon/folder-icon.component';
 import { CopyIconComponent } from './icons/copy-icon/copy-icon.component';
+import { UploadIconComponent } from './icons/upload-icon/upload-icon.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { CopyIconComponent } from './icons/copy-icon/copy-icon.component';
     ChevronDownIconComponent,
     FolderIconComponent,
     CopyIconComponent,
+    UploadIconComponent,
   ],
   exports: [
     SearchIconComponent,
@@ -54,6 +56,7 @@ import { CopyIconComponent } from './icons/copy-icon/copy-icon.component';
     ChevronDownIconComponent,
     FolderIconComponent,
     CopyIconComponent,
+    UploadIconComponent,
   ],
 })
 export class IconModule {

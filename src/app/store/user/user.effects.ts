@@ -23,6 +23,12 @@ import {
   editUserName,
   editUserNameFulfilled,
   editUserNameRejected,
+  editUserAvatar,
+  editUserAvatarFulfilled,
+  editUserAvatarRejected,
+  deleteUserAvatar,
+  deleteUserAvatarFulfilled,
+  deleteUserAvatarRejected,
 } from './user.actions';
 
 // Utilities
@@ -117,6 +123,92 @@ export class UserEffects {
             catchError((error) => {
               this.toast.error(error.message);
               return of(editUserNameRejected());
+            }),
+          );
+        }),
+      );
+    }),
+  ));
+
+  editUserAvatar = createEffect(() => this.actions$.pipe(
+    ofType(editUserAvatar),
+    switchMap(({ payload }) => {
+      return this.store.select(selectUser).pipe(
+        take(1),
+        switchMap(({ user }) => {
+          if (!user) {
+            this.toast.error(authErrorMessage);
+            return of(editUserAvatarRejected());
+          }
+
+          return this.userService.addAvatar(payload, user.id).pipe(
+            switchMap(() => {
+              return this.userService.getAvatar(user.id).pipe(
+                switchMap((avatar) => {
+                  const userWithoutId: IUserWithoutId = {
+                    ...deleteIdFromObject(user),
+                    avatar,
+                  };
+
+                  return this.userService.editUser(user.id, userWithoutId).pipe(
+                    switchMap(() => {
+                      this.toast.success(getSuccessActionMessage('Avatar', 'updated'));
+                      return of(editUserAvatarFulfilled({ payload: { avatar } }));
+                    }),
+                    catchError((error) => {
+                      this.toast.error(error.message);
+                      return of(editUserAvatarRejected());
+                    }),
+                  );
+                }),
+                catchError((error) => {
+                  this.toast.error(error.message);
+                  return of(editUserAvatarRejected());
+                }),
+              );
+            }),
+            catchError((error) => {
+              this.toast.error(error.message);
+              return of(editUserAvatarRejected());
+            }),
+          );
+        }),
+      );
+    }),
+  ));
+
+  deleteUserAvatar = createEffect(() => this.actions$.pipe(
+    ofType(deleteUserAvatar),
+    switchMap(() => {
+      return this.store.select(selectUser).pipe(
+        take(1),
+        switchMap(({ user }) => {
+          if (!user) {
+            this.toast.error(authErrorMessage);
+            return of(deleteUserAvatarRejected());
+          }
+
+          return this.userService.deleteAvatar(user.id).pipe(
+            switchMap(() => {
+              const userWithoutId: IUserWithoutId = {
+                ...deleteIdFromObject(user),
+                avatar: '',
+              };
+
+              return this.userService.editUser(user.id, userWithoutId).pipe(
+                switchMap(() => {
+                  this.toast.success(getSuccessActionMessage('Avatar', 'deleted'));
+                  return of(deleteUserAvatarFulfilled());
+                }),
+                catchError((error) => {
+                  this.toast.error(error.message);
+                  return of(deleteUserAvatarRejected());
+                }),
+              );
+            }),
+            catchError((error) => {
+              this.toast.error(error.message);
+              return of(deleteUserAvatarRejected());
             }),
           );
         }),

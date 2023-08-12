@@ -1,0 +1,55 @@
+<ng-container *ngIf="user">
+  <div class="profile-avatar-actions">
+    <app-button
+      [loading]="uploadLoading"
+      class="profile-avatar-actions__button"
+      buttonClass="profile-avatar-actions__button-button"
+      (buttonClick)="onUploadClick()"
+    >
+      <input
+        type="file"
+        aria-hidden="true"
+        tabindex="-1"
+        class="profile-avatar-actions__file"
+        (change)="onUpload($event)"
+        #fileInput
+      />
+
+      <app-upload-icon
+        iconClass="profile-avatar-actions__upload-icon"
+      ></app-upload-icon>
+
+      <span>
+        Upload Avatar
+      </span>
+    </app-button>
+
+    <app-button
+      *ngIf="user.avatar"
+      [loading]="deleteLoading"
+      color="red"
+      class="profile-avatar-actions__button"
+      buttonClass="profile-avatar-actions__button-button"
+      (buttonClick)="onDelete()"
+    >
+      <app-close-icon
+        iconClass="profile-avatar-actions__delete-icon"
+      ></app-close-icon>
+
+      <span>
+        Delete Avatar
+      </span>
+    </app-button>
+  </div>
+
+  <div class="profile-avatar-wrapper">
+    <app-avatar
+      [src]="user.avatar"
+      [alt]="user.name"
+      [name]="user.name"
+      width="200"
+      height="200"
+      class="profile-avatar"
+    ></app-avatar>
+  </div>
+</ng-container>
