@@ -49,3 +49,9 @@
     background-color: var(--white-background-active);
   }
 }
+
+@media (max-width: 768px) {
+  :host {
+    width: 100%;
+  }
+}

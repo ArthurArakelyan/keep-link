@@ -1,15 +1,18 @@
 <form class="profile-name" [formGroup]="nameForm" (ngSubmit)="onSubmit()">
   <app-input
     placeholder="Name"
+    name="name"
     inputId="name"
     type="text"
     formControlName="name"
     placeholderBackgroundColor="var(--background-color)"
+    [showError]="nameForm.controls.name.invalid && submitted"
+    [error]="nameForm.controls.name.errors"
   ></app-input>
 
   <app-button
     type="submit"
-    [loading]="false"
+    [loading]="loading"
     class="profile-name__submit"
   >
     Save

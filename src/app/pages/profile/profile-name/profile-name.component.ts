@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 
 // Store
 import { AppStore } from '../../../store/app.reducer';
-import { selectUser } from '../../../store/user';
+import { editUserName, selectUser } from '../../../store/user';
 
 // Constants
 import { VALIDATION_LENGTHS } from '../../../core/constants/validation';
@@ -34,11 +34,13 @@ export class ProfileNameComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.userSubscription = this.store.select(selectUser).subscribe((userState) => {
-      if (userState.user) {
+      if (userState.user && !this.nameForm.value.name) {
         this.nameForm.setValue({
           name: userState.user.name,
         });
       }
+
+      this.loading = userState.loading.editUserName;
     });
   }
 
@@ -49,10 +51,14 @@ export class ProfileNameComponent implements OnInit, OnDestroy {
   onSubmit() {
     this.submitted = true;
 
-    if (this.nameForm.invalid) {
+    if (this.nameForm.invalid || this.loading) {
       return;
     }
 
-
+    this.store.dispatch(editUserName({
+      payload: {
+        name: this.nameForm.value.name!,
+      },
+    }));
   }
 }

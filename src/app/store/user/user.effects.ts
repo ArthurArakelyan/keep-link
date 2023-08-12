@@ -20,11 +20,20 @@ import {
   addUser,
   addUserFulfilled,
   addUserRejected,
-  editUserName, editUserNameRejected,
+  editUserName,
+  editUserNameFulfilled,
+  editUserNameRejected,
 } from './user.actions';
+
+// Utilities
+import { deleteIdFromObject } from '../../core/utilities/delete-id-from-object';
 
 // Constants
 import { authErrorMessage } from '../../core/constants/error-messages';
+
+// Models
+import { IUserWithoutId } from '../../core/models/user.model';
+import { getSuccessActionMessage } from '../../core/utilities/get-success-action-message';
 
 @Injectable()
 export class UserEffects {
@@ -57,7 +66,9 @@ export class UserEffects {
   addUser = createEffect(() => this.actions$.pipe(
     ofType(addUser),
     switchMap(({ payload }) => {
-      return this.userService.addUser(payload, payload.id)
+      const user = deleteIdFromObject(payload);
+
+      return this.userService.addUser(user, payload.id)
         .pipe(
           switchMap(() => {
             return of(addUserFulfilled({ payload }));
@@ -93,7 +104,21 @@ export class UserEffects {
             return of(editUserNameRejected());
           }
 
-          return this.userService.editUser();
+          const userWithoutId: IUserWithoutId = {
+            ...deleteIdFromObject(user),
+            name: payload.name,
+          };
+
+          return this.userService.editUser(user.id, userWithoutId).pipe(
+            switchMap(() => {
+              this.toast.success(getSuccessActionMessage('Name', 'updated'));
+              return of(editUserNameFulfilled({ payload: { name: payload.name } }));
+            }),
+            catchError((error) => {
+              this.toast.error(error.message);
+              return of(editUserNameRejected());
+            }),
+          );
         }),
       );
     }),
