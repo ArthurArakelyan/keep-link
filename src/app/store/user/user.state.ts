@@ -8,5 +8,6 @@ export interface UserState {
     deleteUserAvatar: boolean;
     editUserEmail: boolean;
     editUserPassword: boolean;
+    deleteUser: boolean;
   };
 }

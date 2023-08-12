@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
-import { catchError, of, switchMap, take, tap } from 'rxjs';
+import { catchError, of, switchMap, take, tap, combineLatest, map } from 'rxjs';
 
 // Services
 import { UserService } from '../../core/services/user.service';
@@ -12,6 +12,7 @@ import { AuthService } from '../../core/services/auth.service';
 import { AppStore } from '../app.reducer';
 import { selectAuthId } from '../auth';
 import { selectUser } from './user.selectors';
+import { selectFolders } from '../folder';
 
 // Actions
 import {
@@ -36,6 +37,9 @@ import {
   editUserPassword,
   editUserPasswordFulfilled,
   editUserPasswordRejected,
+  deleteUser,
+  deleteUserFulfilled,
+  deleteUserRejected,
 } from './user.actions';
 
 // Utilities
@@ -49,6 +53,9 @@ import { authErrors } from '../../core/constants/auth-errors';
 
 // Models
 import { IUserWithoutId } from '../../core/models/user.model';
+import { FolderService } from '../../core/services/folder.service';
+import { LinkService } from '../../core/services/link.service';
+import { selectLink, selectLinks } from '../link';
 
 @Injectable()
 export class UserEffects {
@@ -293,10 +300,82 @@ export class UserEffects {
     }),
   ));
 
+  deleteUser = createEffect(() => this.actions$.pipe(
+    ofType(deleteUser),
+    switchMap(({ payload }) => {
+      return this.store.select(selectUser).pipe(
+        take(1),
+        switchMap(({ user }) => {
+          if (!user) {
+            this.toast.error(authErrorMessage);
+            return of(deleteUserRejected());
+          }
+
+          return this.authService.login(user.email, payload.password).pipe(
+            switchMap(() => {
+              return combineLatest(
+                [
+                  this.userService.deleteUser(user.id),
+                  this.userService.deleteAvatar(user.id),
+                  this.store.select(selectFolders).pipe(
+                    map((folders) => {
+                      return folders.filter((folder) => folder.userId === user.id);
+                    }),
+                    switchMap((folders) => {
+                      return combineLatest(
+                        folders.map((folder) => {
+                          return this.folderService.deleteFolder(folder.id);
+                        }),
+                      );
+                    }),
+                  ),
+                  this.store.select(selectLinks).pipe(
+                    map((links) => {
+                      return links.filter((folder) => folder.userId === user.id);
+                    }),
+                    switchMap((links) => {
+                      return combineLatest(
+                        links.map((link) => {
+                          return this.linkService.deleteLink(link.id);
+                        }),
+                      );
+                    }),
+                  ),
+                ],
+              ).pipe(
+                switchMap(() => {
+                  return this.authService.deleteUser().pipe(
+                    switchMap(() => {
+                      return of(deleteUserFulfilled());
+                    }),
+                    catchError((error) => {
+                      this.toast.error(getFirebaseError(error.toString(), authErrors));
+                      return of(deleteUserRejected());
+                    }),
+                  );
+                }),
+                catchError((error) => {
+                  this.toast.error(error.message);
+                  return of(deleteUserRejected());
+                }),
+              );
+            }),
+            catchError((error) => {
+              this.toast.error(getFirebaseError(error.toString(), authErrors));
+              return of(deleteUserRejected());
+            }),
+          );
+        }),
+      );
+    }),
+  ));
+
   constructor(
     private actions$: Actions,
     private userService: UserService,
     private authService: AuthService,
+    private folderService: FolderService,
+    private linkService: LinkService,
     private toast: ToastrService,
     private store: Store<AppStore>,
   ) {}

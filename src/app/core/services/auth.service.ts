@@ -10,6 +10,7 @@ import {
   signOut,
   updateEmail,
   updatePassword,
+  deleteUser,
 } from '@angular/fire/auth';
 import { from } from 'rxjs';
 
@@ -64,6 +65,16 @@ export class AuthService {
     }
 
     return from(updateEmail(this.user, email));
+  }
+
+  deleteUser() {
+    if (!this.user) {
+      return from(new Promise((reject) => {
+        reject(authErrorMessage);
+      }));
+    }
+
+    return from(deleteUser(this.user));
   }
 
   get user() {

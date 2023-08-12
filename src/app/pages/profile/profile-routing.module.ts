@@ -7,6 +7,7 @@ import { ProfileNameComponent } from './profile-name/profile-name.component';
 import { ProfileAvatarComponent } from './profile-avatar/profile-avatar.component';
 import { ProfileEmailComponent } from './profile-email/profile-email.component';
 import { ProfilePasswordComponent } from './profile-password/profile-password.component';
+import { ProfileDeleteAccountComponent } from './profile-delete-account/profile-delete-account.component';
 
 // Guards
 import { AuthGuard } from '../../core/guards/auth.guard';
@@ -33,6 +34,10 @@ const profileRoutes: Routes = [
       {
         path: 'password',
         component: ProfilePasswordComponent,
+      },
+      {
+        path: 'delete-account',
+        component: ProfileDeleteAccountComponent,
       },
     ],
   },

@@ -13,6 +13,7 @@ import { ProfileNameComponent } from './profile-name/profile-name.component';
 import { ProfileAvatarComponent } from './profile-avatar/profile-avatar.component';
 import { ProfileEmailComponent } from './profile-email/profile-email.component';
 import { ProfilePasswordComponent } from './profile-password/profile-password.component';
+import { ProfileDeleteAccountComponent } from './profile-delete-account/profile-delete-account.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { ProfilePasswordComponent } from './profile-password/profile-password.co
     ProfileAvatarComponent,
     ProfileEmailComponent,
     ProfilePasswordComponent,
+    ProfileDeleteAccountComponent,
   ],
   imports: [
     SharedModule,

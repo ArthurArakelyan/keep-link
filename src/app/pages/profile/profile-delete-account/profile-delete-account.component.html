@@ -1,0 +1,21 @@
+<form class="profile-delete-account" [formGroup]="deleteAccountForm" (ngSubmit)="onSubmit()">
+  <app-input
+    placeholder="Password"
+    name="password"
+    inputId="password"
+    type="password"
+    formControlName="password"
+    placeholderBackgroundColor="var(--background-color)"
+    [showError]="deleteAccountForm.controls.password.invalid && submitted"
+    [error]="deleteAccountForm.controls.password.errors"
+  ></app-input>
+
+  <app-button
+    type="submit"
+    color="red"
+    [loading]="loading"
+    class="profile-delete-account__submit"
+  >
+    Delete Account
+  </app-button>
+</form>

@@ -124,3 +124,20 @@ export const editUserPasswordFulfilled = createAction(
 export const editUserPasswordRejected = createAction(
   '[User] Edit user password rejected',
 );
+
+export const deleteUser = createAction(
+  '[User] Delete user',
+  props<{
+    payload: {
+      password: string;
+    };
+  }>(),
+);
+
+export const deleteUserFulfilled = createAction(
+  '[User] Delete user fulfilled',
+);
+
+export const deleteUserRejected = createAction(
+  '[User] Delete user rejected',
+);

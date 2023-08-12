@@ -1,0 +1,14 @@
+@import "mixins";
+
+:host {
+  width: 100%;
+}
+
+.profile-delete-account {
+  width: 100%;
+  @include flex(column, flex-start, flex-start);
+}
+
+.profile-delete-account__submit {
+  margin-top: 2rem;
+}
