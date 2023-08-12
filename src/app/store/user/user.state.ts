@@ -6,5 +6,6 @@ export interface UserState {
     editUserName: boolean;
     editUserAvatar: boolean;
     deleteUserAvatar: boolean;
+    editUserEmail: boolean;
   };
 }

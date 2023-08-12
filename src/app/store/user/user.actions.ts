@@ -83,3 +83,26 @@ export const deleteUserAvatarFulfilled = createAction(
 export const deleteUserAvatarRejected = createAction(
   '[User] Delete user avatar rejected',
 );
+
+export const editUserEmail = createAction(
+  '[User] Edit user email',
+  props<{
+    payload: {
+      email: string;
+      password: string;
+    };
+  }>(),
+);
+
+export const editUserEmailFulfilled = createAction(
+  '[User] Edit user email fulfilled',
+  props<{
+    payload: {
+      email: string;
+    };
+  }>(),
+);
+
+export const editUserEmailRejected = createAction(
+  '[User] Edit user email rejected',
+);

@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProfileComponent } from './profile.component';
 import { ProfileNameComponent } from './profile-name/profile-name.component';
 import { ProfileAvatarComponent } from './profile-avatar/profile-avatar.component';
+import { ProfileEmailComponent } from './profile-email/profile-email.component';
 
 // Guards
 import { AuthGuard } from '../../core/guards/auth.guard';
@@ -23,6 +24,10 @@ const profileRoutes: Routes = [
       {
         path: 'avatar',
         component: ProfileAvatarComponent,
+      },
+      {
+        path: 'email',
+        component: ProfileEmailComponent,
       },
     ],
   },

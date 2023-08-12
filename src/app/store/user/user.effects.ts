@@ -6,6 +6,7 @@ import { catchError, of, switchMap, take, tap } from 'rxjs';
 
 // Services
 import { UserService } from '../../core/services/user.service';
+import { AuthService } from '../../core/services/auth.service';
 
 // Store
 import { AppStore } from '../app.reducer';
@@ -29,17 +30,20 @@ import {
   deleteUserAvatar,
   deleteUserAvatarFulfilled,
   deleteUserAvatarRejected,
+  editUserEmail,
+  editUserEmailFulfilled,
+  editUserEmailRejected,
 } from './user.actions';
 
 // Utilities
 import { deleteIdFromObject } from '../../core/utilities/delete-id-from-object';
+import { getSuccessActionMessage } from '../../core/utilities/get-success-action-message';
 
 // Constants
 import { authErrorMessage } from '../../core/constants/error-messages';
 
 // Models
 import { IUserWithoutId } from '../../core/models/user.model';
-import { getSuccessActionMessage } from '../../core/utilities/get-success-action-message';
 
 @Injectable()
 export class UserEffects {
@@ -216,9 +220,44 @@ export class UserEffects {
     }),
   ));
 
+  editUserEmail = createEffect(() => this.actions$.pipe(
+    ofType(editUserEmail),
+    switchMap(({ payload }) => {
+      return this.store.select(selectUser).pipe(
+        take(1),
+        switchMap(({ user }) => {
+          if (!user) {
+            this.toast.error(authErrorMessage);
+            return of(editUserEmailRejected());
+          }
+
+          return this.authService.login(user.email, payload.password).pipe(
+            switchMap(() => {
+              return this.authService.changeEmail(payload.email).pipe(
+                switchMap(() => {
+                  this.toast.success(getSuccessActionMessage('Email', 'updated'));
+                  return of(editUserEmailFulfilled({ payload: { email: payload.email } }));
+                }),
+                catchError((error) => {
+                  this.toast.error(error.message);
+                  return of(editUserEmailRejected());
+                }),
+              );
+            }),
+            catchError((error) => {
+              this.toast.error(error.message);
+              return of(editUserEmailRejected());
+            }),
+          );
+        }),
+      );
+    }),
+  ));
+
   constructor(
     private actions$: Actions,
     private userService: UserService,
+    private authService: AuthService,
     private toast: ToastrService,
     private store: Store<AppStore>,
   ) {}

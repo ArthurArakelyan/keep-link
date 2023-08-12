@@ -3,13 +3,15 @@ import { IFolder } from '../../models/folder.model';
 import { ISize } from '../../models/size.model';
 
 export const alignFolders = (folders: IFolder[], size: ISize): IFolder[][] => {
+  if (size._600) {
+    return [folders];
+  }
+
   const alignedFolders: IFolder[][] = [];
 
   let step: number;
 
-  if (size._600) {
-    return [folders];
-  } else if (size._1000) {
+  if (size._1000) {
     step = 2;
   } else {
     step = 3;

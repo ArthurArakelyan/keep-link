@@ -8,8 +8,13 @@ import {
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
   signOut,
+  updateEmail,
+  updatePassword,
 } from '@angular/fire/auth';
 import { from } from 'rxjs';
+
+// Constants
+import { authErrorMessage } from '../constants/error-messages';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -39,6 +44,26 @@ export class AuthService {
 
   sendEmailVerification(user: User) {
     return from(sendEmailVerification(user));
+  }
+
+  changePassword(password: string) {
+    if (!this.user) {
+      return from(new Promise((reject) => {
+        reject(authErrorMessage);
+      }));
+    }
+
+    return from(updatePassword(this.user, password));
+  }
+
+  changeEmail(email: string) {
+    if (!this.user) {
+      return from(new Promise((reject) => {
+        reject(authErrorMessage);
+      }));
+    }
+
+    return from(updateEmail(this.user, email));
   }
 
   get user() {

@@ -1,0 +1,33 @@
+<form class="profile-email" [formGroup]="emailForm" (ngSubmit)="onSubmit()">
+  <div class="profile-email__fields">
+    <app-input
+      placeholder="Email"
+      name="email"
+      inputId="email"
+      type="email"
+      formControlName="email"
+      placeholderBackgroundColor="var(--background-color)"
+      [showError]="emailForm.controls.email.invalid && submitted"
+      [error]="emailForm.controls.email.errors"
+    ></app-input>
+
+    <app-input
+      placeholder="Confirm Password"
+      name="password"
+      inputId="password"
+      type="password"
+      formControlName="password"
+      placeholderBackgroundColor="var(--background-color)"
+      [showError]="emailForm.controls.password.invalid && submitted"
+      [error]="emailForm.controls.password.errors"
+    ></app-input>
+  </div>
+
+  <app-button
+    type="submit"
+    [loading]="loading"
+    class="profile-email__submit"
+  >
+    Save
+  </app-button>
+</form>

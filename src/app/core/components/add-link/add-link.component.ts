@@ -194,7 +194,7 @@ export class AddLinkComponent implements OnInit, OnDestroy {
   onLinkSubmit() {
     this.submitted = true;
 
-    if (this.linkForm.invalid) {
+    if (this.linkForm.invalid || this.addLinkLoading || this.editLinkLoading) {
       return;
     }
 
@@ -230,7 +230,7 @@ export class AddLinkComponent implements OnInit, OnDestroy {
   onFolderSubmit() {
     this.submitted = true;
 
-    if (this.folderForm.invalid) {
+    if (this.folderForm.invalid || this.addFolderLoading || this.editFolderLoading) {
       return;
     }
 

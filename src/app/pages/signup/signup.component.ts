@@ -64,7 +64,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   onSubmit() {
     this.submitted = true;
 
-    if (this.signupForm.invalid) {
+    if (this.signupForm.invalid || this.loading) {
       return;
     }
 

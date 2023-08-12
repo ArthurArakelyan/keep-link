@@ -11,6 +11,7 @@ import { ProfileHeaderComponent } from './profile-header/profile-header.componen
 import { ProfileTabsComponent } from './profile-tabs/profile-tabs.component';
 import { ProfileNameComponent } from './profile-name/profile-name.component';
 import { ProfileAvatarComponent } from './profile-avatar/profile-avatar.component';
+import { ProfileEmailComponent } from './profile-email/profile-email.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { ProfileAvatarComponent } from './profile-avatar/profile-avatar.componen
     ProfileTabsComponent,
     ProfileNameComponent,
     ProfileAvatarComponent,
+    ProfileEmailComponent,
   ],
   imports: [
     SharedModule,
