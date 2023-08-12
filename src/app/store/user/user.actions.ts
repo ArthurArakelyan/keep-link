@@ -106,3 +106,21 @@ export const editUserEmailFulfilled = createAction(
 export const editUserEmailRejected = createAction(
   '[User] Edit user email rejected',
 );
+
+export const editUserPassword = createAction(
+  '[User] Edit user password',
+  props<{
+    payload: {
+      oldPassword: string;
+      password: string;
+    };
+  }>(),
+);
+
+export const editUserPasswordFulfilled = createAction(
+  '[User] Edit user password fulfilled',
+);
+
+export const editUserPasswordRejected = createAction(
+  '[User] Edit user password rejected',
+);

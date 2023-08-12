@@ -17,6 +17,9 @@ import {
   editUserEmail,
   editUserEmailFulfilled,
   editUserEmailRejected,
+  editUserPassword,
+  editUserPasswordFulfilled,
+  editUserPasswordRejected,
 } from './user.actions';
 import { logout } from '../auth';
 
@@ -30,6 +33,7 @@ export const initialState: UserState = {
     editUserAvatar: false,
     deleteUserAvatar: false,
     editUserEmail: false,
+    editUserPassword: false,
   },
 };
 
@@ -174,6 +178,24 @@ export const userReducer = createReducer(
       loading: {
         ...state.loading,
         editUserEmail: false,
+      },
+    };
+  }),
+  on(editUserPassword, (state) => {
+    return {
+      ...state,
+      loading: {
+        ...state.loading,
+        editUserPassword: true,
+      },
+    };
+  }),
+  on(editUserPasswordFulfilled, editUserPasswordRejected, (state) => {
+    return {
+      ...state,
+      loading: {
+        ...state.loading,
+        editUserPassword: false,
       },
     };
   }),

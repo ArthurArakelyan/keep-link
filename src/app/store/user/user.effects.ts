@@ -33,14 +33,19 @@ import {
   editUserEmail,
   editUserEmailFulfilled,
   editUserEmailRejected,
+  editUserPassword,
+  editUserPasswordFulfilled,
+  editUserPasswordRejected,
 } from './user.actions';
 
 // Utilities
 import { deleteIdFromObject } from '../../core/utilities/delete-id-from-object';
 import { getSuccessActionMessage } from '../../core/utilities/get-success-action-message';
+import { getFirebaseError } from '../../core/utilities/get-firebase-error';
 
 // Constants
 import { authErrorMessage } from '../../core/constants/error-messages';
+import { authErrors } from '../../core/constants/auth-errors';
 
 // Models
 import { IUserWithoutId } from '../../core/models/user.model';
@@ -239,14 +244,48 @@ export class UserEffects {
                   return of(editUserEmailFulfilled({ payload: { email: payload.email } }));
                 }),
                 catchError((error) => {
-                  this.toast.error(error.message);
+                  this.toast.error(getFirebaseError(error.toString(), authErrors));
                   return of(editUserEmailRejected());
                 }),
               );
             }),
             catchError((error) => {
-              this.toast.error(error.message);
+              this.toast.error(getFirebaseError(error.toString(), authErrors));
               return of(editUserEmailRejected());
+            }),
+          );
+        }),
+      );
+    }),
+  ));
+
+  editUserPassword = createEffect(() => this.actions$.pipe(
+    ofType(editUserPassword),
+    switchMap(({ payload }) => {
+      return this.store.select(selectUser).pipe(
+        take(1),
+        switchMap(({ user }) => {
+          if (!user) {
+            this.toast.error(authErrorMessage);
+            return of(editUserPasswordRejected());
+          }
+
+          return this.authService.login(user.email, payload.oldPassword).pipe(
+            switchMap(() => {
+              return this.authService.changePassword(payload.password).pipe(
+                switchMap(() => {
+                  this.toast.success(getSuccessActionMessage('Password', 'updated'));
+                  return of(editUserPasswordFulfilled());
+                }),
+                catchError((error) => {
+                  this.toast.error(getFirebaseError(error.toString(), authErrors));
+                  return of(editUserPasswordRejected());
+                }),
+              );
+            }),
+            catchError((error) => {
+              this.toast.error(getFirebaseError(error.toString(), authErrors));
+              return of(editUserPasswordRejected());
             }),
           );
         }),

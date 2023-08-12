@@ -6,6 +6,7 @@ import { ProfileComponent } from './profile.component';
 import { ProfileNameComponent } from './profile-name/profile-name.component';
 import { ProfileAvatarComponent } from './profile-avatar/profile-avatar.component';
 import { ProfileEmailComponent } from './profile-email/profile-email.component';
+import { ProfilePasswordComponent } from './profile-password/profile-password.component';
 
 // Guards
 import { AuthGuard } from '../../core/guards/auth.guard';
@@ -28,6 +29,10 @@ const profileRoutes: Routes = [
       {
         path: 'email',
         component: ProfileEmailComponent,
+      },
+      {
+        path: 'password',
+        component: ProfilePasswordComponent,
       },
     ],
   },
