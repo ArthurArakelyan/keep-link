@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
@@ -15,7 +15,7 @@ import { MIN_VALIDATION_LENGTHS, VALIDATION_LENGTHS } from '../../../core/consta
   templateUrl: 'profile-delete-account.component.html',
   styleUrls: ['profile-delete-account.component.scss'],
 })
-export class ProfileDeleteAccountComponent {
+export class ProfileDeleteAccountComponent implements OnInit, OnDestroy {
   submitted: boolean = false;
   loading: boolean = false;
 

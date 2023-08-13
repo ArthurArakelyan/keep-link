@@ -4,7 +4,7 @@ import { copyObject } from '../copy-object';
 // Models
 import { IOptionalId } from '../../models/id.model';
 
-export const deleteIdFromObject = <T extends {}>(object: T): T => {
+export const deleteIdFromObject = <T>(object: T): T => {
   try {
     const objectCopy = copyObject<T>(object);
 

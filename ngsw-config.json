@@ -14,7 +14,7 @@
           "/*.js"
         ],
         "urls": [
-          "https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&amp;display=swap",
+          "https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&amp;display=swap",
           "https://fonts.gstatic.com/s/**"
         ]
       }

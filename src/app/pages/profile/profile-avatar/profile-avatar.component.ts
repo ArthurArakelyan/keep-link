@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -27,7 +27,7 @@ import { IUser } from '../../../core/models/user.model';
   styleUrls: ['profile-avatar.component.scss'],
   animations: [modalTranslateAnimation],
 })
-export class ProfileAvatarComponent {
+export class ProfileAvatarComponent implements OnInit, OnDestroy {
   user: IUser | null = null;
   isDeleteAvatarOpen: boolean = false;
   uploadLoading: boolean = false;
