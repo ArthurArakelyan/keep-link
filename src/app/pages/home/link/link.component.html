@@ -8,7 +8,11 @@
   [href]="link.link"
   (click)="onLinkClick($event)"
 >
-  <div *ngIf="link.image && !imageError; else defaultIcon" class="link__image-wrapper">
+  <div
+    *ngIf="link.image && !imageError; else defaultIcon"
+    [ngClass]="imageWrapperClass"
+    class="link__image-wrapper"
+  >
     <img
       [src]="link.image"
       [alt]="link.name"

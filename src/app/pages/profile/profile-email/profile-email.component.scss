@@ -1,0 +1,20 @@
+@import "mixins";
+
+:host {
+  width: 100%;
+}
+
+.profile-email {
+  width: 100%;
+  @include flex(column, flex-start, flex-start);
+}
+
+.profile-email__fields {
+  width: 100%;
+  row-gap: 2rem;
+  @include flex(column, flex-start, flex-start);
+}
+
+.profile-email__submit {
+  margin-top: 2rem;
+}

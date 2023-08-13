@@ -1,0 +1,57 @@
+@import "mixins";
+@import "scss-variables";
+
+:host {
+  width: 40%;
+}
+
+.profile-tabs {
+  width: 100%;
+  row-gap: 0.3rem;
+  @include flex(column, flex-start, flex-start);
+}
+
+.profile-tab {
+  width: 100%;
+}
+
+.profile-tab__link {
+  width: 100%;
+  padding: 1rem;
+  transform: translateX(-0.5rem);
+  border-radius: 0.25rem;
+  @include flex(row, center, flex-start);
+  @include font(1.125rem, 400, var(--primary-text-color));
+  transition: background-color .2s ease;
+
+  &--red {
+    color: $error-color;
+  }
+
+  &.active {
+    background-color: var(--white-background-highlited);
+    font-weight: 500;
+
+    @include hover() {
+      background-color: var(--white-background-highlited-hover);
+    }
+
+    @include active() {
+      background-color: var(--white-background-highlited-active);
+    }
+  }
+
+  @include hover() {
+    background-color: var(--white-background-hover);
+  }
+
+  @include active() {
+    background-color: var(--white-background-active);
+  }
+}
+
+@media (max-width: 768px) {
+  :host {
+    width: 100%;
+  }
+}

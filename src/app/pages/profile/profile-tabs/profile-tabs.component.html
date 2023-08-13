@@ -1,0 +1,15 @@
+<ul class="profile-tabs">
+  <li
+    *ngFor="let profileTab of profileTabs"
+    class="profile-tab"
+  >
+    <a
+      [routerLink]="profileTab.link"
+      [ngClass]="{ 'profile-tab__link--red': profileTab.red }"
+      routerLinkActive="active"
+      class="profile-tab__link"
+    >
+      {{ profileTab.label }}
+    </a>
+  </li>
+</ul>

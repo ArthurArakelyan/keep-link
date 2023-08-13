@@ -16,6 +16,7 @@ import {
   deleteFolderRejected,
 } from './folder.actions';
 import { logout } from '../auth';
+import { deleteUserFulfilled } from '../user';
 
 // Types
 import { FolderState } from './folder.state';
@@ -136,7 +137,7 @@ export const folderReducer = createReducer(
       },
     };
   }),
-  on(logout, () => {
+  on(logout, deleteUserFulfilled, () => {
     return initialState;
   }),
 );

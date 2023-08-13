@@ -29,3 +29,115 @@ export const addUserFulfilled = createAction(
 export const addUserRejected = createAction(
   '[User] Add user rejected',
 );
+
+export const editUserName = createAction(
+  '[User] Edit user name',
+  props<{
+    payload: {
+      name: string;
+    };
+  }>(),
+);
+
+export const editUserNameFulfilled = createAction(
+  '[User] Edit user name fulfilled',
+  props<{
+    payload: {
+      name: string;
+    };
+  }>(),
+);
+
+export const editUserNameRejected = createAction(
+  '[User] Edit user name rejected',
+);
+
+export const editUserAvatar = createAction(
+  '[User] Edit user avatar',
+  props<{
+    payload: File;
+  }>(),
+);
+
+export const editUserAvatarFulfilled = createAction(
+  '[User] Edit user avatar fulfilled',
+  props<{
+    payload: {
+      avatar: string;
+    };
+  }>(),
+);
+
+export const editUserAvatarRejected = createAction(
+  '[User] Edit user avatar rejected',
+);
+
+export const deleteUserAvatar = createAction(
+  '[User] Delete user avatar',
+);
+
+export const deleteUserAvatarFulfilled = createAction(
+  '[User] Delete user avatar fulfilled',
+);
+
+export const deleteUserAvatarRejected = createAction(
+  '[User] Delete user avatar rejected',
+);
+
+export const editUserEmail = createAction(
+  '[User] Edit user email',
+  props<{
+    payload: {
+      email: string;
+      password: string;
+    };
+  }>(),
+);
+
+export const editUserEmailFulfilled = createAction(
+  '[User] Edit user email fulfilled',
+  props<{
+    payload: {
+      email: string;
+    };
+  }>(),
+);
+
+export const editUserEmailRejected = createAction(
+  '[User] Edit user email rejected',
+);
+
+export const editUserPassword = createAction(
+  '[User] Edit user password',
+  props<{
+    payload: {
+      oldPassword: string;
+      password: string;
+    };
+  }>(),
+);
+
+export const editUserPasswordFulfilled = createAction(
+  '[User] Edit user password fulfilled',
+);
+
+export const editUserPasswordRejected = createAction(
+  '[User] Edit user password rejected',
+);
+
+export const deleteUser = createAction(
+  '[User] Delete user',
+  props<{
+    payload: {
+      password: string;
+    };
+  }>(),
+);
+
+export const deleteUserFulfilled = createAction(
+  '[User] Delete user fulfilled',
+);
+
+export const deleteUserRejected = createAction(
+  '[User] Delete user rejected',
+);

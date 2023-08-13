@@ -1,0 +1,67 @@
+<div
+  *ngIf="user"
+  class="profile-avatar"
+>
+  <div class="profile-avatar__actions">
+    <app-button
+      [loading]="uploadLoading"
+      class="profile-avatar__actions-button"
+      buttonClass="profile-avatar__actions-button-button"
+      (buttonClick)="onUploadClick()"
+    >
+      <input
+        type="file"
+        aria-hidden="true"
+        tabindex="-1"
+        class="profile-avatar__actions-file"
+        (change)="onUpload($event)"
+        #fileInput
+      />
+
+      <app-upload-icon
+        iconClass="profile-avatar__actions-upload-icon"
+      ></app-upload-icon>
+
+      <span>
+        Upload Avatar
+      </span>
+    </app-button>
+
+    <app-button
+      *ngIf="user.avatar"
+      color="red"
+      class="profile-avatar__actions-button"
+      buttonClass="profile-avatar__actions-button-button"
+      (buttonClick)="onDelete()"
+    >
+      <app-close-icon
+        iconClass="profile-avatar__actions-delete-icon"
+      ></app-close-icon>
+
+      <span>
+        Delete Avatar
+      </span>
+    </app-button>
+  </div>
+
+  <div class="profile-avatar__image-wrapper">
+    <app-avatar
+      [src]="user.avatar"
+      [alt]="user.name"
+      [name]="user.name"
+      width="200"
+      height="200"
+      class="profile-avatar__image"
+    ></app-avatar>
+  </div>
+</div>
+
+<app-confirm-modal
+  *ngIf="isDeleteAvatarOpen"
+  [@modalTranslate]
+  [loading]="deleteLoading"
+  (confirmModalSubmit)="onDeleteSubmit()"
+  (confirmModalClose)="onDeleteCancel()"
+>
+  Are you sure? Do you want to delete your avatar?
+</app-confirm-modal>

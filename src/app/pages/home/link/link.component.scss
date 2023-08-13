@@ -78,3 +78,23 @@
   height: 1.5rem;
   right: 0;
 }
+
+@media (max-width: 768px) {
+  :host::ng-deep {
+    .link__icon {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+  }
+
+  .link {
+    max-height: 4rem;
+  }
+  .link__image-wrapper, .link__icon-wrapper {
+    width: 4rem;
+    height: 4rem;
+  }
+  .link__info-link {
+    margin-top: 0.15rem;
+  }
+}

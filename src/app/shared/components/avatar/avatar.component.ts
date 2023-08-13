@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 
 // Utilities
 import { stringToColor } from '../../../core/utilities/string-to-color';
@@ -8,7 +8,7 @@ import { stringToColor } from '../../../core/utilities/string-to-color';
   templateUrl: 'avatar.component.html',
   styleUrls: ['avatar.component.scss'],
 })
-export class AvatarComponent implements OnInit {
+export class AvatarComponent implements OnInit, OnChanges {
   avatarSrc: string = '';
 
   @Input({ required: true }) name: string = '';
@@ -35,6 +35,16 @@ export class AvatarComponent implements OnInit {
 
   ngOnInit() {
     if (!this.src.trim()) {
+      this.avatarSrc = '';
+    } else {
+      this.avatarSrc = this.src;
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    const src = changes['src'].currentValue;
+
+    if (!src.trim()) {
       this.avatarSrc = '';
     } else {
       this.avatarSrc = this.src;

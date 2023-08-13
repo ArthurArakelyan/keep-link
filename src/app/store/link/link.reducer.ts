@@ -16,6 +16,7 @@ import {
   deleteLinkRejected,
 } from './link.actions';
 import { logout } from '../auth';
+import { deleteUserFulfilled } from '../user';
 
 // Types
 import { LinkState } from './link.state';
@@ -136,7 +137,7 @@ export const linkReducer = createReducer(
       },
     };
   }),
-  on(logout, () => {
+  on(logout, deleteUserFulfilled, () => {
     return initialState;
   }),
 );

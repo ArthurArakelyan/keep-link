@@ -14,6 +14,7 @@ import {
   forgotPasswordRejected,
   logout,
 } from './auth.actions';
+import { deleteUserFulfilled } from '../user/user.actions';
 
 // Types
 import { AuthState } from './auth.state';
@@ -116,7 +117,7 @@ export const authReducer = createReducer(
       },
     };
   }),
-  on(logout, () => {
+  on(logout, deleteUserFulfilled, () => {
     return initialState;
   }),
 );

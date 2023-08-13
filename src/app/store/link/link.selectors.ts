@@ -5,6 +5,13 @@ import { AppStore } from '../app.reducer';
 
 export const selectLink = (state: AppStore) => state.link;
 
+export const selectLinks = createSelector(
+  selectLink,
+  (state) => {
+    return state.list;
+  },
+);
+
 export const selectLinksWithoutFolder = createSelector(
   selectLink,
   (state) => {
