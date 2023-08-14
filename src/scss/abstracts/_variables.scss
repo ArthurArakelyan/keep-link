@@ -1,3 +1,4 @@
+// Support for light theme mode
 :root {
   --card-color: #ffffff;
   --primary-text-color: #081e3b;
@@ -33,6 +34,7 @@
   --fab-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
 }
 
+// Support for dark theme mode
 .dark {
   --card-color: #232323;
   --primary-text-color: #f0f0f0;
@@ -69,33 +71,37 @@
 }
 
 // Support for high-contrast mode
-@media (prefers-contrast: more) {
-  .dark {
-    --card-color: #0a0a0a;
-    --primary-text-color: #ffffff;
-    --input-border-color: #ffffff;
-    --theme-button-color: #ffffff;
-    --secondary-text-color: #f0f0f0;
+.dark-high-contrast {
+  --card-color: #0a0a0a;
+  --primary-text-color: #ffffff;
+  --input-border-color: #ffffff;
+  --theme-button-color: #ffffff;
+  --secondary-text-color: #f0f0f0;
+  --input-border-focus-color: #478dfe;
 
-    // backgrounds
-    --background-color: #000000;
-    --header-footer-background-color: #0f0f0f;
-    --input-background-color: #111111;
+  // backgrounds
+  --background-color: #000000;
+  --header-footer-background-color: #0f0f0f;
+  --input-background-color: #111111;
 
-    // main colors
-    --gray: #dcdcdc;
-    --gray-100: #dcdcdc1a;
+  // main colors
+  --white: #000000;
+  --black: #ffffff;
+  --link: #bdbdbf;
+  --gray: #dcdcdc;
+  --gray-100: #dcdcdc1a;
 
-    --white-background-hover: rgba(255, 255, 255, 0.03);
-    --white-background-active: rgba(255, 255, 255, 0.045);
-    --white-background-highlited: rgba(255, 255, 255, 0.055);
-    --white-background-highlited-hover: rgba(255, 255, 255, 0.065);
-    --white-background-highlited-active: rgba(255, 255, 255, 0.08);
+  --separator-border-color: rgba(255, 255, 255, 0.2);
 
-    // shadows
-    --shadow-sm-color: rgba(110, 110, 110, 0.1);
-    --shadow-md-color: rgba(110, 110, 110, 0.2);
-    --shadow-lg-color: rgba(110, 110, 110, 0.3);
-    --fab-shadow: 0px 3px 5px -1px rgba(110, 110, 110, 0.2), 0px 6px 10px 0px rgba(110, 110, 110, 0.14), 0px 1px 18px 0px rgba(110, 110, 110, 0.12);
-  }
+  --white-background-hover: rgba(255, 255, 255, 0.03);
+  --white-background-active: rgba(255, 255, 255, 0.045);
+  --white-background-highlited: rgba(255, 255, 255, 0.055);
+  --white-background-highlited-hover: rgba(255, 255, 255, 0.065);
+  --white-background-highlited-active: rgba(255, 255, 255, 0.08);
+
+  // shadows
+  --shadow-sm-color: rgba(110, 110, 110, 0.1);
+  --shadow-md-color: rgba(110, 110, 110, 0.2);
+  --shadow-lg-color: rgba(110, 110, 110, 0.3);
+  --fab-shadow: 0px 3px 5px -1px rgba(110, 110, 110, 0.2), 0px 6px 10px 0px rgba(110, 110, 110, 0.14), 0px 1px 18px 0px rgba(110, 110, 110, 0.12);
 }

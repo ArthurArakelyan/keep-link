@@ -1,0 +1,60 @@
+<button
+  role="radio"
+  [attr.aria-checked]="theme.theme === currentTheme"
+  [attr.aria-label]="theme.name"
+  [ngClass]="{ 'settings-theme--active': theme.theme === currentTheme }"
+  class="settings-theme"
+  (click)="onThemeClick()"
+>
+  <div class="settings-theme__preview-wrapper">
+    <div
+      aria-hidden="true"
+      [ngStyle]="{ backgroundColor: theme.backgroundColor }"
+      [ngClass]="{ 'settings-theme__preview--first': theme.second }"
+      class="settings-theme__preview"
+    >
+      <div
+        [ngStyle]="{ backgroundColor: theme.textColor }"
+        class="settings-theme__preview-text"
+      ></div>
+
+      <div
+        [ngStyle]="{ backgroundColor: theme.textColor }"
+        class="settings-theme__preview-text"
+      ></div>
+
+      <div
+        [ngStyle]="{ backgroundColor: theme.textColor }"
+        class="settings-theme__preview-text"
+      ></div>
+    </div>
+
+    <div
+      *ngIf="theme.second"
+      aria-hidden="true"
+      [ngStyle]="{ backgroundColor: theme.second.backgroundColor }"
+      class="settings-theme__preview settings-theme__preview--second"
+    >
+      <div
+        [ngStyle]="{ backgroundColor: theme.second.textColor }"
+        class="settings-theme__preview-text"
+      ></div>
+
+      <div
+        [ngStyle]="{ backgroundColor: theme.second.textColor }"
+        class="settings-theme__preview-text"
+      ></div>
+
+      <div
+        [ngStyle]="{ backgroundColor: theme.second.textColor }"
+        class="settings-theme__preview-text"
+      ></div>
+    </div>
+  </div>
+
+  <div class="settings-theme__name-wrapper">
+    <span class="settings-theme__name">
+      {{ theme.name }}
+    </span>
+  </div>
+</button>

@@ -1,0 +1,6 @@
+@import "mixins";
+
+:host {
+  width: 100%;
+  @include flex(column, flex-start, flex-start);
+}

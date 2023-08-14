@@ -1,0 +1,10 @@
+<h2 class="settings-themes-title">
+  Theme preferences
+</h2>
+
+<div class="settings-themes-list">
+  <app-settings-theme
+    *ngFor="let theme of themes"
+    [theme]="theme"
+  ></app-settings-theme>
+</div>
