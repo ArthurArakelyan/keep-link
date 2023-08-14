@@ -5,20 +5,26 @@ import { Subscription, take } from 'rxjs';
 
 // Store
 import { AppStore } from './store/app.reducer';
-import { ThemeState, changeTheme, selectTheme, initialState as themeInitialState } from './store/theme';
+import {
+  ThemeState,
+  selectTheme,
+  initialState as themeInitialState,
+  changePreferredTheme,
+  changePreferredContrast,
+} from './store/theme';
 import { AuthState, changeAuth, selectAuth, initialState as authInitialState } from './store/auth';
 
 // Services
 import { AuthService } from './core/services/auth.service';
 import { SizeService } from './core/services/size.service';
+import { ThemeService } from './core/services/theme.service';
 
 // Utilities
 import { addColorSchemeGlobalStyle } from './core/utilities/add-color-scheme-global-style';
-import { getPreferredTheme } from './core/utilities/get-preferred-theme';
 import { getStoreSync } from './core/utilities/get-store-sync';
 
 // Models
-import { ThemeType } from './core/models/theme.model';
+import { ColorSchemeType, ThemeType } from './core/models/theme.model';
 
 @Component({
   selector: 'app-root',
@@ -28,19 +34,25 @@ import { ThemeType } from './core/models/theme.model';
 export class AppComponent implements OnInit, OnDestroy {
   isAuth: boolean = getStoreSync<AuthState>('auth', authInitialState).isAuth;
   theme: ThemeType = getStoreSync<ThemeState>('theme', themeInitialState).theme;
+  preferredTheme: ColorSchemeType = getStoreSync<ThemeState>('theme', themeInitialState).preferredTheme;
+  preferredContrast: boolean = getStoreSync<ThemeState>('theme', themeInitialState).preferredContrast;
 
   private authSubscription: Subscription | undefined;
   private themeSubscription: Subscription | undefined;
+  private colorSchemeSubscription: Subscription | undefined;
+  private contrastSubscription: Subscription | undefined;
   private authChangedSubscription: (() => void) | undefined;
 
-  @HostBinding('class.light') get classLight() { return this.theme === 'light'; }
-  @HostBinding('class.dark') get classDark() { return this.theme === 'dark'; }
+  @HostBinding('class.light') get classLight() { return this.theme === 'default' ? this.preferredTheme === 'light' : this.theme === 'light'; }
+  @HostBinding('class.dark') get classDark() { return this.theme === 'default' ? this.preferredTheme === 'dark' : this.theme === 'dark'; }
+  @HostBinding('class.dark-high-contrast') get classDarkHighContrast() { return this.theme === 'default' ? (this.preferredTheme === 'dark' && this.preferredContrast) : this.theme === 'darkHighContrast'; }
 
   constructor(
     private store: Store<AppStore>,
     private router: Router,
     private authService: AuthService,
     private sizeService: SizeService,
+    private themeService: ThemeService,
   ) {}
 
   ngOnInit() {
@@ -48,18 +60,26 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.subscribeToTheme();
 
+    this.subscribeToPreferredTheme();
+
     this.subscribeToAuthChanged();
 
     this.sizeService.addListener();
+
+    this.themeService.addListener();
   }
 
   ngOnDestroy() {
     this.authSubscription?.unsubscribe();
     this.themeSubscription?.unsubscribe();
+    this.colorSchemeSubscription?.unsubscribe();
+    this.contrastSubscription?.unsubscribe();
 
     this.authChangedSubscription?.();
 
     this.sizeService.deleteListener();
+
+    this.themeService.deleteListener();
   }
 
   private subscribeToAuth() {
@@ -70,17 +90,21 @@ export class AppComponent implements OnInit, OnDestroy {
 
   private subscribeToTheme() {
     this.themeSubscription = this.store.select(selectTheme).subscribe((themeState) => {
-      const theme = themeState.theme;
+      this.theme = themeState.theme;
+      this.preferredTheme = themeState.preferredTheme;
+      this.preferredContrast = themeState.preferredContrast;
 
-      this.theme = theme;
+      addColorSchemeGlobalStyle(themeState.theme, themeState.preferredTheme);
+    });
+  }
 
-      addColorSchemeGlobalStyle(theme);
+  private subscribeToPreferredTheme() {
+    this.colorSchemeSubscription = this.themeService.colorScheme$.subscribe((colorScheme) => {
+      this.store.dispatch(changePreferredTheme({ payload: colorScheme }));
+    });
 
-      const preferredTheme = getPreferredTheme();
-
-      if (theme !== preferredTheme) {
-        this.store.dispatch(changeTheme({ payload: preferredTheme }));
-      }
+    this.contrastSubscription = this.themeService.contrast$.subscribe((contrast) => {
+      this.store.dispatch(changePreferredContrast({ payload: contrast }));
     });
   }
 

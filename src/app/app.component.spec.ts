@@ -49,7 +49,7 @@ describe('AppComponent', () => {
   it('should have a class with theme', () => {
     store.select(fromTheme.selectTheme)
       .subscribe((themeState) => {
-        expect(compiled.className.includes(themeState.theme)).toBeTrue();
+        expect(compiled.className.includes(themeState.preferredTheme)).toBeTrue();
       });
   });
 
