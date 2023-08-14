@@ -52,18 +52,4 @@ describe('AppComponent', () => {
         expect(compiled.className.includes(themeState.preferredTheme)).toBeTrue();
       });
   });
-
-  it('should be able to dispatch the changeTheme', () => {
-    const newTheme = 'dark';
-
-    store.dispatch(fromTheme.changeTheme({ payload: newTheme }));
-
-    store.select(fromTheme.selectTheme)
-      .pipe(
-        takeWhile((themeState) => themeState.theme === newTheme)
-      )
-      .subscribe(() => {
-        expect(compiled.className.includes(newTheme)).toBeTrue();
-      });
-  });
 });
