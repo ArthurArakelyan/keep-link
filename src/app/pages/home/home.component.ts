@@ -63,7 +63,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       {
         relativeTo: this.route,
         queryParamsHandling: 'merge',
-        replaceUrl: true,
         queryParams: {
           addLink: '',
         },
