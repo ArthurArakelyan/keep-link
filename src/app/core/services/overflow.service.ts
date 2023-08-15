@@ -24,16 +24,16 @@ export class OverflowService {
     } catch (e) {
       console.error(e);
     }
-  };
+  }
 
   private showOverflow() {
     document.body.style.paddingRight = '';
     document.body.style.overflow = '';
     this.overflowHidden$.next(false);
-  };
+  }
 
   private hideOverflow() {
     document.body.style.overflow = 'hidden';
     this.overflowHidden$.next(true);
-  };
+  }
 }
