@@ -8,6 +8,9 @@ import {
   Output,
 } from '@angular/core';
 
+// Services
+import { OverflowService } from '../../../core/services/overflow.service';
+
 // Constants
 import { keys } from '../../../core/constants/keys';
 
@@ -31,21 +34,29 @@ export class ModalComponent implements OnInit, OnDestroy {
     }
   }
 
+  constructor(
+    private overflowService: OverflowService,
+  ) {}
+
   ngOnInit() {
-    document.body.style.overflow = 'hidden';
+    this.overflowService.toggleOverflow(false);
 
      this.hideScrollTimeout = setTimeout(() => {
-      document.body.style.overflow = 'hidden';
+       this.overflowService.toggleOverflow(false);
 
        this.hideScrollTimeout = setTimeout(() => {
-         document.body.style.overflow = 'hidden';
+         this.overflowService.toggleOverflow(false);
        }, 100);
     }, 200);
   }
 
   ngOnDestroy() {
+    if (this.hideScrollTimeout) {
+      clearTimeout(this.hideScrollTimeout);
+    }
+
     setTimeout(() => {
-      document.body.style.overflow = '';
+      this.overflowService.toggleOverflow(true);
     }, 200);
   }
 

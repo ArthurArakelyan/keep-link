@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 
 // Services
 import { SideMenuService } from '../../services/side-menu.service';
+import { OverflowService } from '../../services/overflow.service';
 
 // Animations
 import { sideMenuSlideAnimation } from '../../animations/side-menu-slide.animation';
@@ -33,13 +34,14 @@ export class SideMenuResponsiveComponent implements OnInit, OnDestroy {
 
   constructor(
     private sideMenuService: SideMenuService,
+    private overflowService: OverflowService,
   ) {}
 
   ngOnInit() {
     this.sideMenuServiceSubscription = this.sideMenuService.open$.subscribe((isOpen) => {
       this.open = isOpen;
 
-      this.toggleOverlay(isOpen);
+      this.overflowService.toggleOverflow(!isOpen);
     });
 
     document.addEventListener('touchstart', this.onTouchStart);
@@ -64,16 +66,6 @@ export class SideMenuResponsiveComponent implements OnInit, OnDestroy {
       if (this.touchStart - 90 > this.touchEnd) {
         this.sideMenuService.close();
       }
-    }
-  }
-
-  private toggleOverlay(open: boolean) {
-    if (open) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      setTimeout(() => {
-        document.body.style.overflow = '';
-      }, 300);
     }
   }
 }
