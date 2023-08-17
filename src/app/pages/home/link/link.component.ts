@@ -5,6 +5,9 @@ import { Subscription } from 'rxjs';
 // Utilities
 import { copy } from '../../../core/utilities/copy';
 
+// Animations
+import { linkHighlight } from '../../../core/animations/link-highlight.animation';
+
 // Models
 import { ILink } from '../../../core/models/link.model';
 import { IDropdownOption } from '../../../core/models/dropdown-option.model';
@@ -13,6 +16,7 @@ import { IDropdownOption } from '../../../core/models/dropdown-option.model';
   selector: 'app-link',
   templateUrl: 'link.component.html',
   styleUrls: ['link.component.scss'],
+  animations: [linkHighlight],
 })
 export class LinkComponent implements OnInit, OnDestroy {
   imageError: boolean = false;
@@ -47,8 +51,6 @@ export class LinkComponent implements OnInit, OnDestroy {
 
   @Output() edit = new EventEmitter<string>();
   @Output() delete = new EventEmitter<string>();
-
-  @HostBinding('class.highlight') get classHighlight() { return this.linkHighlight; }
 
   get id() {
     return `link-${this.link.id}`;

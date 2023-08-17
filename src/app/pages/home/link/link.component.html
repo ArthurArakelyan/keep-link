@@ -52,3 +52,10 @@
     iconClass="link__info-action-icon"
   ></app-menu-icon>
 </app-dropdown>
+
+<div
+  *ngIf="linkHighlight"
+  [@linkHighlight]
+  aria-hidden="true"
+  class="link__highlight"
+></div>
