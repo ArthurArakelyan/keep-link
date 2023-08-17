@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Modules
 import { SharedModule } from '../../../shared/shared.module';
@@ -38,7 +39,7 @@ describe('LinkComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [LinkComponent, ShortLinkPipe],
-      imports: [SharedModule, RouterTestingModule],
+      imports: [SharedModule, RouterTestingModule, BrowserAnimationsModule],
     });
 
     fixture = TestBed.createComponent(LinkComponent);
