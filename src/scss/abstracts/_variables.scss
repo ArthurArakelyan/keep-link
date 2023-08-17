@@ -20,6 +20,7 @@
   --gray-100: #76767619;
 
   --separator-border-color: rgba(0, 0, 0, .12);
+  --highlight-color: rgba(0, 0, 0, 0.1);
 
   --white-background-hover: rgba(0, 0, 0, 0.03);
   --white-background-active: rgba(0, 0, 0, 0.045);
@@ -56,6 +57,7 @@
   --gray-100: #c8c8c819;
 
   --separator-border-color: rgba(255, 255, 255, 0.2);
+  --highlight-color: rgba(255, 255, 255, 0.15);
 
   --white-background-hover: rgba(255, 255, 255, 0.03);
   --white-background-active: rgba(255, 255, 255, 0.045);
@@ -72,7 +74,7 @@
 
 // Support for high-contrast mode
 .dark-high-contrast {
-  --card-color: #0a0a0a;
+  --card-color: #0d0d0d;
   --primary-text-color: #ffffff;
   --input-border-color: #ffffff;
   --theme-button-color: #ffffff;
@@ -92,6 +94,7 @@
   --gray-100: #dcdcdc1a;
 
   --separator-border-color: rgba(255, 255, 255, 0.2);
+  --highlight-color: rgba(255, 255, 255, 0.15);
 
   --white-background-hover: rgba(255, 255, 255, 0.03);
   --white-background-active: rgba(255, 255, 255, 0.045);

@@ -2,8 +2,22 @@
 
 :host {
   position: relative;
+  z-index: $component-z-index;
   width: 100%;
   @include flex(row, center, center);
+
+  &::after {
+    content: "";
+    position: absolute;
+    z-index: $negative-z-index;
+    background-color: transparent;
+    border-radius: inherit;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    transition: background-color .3s ease;
+  }
 }
 
 :host::ng-deep {
@@ -19,6 +33,12 @@
     path {
       fill: var(--primary-text-color);
     }
+  }
+}
+
+:host(.highlight) {
+  &::after {
+    background-color: var(--highlight-color);
   }
 }
 

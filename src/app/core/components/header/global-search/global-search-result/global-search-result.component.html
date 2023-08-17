@@ -1,0 +1,24 @@
+<button
+  class="global-search-result"
+  (click)="onClick()"
+>
+  <ng-container [ngSwitch]="searchResult.type">
+    <app-folder-icon *ngSwitchCase="'folder'" iconClass="global-search-result__icon"></app-folder-icon>
+    <app-link-icon *ngSwitchCase="'link'" iconClass="global-search-result__icon"></app-link-icon>
+  </ng-container>
+
+  <p class="global-search-result__name">
+    {{ searchResult.name }}
+  </p>
+</button>
+
+<div
+  *ngIf="searchResult.results?.length"
+  class="global-search-result__results"
+>
+  <app-global-search-result
+    *ngFor="let result of searchResult.results"
+    [searchResult]="result"
+    (clearSearch)="onClearSearch()"
+  ></app-global-search-result>
+</div>

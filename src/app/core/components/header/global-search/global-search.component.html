@@ -1,0 +1,12 @@
+<ng-container *ngIf="searchResults.length; else emptyResults">
+  <app-global-search-result
+    *ngFor="let searchResult of searchResults"
+    [searchResult]="searchResult"
+    (clearSearch)="onClearSearch()"
+  ></app-global-search-result>
+</ng-container>
+<ng-template #emptyResults>
+  <p class="global-search-empty">
+    No results found
+  </p>
+</ng-template>

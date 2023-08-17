@@ -1,0 +1,55 @@
+@import "mixins";
+
+:host {
+  width: 100%;
+}
+
+.global-search-result {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  background-color: transparent;
+  border: none;
+  @include flex(row, center, flex-start);
+  transition: background-color .2s ease;
+
+  @include hover() {
+    background-color: var(--white-background-highlited);
+  }
+
+  @include active() {
+    background-color: var(--white-background-highlited-active);
+  }
+}
+
+:host::ng-deep {
+  .global-search-result__icon {
+    width: 1rem;
+    height: 1rem;
+    fill: var(--primary-text-color);
+  }
+}
+
+.global-search-result__name {
+  margin-left: 0.75rem;
+  flex: 1;
+  @include ellipsis();
+  @include font(1rem, 400, var(--primary-text-color));
+}
+
+.global-search-result__results {
+  position: relative;
+  width: 100%;
+  padding-left: 2rem;
+  @include flex(column, flex-start, flex-start);
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 1rem;
+    width: 0.063rem;
+    height: calc(100% - 0.25rem);
+    background-color: var(--separator-border-color);
+  }
+}
