@@ -1,4 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostBinding, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 // Utilities
 import { copy } from '../../../core/utilities/copy';
@@ -12,8 +14,9 @@ import { IDropdownOption } from '../../../core/models/dropdown-option.model';
   templateUrl: 'link.component.html',
   styleUrls: ['link.component.scss'],
 })
-export class LinkComponent {
+export class LinkComponent implements OnInit, OnDestroy {
   imageError: boolean = false;
+  linkHighlight: boolean = false;
 
   dropdownOptions: IDropdownOption[] = [
     {
@@ -33,6 +36,9 @@ export class LinkComponent {
     },
   ];
 
+  private highlightTimeout: ReturnType<typeof setTimeout> | undefined;
+  private fragmentSubscription: Subscription | undefined;
+
   @Input({ required: true }) link!: ILink;
   @Input() action: 'menu' | null  = null;
   @Input() imageClass: string | undefined;
@@ -42,8 +48,36 @@ export class LinkComponent {
   @Output() edit = new EventEmitter<string>();
   @Output() delete = new EventEmitter<string>();
 
+  @HostBinding('class.highlight') get classHighlight() { return this.linkHighlight; }
+
+  get id() {
+    return `link-${this.link.id}`;
+  }
+
   get dropdownId() {
     return `${this.link.id}-link-dropdown`;
+  }
+
+  constructor(
+    private element: ElementRef<HTMLElement>,
+    private route: ActivatedRoute,
+    private router: Router,
+  ) {}
+
+  ngOnInit() {
+    this.fragmentSubscription = this.route.fragment.subscribe((fragment) => {
+      if (fragment === this.id) {
+        this.onHighlight();
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.highlightTimeout) {
+      clearTimeout(this.highlightTimeout);
+    }
+
+    this.fragmentSubscription?.unsubscribe();
   }
 
   onImageError() {
@@ -66,5 +100,29 @@ export class LinkComponent {
 
   private onDelete() {
     this.delete.emit(this.link.id);
+  }
+
+  private onHighlight() {
+    this.router.navigate(
+      [],
+      {
+        relativeTo: this.route,
+        replaceUrl: true,
+        fragment: undefined,
+      },
+    );
+
+    this.element.nativeElement.scrollIntoView({
+      behavior: 'auto',
+      block: 'center',
+      inline: 'center',
+    });
+
+    this.linkHighlight = true;
+
+    this.highlightTimeout = setTimeout(() => {
+      this.linkHighlight = false;
+      this.highlightTimeout = undefined;
+    }, 300);
   }
 }

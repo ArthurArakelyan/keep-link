@@ -5,6 +5,7 @@ import { takeWhile } from 'rxjs';
 
 // Modules
 import { SharedModule } from '../../../shared/shared.module';
+import { CoreModule } from '../../core.module';
 
 // Store
 import { appReducer, AppStore } from '../../../store/app.reducer';
@@ -22,7 +23,7 @@ describe('HeaderComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [HeaderComponent],
-      imports: [SharedModule, BrowserAnimationsModule, StoreModule.forRoot(appReducer)],
+      imports: [SharedModule, CoreModule, BrowserAnimationsModule, StoreModule.forRoot(appReducer)],
     });
 
     fixture = TestBed.createComponent(HeaderComponent);
@@ -48,6 +49,47 @@ describe('HeaderComponent', () => {
     fixture.detectChanges();
 
     expect(document.activeElement).toBe(input);
+  });
+
+  it('should show the search input clear button when it has a value', () => {
+    component.searchValue = 'test';
+
+    fixture.detectChanges();
+
+    expect(compiled.querySelector('.search__clear')).toBeInstanceOf(HTMLButtonElement);
+  });
+
+  it('should not show the search input clear button when it has no value', () => {
+    component.searchValue = '';
+
+    fixture.detectChanges();
+
+    expect(compiled.querySelector('.search__clear')).toBeNull();
+  });
+
+  it('show show the global search popup when search input has a value', () => {
+    component.searchValue = 'test';
+
+    fixture.detectChanges();
+
+    expect(compiled.querySelector('app-global-search')).toBeInstanceOf(HTMLElement);
+  });
+
+  it('should not show the global search popup when search input has no value', () => {
+    component.searchValue = '';
+
+    fixture.detectChanges();
+
+    expect(compiled.querySelector('app-global-search')).toBeNull();
+  });
+
+  it('should not show the global search popup when search input has a value and search is hidden', () => {
+    component.searchValue = 'test';
+    component.isSearchHidden = true;
+
+    fixture.detectChanges();
+
+    expect(compiled.querySelector('app-global-search')).toBeNull();
   });
 
   it('should logout on logout button click', () => {

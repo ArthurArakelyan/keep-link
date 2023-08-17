@@ -1,21 +1,45 @@
 <app-header-menu *ngIf="showMenu"></app-header-menu>
 
-<div class="search">
+<div
+  class="search"
+  #searchContainer
+>
   <app-search-icon
     width="20"
     height="20"
     class="search__icon"
     iconClass="search__icon"
-    (click)="onFocusSearch(search)"
+    (click)="onSearchIconClick(search)"
   ></app-search-icon>
 
   <input
-    type="text"
     tabindex="0"
     placeholder="Search"
     class="search__input"
+    [value]="searchValue"
+    (input)="onSearch($event)"
+    (focus)="onFocusSearch()"
     #search
   />
+
+  <button
+    *ngIf="searchValue"
+    [@fadeInOut]
+    aria-label="Clear the search input"
+    class="search__clear"
+    (click)="onClearSearch()"
+  >
+    <app-close-icon
+      iconClass="search__clear-icon"
+    ></app-close-icon>
+  </button>
+
+  <app-global-search
+    *ngIf="!isSearchHidden && hasSearchValue"
+    [@fadeInOut]
+    [search]="searchValue"
+    (clearSearch)="onClearSearch()"
+  ></app-global-search>
 </div>
 
 <app-dropdown

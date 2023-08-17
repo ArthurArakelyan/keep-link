@@ -2,7 +2,7 @@
   "name": "Keep Link",
   "short_name": "Keep Link",
   "description": "Save your interesting and useful links in this app",
-  "theme_color": "#121212",
+  "theme_color": "#202020",
   "background_color": "#121212",
   "display": "standalone",
   "categories": ["productivity", "utilities", "education"],

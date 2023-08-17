@@ -76,7 +76,7 @@ export class FolderModalComponent implements OnInit, OnDestroy {
         queryParams: {
           hideFolder: '',
           addLink: '',
-          link: id,
+          editLink: id,
         },
       },
     );

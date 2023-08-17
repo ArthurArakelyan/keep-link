@@ -7,8 +7,8 @@
   top: 0;
   z-index: $advanced-component-z-index;
   width: $side-menu-width;
-  height: 100vh;
-  max-height: 100vh;
+  height: 100dvh;
+  max-height: 100dvh;
   overflow: hidden;
   background-color: var(--header-footer-background-color);
 }
@@ -57,7 +57,7 @@
 .side-menu-content {
   width: 100%;
   padding: 2rem 0;
-  max-height: calc(100vh - $header-height);
+  max-height: calc(100dvh - $header-height);
   overflow-y: auto;
 }
 

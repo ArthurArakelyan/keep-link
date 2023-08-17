@@ -8,7 +8,7 @@
 
 .main {
   position: relative;
-  min-height: calc(100vh - $header-height);
+  min-height: calc(100dvh - $header-height);
   width: 1%;
   flex: 1 1;
   padding: 2rem;
@@ -18,7 +18,7 @@
 @media (max-width: 1250px) {
   .main {
     padding: 1.5rem;
-    min-height: calc(100vh - $header-height);
+    min-height: calc(100dvh - $header-height);
     margin-top: $header-height;
   }
 }
@@ -26,7 +26,7 @@
 @media (max-width: $header-small-breakpoint) {
   .main {
     padding: 1.5rem;
-    min-height: calc(100vh - $header-height-mobile);
+    min-height: calc(100dvh - $header-height-mobile);
     margin-top: $header-height-mobile;
   }
 }

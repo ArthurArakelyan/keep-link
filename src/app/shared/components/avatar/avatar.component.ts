@@ -42,9 +42,9 @@ export class AvatarComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    const src = changes['src'].currentValue;
+    const src = changes['src']?.currentValue;
 
-    if (!src.trim()) {
+    if (!src?.trim?.()) {
       this.avatarSrc = '';
     } else {
       this.avatarSrc = this.src;

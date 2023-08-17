@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 // Modules
 import { SharedModule } from '../../../shared/shared.module';
@@ -37,7 +38,7 @@ describe('LinkComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [LinkComponent, ShortLinkPipe],
-      imports: [SharedModule],
+      imports: [SharedModule, RouterTestingModule],
     });
 
     fixture = TestBed.createComponent(LinkComponent);
