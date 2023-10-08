@@ -47,4 +47,5 @@ Thumbs.db
 .runtimeconfig.json
 
 # Storybook
+/storybook-static
 documentation.json
