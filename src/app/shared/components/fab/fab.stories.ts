@@ -23,6 +23,11 @@ const meta: Meta<FabComponent> = {
     ),
   ],
   argTypes: {
+    show: {
+      type: 'boolean',
+      defaultValue: false,
+      description: 'Shows only on mobile',
+    },
     icon: {
       type: 'string',
       defaultValue: 'plus',
@@ -54,6 +59,21 @@ export const FAB: Story = {
     label: 'Add',
     disabled: false,
     loading: false,
+  },
+};
+
+export const Mobile: Story = {
+  args: {
+    show: true,
+    icon: 'plus',
+    label: 'Add',
+    disabled: false,
+    loading: false,
+  },
+  parameters: {
+    viewport: {
+      defaultViewport: 'mobile',
+    },
   },
 };
 
