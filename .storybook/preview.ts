@@ -5,6 +5,16 @@ import docJson from '../documentation.json';
 
 setCompodocJson(docJson);
 
+const viewports = {
+  mobile: {
+    name: 'Mobile',
+    styles: {
+      width: '375px',
+      height: '600px',
+    },
+  },
+};
+
 const preview: Preview = {
   parameters: {
     // actions: { argTypesRegex: '^on[A-Z].*' },
@@ -13,6 +23,9 @@ const preview: Preview = {
         color: /(background|color)$/i,
         date: /Date$/,
       },
+    },
+    viewport: {
+      viewports: viewports,
     },
   },
 };
