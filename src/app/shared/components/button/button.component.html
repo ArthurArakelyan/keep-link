@@ -14,6 +14,10 @@
   ></div>
 
   <div class="button__content">
+    <ng-container *ngIf="label">
+      {{ label }}
+    </ng-container>
+
     <ng-content></ng-content>
   </div>
 
