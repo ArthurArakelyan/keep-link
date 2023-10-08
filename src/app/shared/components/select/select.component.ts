@@ -56,6 +56,7 @@ export class SelectComponent implements ControlValueAccessor, OnInit, OnChanges 
   @Input() defaultValue: string = '';
   @Input() canSelectNothing: boolean = true;
   @Input() showSearch: boolean = false;
+  @Input() emptyText: string = 'No options';
 
   @Output() selectOption = new EventEmitter<string | null>();
   @Output() search = new EventEmitter<string>();
