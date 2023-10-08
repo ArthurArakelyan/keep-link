@@ -30,7 +30,7 @@ export class AvatarComponent implements OnInit, OnChanges {
       return '';
     }
 
-    return `${this.name.split(' ')[0][0] || ''}`;
+    return `${this.name[0] || ''}`;
   }
 
   ngOnInit() {

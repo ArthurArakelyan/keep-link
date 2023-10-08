@@ -11,9 +11,10 @@ import { IRipple } from '../../../core/models/ripple.model';
 export class ButtonComponent {
   ripples: IRipple[] = [];
 
-  @Input() type: string = 'button';
-  @Input() variant: 'rounded' | 'circle' | '' = '';
+  @Input() type: 'button' | 'submit' = 'button';
+  @Input() variant: 'default' | 'rounded' | 'circle' = 'default';
   @Input() color: 'primary' | 'red' = 'primary';
+  @Input() label: string = '';
   @Input() loading: boolean = false;
   @Input() disabled: boolean = false;
   @Input() buttonClass: string = '';
