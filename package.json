@@ -8,7 +8,9 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "test:prod": "ng test --browsers=ChromeHeadless --watch=false",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "storybook": "ng run keep-link:storybook",
+    "build-storybook": "ng run keep-link:build-storybook"
   },
   "private": true,
   "dependencies": {
@@ -38,16 +40,28 @@
     "@angular-eslint/template-parser": "16.0.3",
     "@angular/cli": "~16.1.1",
     "@angular/compiler-cli": "^16.1.2",
+    "@compodoc/compodoc": "^1.1.21",
+    "@storybook/addon-docs": "^7.4.6",
+    "@storybook/addon-essentials": "^7.4.6",
+    "@storybook/addon-interactions": "^7.4.6",
+    "@storybook/addon-links": "^7.4.6",
+    "@storybook/angular": "^7.4.6",
+    "@storybook/blocks": "^7.4.6",
+    "@storybook/testing-library": "^0.2.2",
     "@types/jasmine": "~4.3.0",
     "@typescript-eslint/eslint-plugin": "5.59.7",
     "@typescript-eslint/parser": "5.59.7",
     "eslint": "^8.40.0",
+    "eslint-plugin-storybook": "^0.6.15",
     "jasmine-core": "~4.6.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "storybook": "^7.4.6",
     "typescript": "~5.0.2"
   }
 }
