@@ -34,7 +34,18 @@ import { GlobalSearchResultComponent } from './components/header/global-search/g
     RouterModule,
   ],
   exports: [
+    CommonModule,
+    SharedModule,
+    ReactiveFormsModule,
+    RouterModule,
+    HeaderComponent,
+    HeaderMenuComponent,
+    SideMenuComponent,
+    SideMenuResponsiveComponent,
     UserLayoutComponent,
+    AddLinkComponent,
+    GlobalSearchComponent,
+    GlobalSearchResultComponent,
   ],
 })
 export class CoreModule {

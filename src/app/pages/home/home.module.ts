@@ -27,6 +27,17 @@ import { FolderModalActionsBarComponent } from './folders/folder-modal/folder-mo
     SharedModule,
     HomeRoutingModule,
   ],
+  exports: [
+    SharedModule,
+    HomeRoutingModule,
+    HomeComponent,
+    FoldersComponent,
+    FolderComponent,
+    LinksComponent,
+    LinkComponent,
+    FolderModalComponent,
+    FolderModalActionsBarComponent,
+  ],
 })
 export class HomeModule {
 
