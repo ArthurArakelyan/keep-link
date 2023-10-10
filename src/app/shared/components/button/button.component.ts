@@ -15,6 +15,7 @@ export class ButtonComponent {
   @Input() variant: 'default' | 'rounded' | 'circle' = 'default';
   @Input() color: 'primary' | 'red' = 'primary';
   @Input() label: string = '';
+  @Input() ariaLabel: string = '';
   @Input() loading: boolean = false;
   @Input() disabled: boolean = false;
   @Input() buttonClass: string = '';
