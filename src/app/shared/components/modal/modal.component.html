@@ -3,6 +3,7 @@
     role="dialog"
     aria-modal="true"
     class="modal-content-wrapper"
+    [attr.aria-label]="title"
     (click)="onContentWrapperClick($event)"
     (keydown)="onContentWrapperKeyDown()"
   >

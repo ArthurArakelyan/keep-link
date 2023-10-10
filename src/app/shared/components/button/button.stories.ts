@@ -51,6 +51,10 @@ const meta: Meta<ButtonComponent> = {
       control: 'text',
       defaultValue: '',
     },
+    ariaLabel: {
+      control: 'text',
+      defaultValue: '',
+    },
   },
 };
 
@@ -66,6 +70,7 @@ export const Primary: Story = {
     label: 'Button',
     loading: false,
     disabled: false,
+    ariaLabel: '',
   },
 };
 
@@ -77,6 +82,7 @@ export const Red: Story = {
     label: 'Button',
     loading: false,
     disabled: false,
+    ariaLabel: '',
   },
 };
 
@@ -93,6 +99,7 @@ export const Rounded: Story = {
     label: 'Button',
     loading: false,
     disabled: false,
+    ariaLabel: '',
   },
 };
 
@@ -109,6 +116,7 @@ export const Circle: Story = {
     label: 'B',
     loading: false,
     disabled: false,
+    ariaLabel: '',
   },
 };
 
@@ -120,6 +128,7 @@ export const Disabled: Story = {
     label: 'Button',
     loading: false,
     disabled: true,
+    ariaLabel: '',
   },
 };
 
@@ -131,5 +140,6 @@ export const Loader: Story = {
     label: 'Button',
     loading: true,
     disabled: false,
+    ariaLabel: '',
   },
 };

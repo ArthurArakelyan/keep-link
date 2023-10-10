@@ -19,6 +19,13 @@ import { SettingsThemeComponent } from './settings-themes/settings-theme/setting
     SharedModule,
     SettingsRoutingModule,
   ],
+  exports: [
+    SharedModule,
+    SettingsRoutingModule,
+    SettingsComponent,
+    SettingsThemesComponent,
+    SettingsThemeComponent,
+  ],
 })
 export class SettingsModule {
 
