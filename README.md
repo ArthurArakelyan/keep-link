@@ -77,10 +77,3 @@ height="40"/>&nbsp;&nbsp;
    <img src="https://github.com/devicons/devicon/blob/master/icons/firebase/firebase-plain.svg" title="Firebase" alt="Firebase" width="40" height="40"/>&nbsp;&nbsp;
    <img src="https://github.com/devicons/devicon/blob/master/icons/storybook/storybook-original.svg" title="Storybook" alt="Storybook" width="40" height="40"/>&nbsp;&nbsp;
 </div>
-
-## API
-
-Repository: https://github.com/ArturArakelyan0411/keep-link-server
-
-API URL: https://keep-link-server.vercel.app/api/
-
