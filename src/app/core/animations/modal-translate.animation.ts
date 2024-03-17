@@ -1,10 +1,10 @@
 import { animate, group, query, style, transition, trigger } from '@angular/animations';
 
 const openOverlay = style({ backgroundColor: 'rgba(0, 0, 0, 0.6)' });
-const openContent = style({ opacity: 1, transform: 'translateY(0)' });
+const openContent = style({ opacity: 1, transform: 'scale(1)' });
 
 const hideOverlay = style({ backgroundColor: 'rgba(0, 0, 0, 0)' });
-const hideContent = style({ opacity: 0, transform: 'translateY(-0.5rem)' });
+const hideContent = style({ opacity: 0, transform: 'scale(0.8)' });
 
 export const modalTranslateAnimation = trigger('modalTranslate', [
   transition(':enter', [

@@ -8,6 +8,7 @@
         inputId="name"
         placeholderBackgroundColor="var(--card-color)"
         formControlName="name"
+        autoComplete="name"
         [showError]="signupForm.controls.name.invalid && submitted"
         [error]="signupForm.controls.name.errors"
       ></app-input>
@@ -19,6 +20,7 @@
         inputId="email"
         placeholderBackgroundColor="var(--card-color)"
         formControlName="email"
+        autoComplete="email"
         [showError]="signupForm.controls.email.invalid && submitted"
         [error]="signupForm.controls.email.errors"
       ></app-input>
@@ -30,6 +32,7 @@
         inputId="password"
         placeholderBackgroundColor="var(--card-color)"
         formControlName="password"
+        autoComplete="new-password"
         [showError]="signupForm.controls.password.invalid && submitted"
         [error]="signupForm.controls.password.errors"
       ></app-input>
@@ -41,6 +44,7 @@
         inputId="confirm-password"
         placeholderBackgroundColor="var(--card-color)"
         formControlName="confirmPassword"
+        autoComplete="current-password"
         [showError]="signupForm.controls.confirmPassword.invalid && submitted"
         [error]="signupForm.controls.confirmPassword.errors"
       ></app-input>

@@ -8,6 +8,7 @@
         inputId="email"
         placeholderBackgroundColor="var(--card-color)"
         formControlName="email"
+        autoComplete="name"
         [showError]="loginForm.controls.email.invalid && submitted"
         [error]="loginForm.controls.email.errors"
       ></app-input>
@@ -19,6 +20,7 @@
         inputId="password"
         placeholderBackgroundColor="var(--card-color)"
         formControlName="password"
+        autoComplete="current-password"
         [showError]="loginForm.controls.password.invalid && submitted"
         [error]="loginForm.controls.password.errors"
       ></app-input>

@@ -18,6 +18,7 @@
 
     <form
       *ngIf="type === 'link'"
+      autocomplete="off"
       class="add-link__form add-link__form-link"
       [formGroup]="linkForm"
       (ngSubmit)="onLinkSubmit()"
@@ -40,6 +41,7 @@
         inputId="link-name"
         placeholderBackgroundColor="var(--card-color)"
         formControlName="name"
+        autoComplete="off"
         [showError]="linkForm.controls.name.invalid && submitted"
         [error]="linkForm.controls.name.errors"
       ></app-input>
@@ -51,6 +53,7 @@
         inputId="link-url"
         placeholderBackgroundColor="var(--card-color)"
         formControlName="link"
+        autoComplete="off"
         [showError]="linkForm.controls.link.invalid && submitted"
         [error]="linkForm.controls.link.errors"
       ></app-input>
@@ -66,6 +69,7 @@
 
     <form
       *ngIf="type === 'folder'"
+      autocomplete="off"
       [formGroup]="folderForm"
       class="add-link__form add-link__form-folder"
       (ngSubmit)="onFolderSubmit()"
@@ -76,6 +80,7 @@
         placeholderBackgroundColor="var(--card-color)"
         formControlName="name"
         inputId="folder-name"
+        autoComplete="off"
         [showError]="folderForm.controls.name.invalid && submitted"
         [error]="folderForm.controls.name.errors"
       ></app-input>
@@ -86,6 +91,7 @@
         placeholderBackgroundColor="var(--card-color)"
         formControlName="description"
         inputId="folder-description"
+        autoComplete="off"
         [showError]="folderForm.controls.description.invalid && submitted"
         [error]="folderForm.controls.description.errors"
       ></app-input>
