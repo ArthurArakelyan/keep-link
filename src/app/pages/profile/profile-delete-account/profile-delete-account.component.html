@@ -6,6 +6,7 @@
     type="password"
     formControlName="password"
     placeholderBackgroundColor="var(--background-color)"
+    autoComplete="current-password"
     [showError]="deleteAccountForm.controls.password.invalid && submitted"
     [error]="deleteAccountForm.controls.password.errors"
   ></app-input>

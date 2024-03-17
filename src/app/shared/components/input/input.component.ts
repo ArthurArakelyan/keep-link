@@ -5,7 +5,7 @@ import {
   HostBinding,
   HostListener,
   Input,
-  OnChanges,
+  OnChanges, OnInit,
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
@@ -28,7 +28,7 @@ import { getErrorMessage } from '../../../core/utilities/get-error-message';
   }],
   animations: [fadeInOut],
 })
-export class InputComponent implements ControlValueAccessor, OnChanges {
+export class InputComponent implements ControlValueAccessor, OnChanges, OnInit {
   focused: boolean = false;
   divided: boolean = false;
   errorMessage: string = '';
@@ -41,6 +41,7 @@ export class InputComponent implements ControlValueAccessor, OnChanges {
   @Input() inputMode: string = 'text';
   @Input() error: ValidationErrors | null | undefined;
   @Input() showError: boolean = false;
+  @Input() autoComplete: string = 'on';
   @Input() placeholderBackgroundColor: string = 'var(--background-color)';
 
   get labelId() { return `${this.inputId || this.placeholder}-label`; }
@@ -59,6 +60,14 @@ export class InputComponent implements ControlValueAccessor, OnChanges {
         this.errorMessage = error;
       }
     }
+  }
+
+  ngOnInit() {
+    setTimeout(() => {
+      if (this.inputElement?.nativeElement?.matches(':autofill')) {
+        this.divided = true;
+      }
+    }, 100);
   }
 
   @HostListener('click')
