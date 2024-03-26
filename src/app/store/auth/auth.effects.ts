@@ -50,7 +50,6 @@ export class AuthEffects {
               .pipe(
                 switchMap(() => {
                   this.showVerificationMessage();
-
                   return of(loginRejected());
                 }),
                 catchError((error) => {

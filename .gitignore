@@ -49,3 +49,9 @@ Thumbs.db
 # Storybook
 /storybook-static
 documentation.json
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

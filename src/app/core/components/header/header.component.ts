@@ -11,12 +11,14 @@ import { selectUser } from '../../../store/user';
 import { SizeService } from '../../services/size.service';
 import { OverflowService } from '../../services/overflow.service';
 
+// Constants
+import { keys } from '../../constants/keys';
+
 // Animations
 import { fadeInOut } from '../../animations/fade-in-out.animation';
 
 // Models
 import { IDropdownOption } from '../../models/dropdown-option.model';
-import { keys } from '../../constants/keys';
 
 @Component({
   selector: 'app-header',

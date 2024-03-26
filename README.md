@@ -12,9 +12,9 @@ Storybook: https://keep-link-storybook.vercel.app
 
 This project uses `npm` as a package manager.
 
-Node version: `18.7.1`
+Node version: `20.11.1`
 
-NPM version: `9.8.1`
+NPM version: `10.2.4`
 
 ### Install Dependencies
 ```bash
@@ -53,6 +53,18 @@ npm run test
 npm run test:prod
 ```
 
+### Run E2E Tests
+
+```bash
+npm run test:e2e
+```
+
+### Run E2E Tests with UI
+
+```bash
+npm run test:e2e:ui
+```
+
 ### Run Storybook Development Server
 
 ```bash
@@ -76,4 +88,5 @@ height="40"/>&nbsp;&nbsp;
 height="40"/>&nbsp;&nbsp;
    <img src="https://github.com/devicons/devicon/blob/master/icons/firebase/firebase-plain.svg" title="Firebase" alt="Firebase" width="40" height="40"/>&nbsp;&nbsp;
    <img src="https://github.com/devicons/devicon/blob/master/icons/storybook/storybook-original.svg" title="Storybook" alt="Storybook" width="40" height="40"/>&nbsp;&nbsp;
+   <img src="https://github.com/devicons/devicon/blob/master/icons/playwright/playwright-original.svg" title="Playwright" alt="Playwright" width="40" height="40"/>&nbsp;&nbsp;
 </div>
