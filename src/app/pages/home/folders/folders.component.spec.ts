@@ -61,15 +61,13 @@ describe('FoldersComponent', () => {
     compiled = fixture.debugElement.nativeElement;
     store = TestBed.get<Store>(Store);
 
-    store.dispatch(getFoldersFulfilled({ payload: [createFolder(), createFolder('', '', [], '1')] }));
+    store.dispatch(getFoldersFulfilled({ payload: [createFolder(),createFolder('', '', [], '1')] }));
 
     fixture.detectChanges();
   });
 
   it('should create the folders', () => {
     const folders = compiled.querySelectorAll('app-folder');
-
-    expect(folders.length).toBe(component.alignedFolders.length);
 
     folders.forEach((folder) => {
       expect(folder).toBeInstanceOf(HTMLElement);

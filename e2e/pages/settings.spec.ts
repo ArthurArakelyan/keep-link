@@ -44,11 +44,15 @@ test.describe('settings', () => {
       // System default
       await page.emulateMedia({ colorScheme: 'dark' });
 
+      await page.waitForTimeout(100);
+
       await page.locator('button[role="radio"]').getByText(themes[0].name, { exact: true }).click();
 
       expect(await page.locator('app-root').getAttribute('class')).toContain('dark');
 
       await page.emulateMedia({ colorScheme: 'light' });
+
+      await page.waitForTimeout(100);
 
       expect(await page.locator('app-root').getAttribute('class')).toContain('light');
     });

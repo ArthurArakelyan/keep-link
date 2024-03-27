@@ -1,5 +1,6 @@
 <app-modal
   [title]="title"
+  [loading]="loading"
   (modalClose)="onClose()"
 >
   <p class="confirm-modal-text">
@@ -17,7 +18,7 @@
     <app-button
       class="confirm-modal-actions__submit"
       color="red"
-      [loading]="loading"
+      [disabled]="loading"
       (buttonClick)="onSubmit()"
     >
       {{ submitText }}

@@ -37,6 +37,14 @@ describe('ModalComponent', () => {
     expect(compiled.querySelector('app-modal-header')).toBeInstanceOf(HTMLElement);
   });
 
+  it('should show loader when loading', () => {
+    component.loading = true;
+
+    fixture.detectChanges();
+
+    expect(compiled.querySelector('app-loader')).toBeInstanceOf(HTMLElement);
+  });
+
   it('should close the modal on esc click', () => {
     const spy = createSpy('close');
 
@@ -62,5 +70,26 @@ describe('ModalComponent', () => {
     fixture.detectChanges();
 
     expect(spy).toHaveBeenCalled();
+  });
+
+  it('should not be able to close modal during loading', () => {
+    const spy = createSpy('close');
+
+    component.modalClose.subscribe(spy);
+
+    component.loading = true;
+
+    fixture.detectChanges();
+
+    document.dispatchEvent(new KeyboardEvent('keydown', {
+      bubbles: true,
+      key: keys.esc,
+    }));
+
+    compiled.querySelector<HTMLDivElement>('.modal-content-wrapper')!.click();
+
+    fixture.detectChanges();
+
+    expect(spy).not.toHaveBeenCalled();
   });
 });

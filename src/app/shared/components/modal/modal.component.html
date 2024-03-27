@@ -2,8 +2,9 @@
   <div
     role="dialog"
     aria-modal="true"
-    class="modal-content-wrapper"
+    [attr.aria-busy]="loading"
     [attr.aria-label]="title"
+    class="modal-content-wrapper"
     (click)="onContentWrapperClick($event)"
     (keydown)="onContentWrapperKeyDown()"
   >
@@ -15,6 +16,14 @@
         [title]="title"
         (modalHeaderClose)="onClose()"
       ></app-modal-header>
+
+      <div
+        *ngIf="loading"
+        [@modalLoaderAnimation]
+        class="modal-loader-overlay"
+      >
+        <app-loader size="large" class="modal-loader"></app-loader>
+      </div>
 
       <ng-content></ng-content>
     </div>

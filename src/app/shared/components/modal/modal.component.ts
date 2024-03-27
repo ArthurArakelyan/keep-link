@@ -14,14 +14,19 @@ import { OverflowService } from '../../../core/services/overflow.service';
 // Constants
 import { keys } from '../../../core/constants/keys';
 
+// Animations
+import { modalLoaderAnimation } from '../../../core/animations/modal-loader.animation';
+
 @Component({
   selector: 'app-modal',
   templateUrl: 'modal.component.html',
   styleUrls: ['modal.component.scss'],
+  animations: [modalLoaderAnimation],
 })
 export class ModalComponent implements OnInit, OnDestroy {
   @Input({ required: true }) title: string = '';
   @Input() fullscreen: boolean = false;
+  @Input() loading: boolean = false;
 
   @Output() modalClose = new EventEmitter();
 
@@ -61,6 +66,10 @@ export class ModalComponent implements OnInit, OnDestroy {
   }
 
   onClose() {
+    if (this.loading) {
+      return;
+    }
+
     this.modalClose.emit();
   }
 

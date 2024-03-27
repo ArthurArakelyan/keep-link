@@ -38,6 +38,23 @@
   @include flex(column, center, center);
 }
 
+.modal-loader-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  border-radius: 0.375rem;
+  background-color: rgba(0, 0, 0, 0.4);
+  @include flex(row, center, center);
+}
+
+.modal-loader {
+  opacity: 1;
+  color: $white;
+}
+
 @media (max-width: 750px) {
   .modal-content {
     max-width: unset;
