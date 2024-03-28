@@ -16,6 +16,7 @@ export default defineConfig({
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
+    // baseURL: 'http://localhost:4200',
     baseURL: 'https://keep-link.vercel.app',
     trace: 'on-first-retry',
     colorScheme: 'dark',

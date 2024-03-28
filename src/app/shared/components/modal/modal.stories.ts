@@ -15,7 +15,7 @@ const meta: Meta<ModalComponent> = {
     template: `
       <div style="height: 300px;"></div>
 
-      <app-modal [title]="title" [fullscreen]="fullscreen">
+      <app-modal [title]="title" [loading]="loading" [fullscreen]="fullscreen">
         <p style="font-size: 16px; line-height: 24px; color: var(--primary-text-color);">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aperiam aspernatur blanditiis eveniet explicabo, facilis harum laudantium optio rem voluptas?
         </p>
@@ -33,6 +33,10 @@ const meta: Meta<ModalComponent> = {
       type: 'string',
       defaultValue: '',
     },
+    loading: {
+      type: 'boolean',
+      defaultValue: false,
+    },
     fullscreen: {
       type: 'boolean',
       defaultValue: false,
@@ -49,6 +53,14 @@ export const Modal: Story = {
   args: {
     title: 'Title',
     fullscreen: false,
+  },
+};
+
+export const Loading: Story = {
+  args: {
+    title: 'Title',
+    fullscreen: false,
+    loading: true,
   },
 };
 

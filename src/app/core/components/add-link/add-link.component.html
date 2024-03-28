@@ -1,6 +1,7 @@
 <app-modal
   [title]="modalTitle"
   [fullscreen]="true"
+  [loading]="addLinkLoading || editLinkLoading || addFolderLoading || editFolderLoading"
   (modalClose)="onClose()"
 >
   <div class="add-link">
@@ -61,7 +62,7 @@
       <app-button
         type="submit"
         class="add-link__submit"
-        [loading]="addLinkLoading || editLinkLoading"
+        [disabled]="addLinkLoading || editLinkLoading"
       >
         {{ link ? 'Edit' : 'Add' }}
       </app-button>
@@ -99,7 +100,7 @@
       <app-button
         type="submit"
         class="add-link__submit"
-        [loading]="addFolderLoading || editFolderLoading"
+        [disabled]="addFolderLoading || editFolderLoading"
       >
         {{ folder ? 'Edit' : 'Add' }}
       </app-button>
