@@ -52,4 +52,11 @@ describe('AppComponent', () => {
         expect(compiled.className.includes(themeState.preferredTheme)).toBeTrue();
       });
   });
+
+  it('should have a class with color', () => {
+    store.select(fromTheme.selectTheme)
+      .subscribe((themeState) => {
+        expect(compiled.className.includes(themeState.color)).toBeTrue();
+      });
+  });
 });

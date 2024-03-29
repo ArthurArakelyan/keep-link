@@ -28,7 +28,7 @@ describe('SideMenuComponent', () => {
   });
 
   it('should create the side menu', () => {
-    expect(compiled.querySelector('.side-menu-header img')).toBeInstanceOf(HTMLImageElement);
+    expect(compiled.querySelector('.side-menu-header svg')).toBeInstanceOf(SVGElement);
     expect(compiled.querySelector('.side-menu__add-button')).toBeInstanceOf(HTMLElement);
     expect(compiled.querySelector('.side-menu__links')).toBeInstanceOf(HTMLUListElement);
     expect(compiled.querySelectorAll('.side-menu__link-wrapper').length).toBe(navLinks.length);

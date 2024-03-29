@@ -2,6 +2,10 @@ html, body, input, button {
   font-family: 'Rubik',Helvetica,Arial,sans-serif;
 }
 
+::selection {
+  background-color: var(--primary);
+}
+
 @media (max-width: 320px) {
   html,
   body {
