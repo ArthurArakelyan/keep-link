@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 
 // Actions
-import { changePreferredContrast, changePreferredTheme, changeTheme } from './theme.actions';
+import { changePreferredContrast, changePreferredTheme, changeTheme, changeColor } from './theme.actions';
 
 // Types
 import { ThemeState } from './theme.state';
@@ -10,6 +10,7 @@ export const initialState: ThemeState = {
   theme: 'default',
   preferredTheme: 'light',
   preferredContrast: false,
+  color: 'blue',
 };
 
 export const themeReducer = createReducer(
@@ -30,6 +31,12 @@ export const themeReducer = createReducer(
     return {
       ...state,
       preferredContrast: action.payload,
+    };
+  }),
+  on(changeColor, (state, action) => {
+    return {
+      ...state,
+      color: action.payload,
     };
   }),
 );

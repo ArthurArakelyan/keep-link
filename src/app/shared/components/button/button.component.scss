@@ -57,15 +57,15 @@
 
   // colors
   &--primary {
-    background-color: $primary-color;
+    background-color: var(--primary);
 
     &:disabled {
-      background-color: $primary-color-600;
+      background-color: var(--primary-600);
     }
 
     &:not(:disabled) {
       @include hover() {
-        background-color: $primary-color-hover;
+        background-color: var(--primary-hover);
       }
     }
   }

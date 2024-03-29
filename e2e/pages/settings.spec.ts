@@ -2,7 +2,10 @@ import { expect, test } from '@playwright/test';
 
 // Utilities
 import { login } from '../utilities/auth';
+
+// Constants
 import { themes } from '../../src/app/core/constants/themes';
+import { colors } from '../../src/app/core/constants/colors';
 
 test.beforeEach(async ({ page }) => {
   await login(page);
@@ -55,6 +58,27 @@ test.describe('settings', () => {
       await page.waitForTimeout(100);
 
       expect(await page.locator('app-root').getAttribute('class')).toContain('light');
+    });
+  });
+
+  test.describe('color', () => {
+    test('should render colors', async ({ page }) => {
+      expect(await page.locator('app-settings-colors').getByRole('radio', { checked: true }).getAttribute('aria-label'))
+        .toBe(colors[0].name);
+
+      for (const color of colors) {
+        await page.locator('app-settings-color button[role="radio"]').getByText(color.name, { exact: true }).isVisible();
+      }
+    });
+
+    test('should change color', async ({ page }) => {
+      for (const color of colors) {
+        await page.locator(`app-settings-color button[aria-label="${color.name}"]`).click();
+
+        await page.waitForTimeout(100);
+
+        expect(await page.locator('app-root').getAttribute('class')).toContain(color.name);
+      }
     });
   });
 });

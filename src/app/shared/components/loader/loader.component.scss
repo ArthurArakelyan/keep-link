@@ -2,7 +2,7 @@
 
 :host {
   display: inline-block;
-  color: $primary-color;
+  color: var(--primary);
   animation: rotate 1.3s linear infinite;
 }
 :host(.small) {

@@ -30,5 +30,6 @@ describe('SettingsComponent', () => {
 
   it('should create the settings', () => {
     expect(compiled.querySelector('app-settings-themes')).toBeInstanceOf(HTMLElement);
+    expect(compiled.querySelector('app-settings-colors')).toBeInstanceOf(HTMLElement);
   });
 });

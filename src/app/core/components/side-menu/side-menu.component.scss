@@ -51,7 +51,8 @@
 .side-menu-header__logo-image {
   width: 3.75rem;
   height: 3.75rem;
-  display: block;
+  color: var(--primary);
+  transition: color .2s ease;
 }
 
 .side-menu-content {

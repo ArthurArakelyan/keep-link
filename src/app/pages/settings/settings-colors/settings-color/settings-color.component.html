@@ -1,0 +1,8 @@
+<button
+  role="radio"
+  [attr.aria-checked]="color.name === currentColor"
+  [attr.aria-label]="color.name"
+  [ngStyle]="styles"
+  class="settings-color"
+  (click)="onColorClick()"
+></button>

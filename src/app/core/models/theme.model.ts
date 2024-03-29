@@ -5,7 +5,11 @@ export type ColorSchemeType = 'light' | 'dark';
 export interface ITheme {
   theme: ThemeType;
   name: string;
+  headerColor?: string;
   backgroundColor: string;
   textColor: string;
-  second?: Omit<Omit<Omit<ITheme, 'theme'>, 'second'>, 'name'>;
+  second?: {
+    backgroundColor: string;
+    textColor: string;
+  };
 }

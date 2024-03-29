@@ -5,7 +5,6 @@
   --secondary-text-color: #9fa9be;
   --theme-button-color: #5f6368;
   --input-border-color: #a2acc0;
-  --input-border-focus-color: #1665d8;
 
   // backgrounds
   --background-color: #f8f8f8;
@@ -42,7 +41,6 @@
   --secondary-text-color: #bebebe;
   --theme-button-color: #e9e6e6;
   --input-border-color: #f0f0f0;
-  --input-border-focus-color: #478dfe;
 
   // backgrounds
   --background-color: #121212;
@@ -74,16 +72,15 @@
 
 // Support for high-contrast mode
 .dark-high-contrast {
-  --card-color: #0d0d0d;
+  --card-color: #141414;
   --primary-text-color: #ffffff;
   --input-border-color: #ffffff;
   --theme-button-color: #ffffff;
   --secondary-text-color: #f0f0f0;
-  --input-border-focus-color: #478dfe;
 
   // backgrounds
   --background-color: #000000;
-  --header-footer-background-color: #0f0f0f;
+  --header-footer-background-color: #141414;
   --input-background-color: #111111;
 
   // main colors
@@ -107,4 +104,54 @@
   --shadow-md-color: rgba(110, 110, 110, 0.2);
   --shadow-lg-color: rgba(110, 110, 110, 0.3);
   --fab-shadow: 0px 3px 5px -1px rgba(110, 110, 110, 0.2), 0px 6px 10px 0px rgba(110, 110, 110, 0.14), 0px 1px 18px 0px rgba(110, 110, 110, 0.12);
+}
+
+// Support for colors
+app-root {
+  --primary: #1665d8;
+  --primary-hover: #1e56a8;
+  --primary-active: #0f366e;
+  --primary-600: #1665d899;
+
+  &.orange {
+    --primary: #e8561d;
+    --primary-hover: #be4617;
+    --primary-active: #883312;
+    --primary-600: #e8561d99;
+  }
+
+  &.pink {
+    --primary: #d531d5;
+    --primary-hover: #a928a9;
+    --primary-active: #811a81;
+    --primary-600: #d531d599;
+  }
+
+  &.purple {
+    --primary: #a121ec;
+    --primary-hover: #7f1cb9;
+    --primary-active: #671596;
+    --primary-600: #a121ec99;
+  }
+
+  &.red {
+    --primary: #e3304e;
+    --primary-hover: #af253d;
+    --primary-active: #8d1f31;
+    --primary-600: #e3304e99;
+  }
+
+  &.green {
+    --primary: #008d5b;
+    --primary-hover: #056b47;
+    --primary-active: #055035;
+    --primary-600: #008d5b99;
+  }
+
+  &.green-dark {
+    --primary: #5ba90d;
+    --primary-hover: #45800a;
+    --primary-active: #325d08;
+    --primary-600: #5ba90d99;
+  }
 }

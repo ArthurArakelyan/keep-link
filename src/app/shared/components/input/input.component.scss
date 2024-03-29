@@ -24,10 +24,10 @@
 }
 
 :host(.focus) {
-  border-color: var(--input-border-focus-color);
+  border-color: var(--primary);
 
   .input-placeholder {
-    color: var(--input-border-focus-color);
+    color: var(--primary);
   }
 }
 

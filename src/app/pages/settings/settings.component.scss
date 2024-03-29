@@ -2,5 +2,6 @@
 
 :host {
   width: 100%;
+  row-gap: 2rem;
   @include flex(column, flex-start, flex-start);
 }

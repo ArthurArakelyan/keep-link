@@ -3,7 +3,7 @@ import { ColorSchemeType, ThemeType } from '../../models/theme.model';
 
 export const addColorSchemeGlobalStyle = (theme: ThemeType, preferredTheme: ColorSchemeType) => {
   try {
-    const themeStyle = document.querySelector('style#theme');
+    const themeStyle = document.head.querySelector('style#theme');
 
     if (!themeStyle) {
       return;

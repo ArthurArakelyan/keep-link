@@ -120,6 +120,12 @@ export class LinkComponent implements OnInit, OnDestroy {
       inline: 'center',
     });
 
+    const link = this.element.nativeElement.firstElementChild as HTMLAnchorElement;
+
+    if (link) {
+      link.focus();
+    }
+
     this.linkHighlight = true;
 
     this.highlightTimeout = setTimeout(() => {

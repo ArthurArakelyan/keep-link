@@ -1,0 +1,21 @@
+@import "mixins";
+
+:host {
+  width: 100%;
+  @include flex(column, flex-start, flex-start);
+}
+
+.settings-colors-title {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  width: 100%;
+  border-bottom: 0.063rem solid var(--separator-border-color);
+  @include font(1.75rem, 500, var(--primary-text-color));
+}
+
+.settings-colors-list {
+  width: 100%;
+  gap: 1rem;
+  flex-wrap: wrap;
+  @include flex(row, flex-start, flex-start);
+}

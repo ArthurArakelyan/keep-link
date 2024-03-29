@@ -22,9 +22,15 @@ import { ThemeService } from './core/services/theme.service';
 // Utilities
 import { addColorSchemeGlobalStyle } from './core/utilities/add-color-scheme-global-style';
 import { getStoreSync } from './core/utilities/get-store-sync';
+import { changeFavicon } from './core/utilities/change-favicon';
+import { changeThemeColor } from './core/utilities/change-theme-color';
 
 // Models
 import { ColorSchemeType, ThemeType } from './core/models/theme.model';
+import { ColorType } from './core/models/color.model';
+
+const authStoreStorage = getStoreSync<AuthState>('auth', authInitialState);
+const themeStoreStorage = getStoreSync<ThemeState>('theme', themeInitialState);
 
 @Component({
   selector: 'app-root',
@@ -32,10 +38,11 @@ import { ColorSchemeType, ThemeType } from './core/models/theme.model';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit, OnDestroy {
-  isAuth: boolean = getStoreSync<AuthState>('auth', authInitialState).isAuth;
-  theme: ThemeType = getStoreSync<ThemeState>('theme', themeInitialState).theme;
-  preferredTheme: ColorSchemeType = getStoreSync<ThemeState>('theme', themeInitialState).preferredTheme;
-  preferredContrast: boolean = getStoreSync<ThemeState>('theme', themeInitialState).preferredContrast;
+  isAuth: boolean = authStoreStorage.isAuth;
+  theme: ThemeType = themeStoreStorage.theme;
+  preferredTheme: ColorSchemeType = themeStoreStorage.preferredTheme;
+  preferredContrast: boolean = themeStoreStorage.preferredContrast;
+  color: ColorType = themeStoreStorage.color;
 
   private authSubscription: Subscription | undefined;
   private themeSubscription: Subscription | undefined;
@@ -46,6 +53,7 @@ export class AppComponent implements OnInit, OnDestroy {
   @HostBinding('class.light') get classLight() { return this.theme === 'default' ? this.preferredTheme === 'light' : this.theme === 'light'; }
   @HostBinding('class.dark') get classDark() { return this.theme === 'default' ? this.preferredTheme === 'dark' : this.theme === 'dark'; }
   @HostBinding('class.dark-high-contrast') get classDarkHighContrast() { return this.theme === 'default' ? (this.preferredTheme === 'dark' && this.preferredContrast) : this.theme === 'darkHighContrast'; }
+  @HostBinding('class') get hostClasses() { return this.color || 'blue'; }
 
   constructor(
     private store: Store<AppStore>,
@@ -67,6 +75,8 @@ export class AppComponent implements OnInit, OnDestroy {
     this.sizeService.addListener();
 
     this.themeService.addListener();
+
+    changeFavicon(this.color);
   }
 
   ngOnDestroy() {
@@ -90,11 +100,19 @@ export class AppComponent implements OnInit, OnDestroy {
 
   private subscribeToTheme() {
     this.themeSubscription = this.store.select(selectTheme).subscribe((themeState) => {
+      const prevColor = this.color;
+
       this.theme = themeState.theme;
       this.preferredTheme = themeState.preferredTheme;
       this.preferredContrast = themeState.preferredContrast;
+      this.color = themeState.color;
+
+      if (prevColor !== themeState.color) {
+        changeFavicon(themeState.color);
+      }
 
       addColorSchemeGlobalStyle(themeState.theme, themeState.preferredTheme);
+      changeThemeColor(themeState.theme, themeState.preferredTheme);
     });
   }
 
