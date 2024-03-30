@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { moduleMetadata } from '@storybook/angular';
+import { componentWrapperDecorator, moduleMetadata } from '@storybook/angular';
 
 // Modules
 import { SharedModule } from '../../shared.module';
@@ -25,6 +25,9 @@ const meta: Meta<DropdownComponent> = {
     moduleMetadata({
       imports: [SharedModule, BrowserAnimationsModule],
     }),
+    componentWrapperDecorator(
+      (story) => `<app-root>${story}</app-root>`,
+    ),
   ],
   argTypes: {
     options: {

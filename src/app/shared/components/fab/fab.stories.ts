@@ -19,7 +19,7 @@ const meta: Meta<FabComponent> = {
       imports: [SharedModule],
     }),
     componentWrapperDecorator(
-      (story) => `<div style="width: 100%; min-height: 100px;">${story}</div>`,
+      (story) => `<app-root><div style="width: 100%; min-height: 100px;">${story}</div></app-root>`,
     ),
   ],
   argTypes: {

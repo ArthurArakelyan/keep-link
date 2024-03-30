@@ -19,7 +19,7 @@ const meta: Meta<InputComponent> = {
       imports: [SharedModule],
     }),
     componentWrapperDecorator(
-      (story) => `<div style="max-width: 300px;">${story}</div>`,
+      (story) => `<app-root><div style="max-width: 300px;">${story}</div></app-root>`,
     ),
   ],
   argTypes: {

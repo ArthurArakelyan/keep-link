@@ -20,7 +20,7 @@ const meta: Meta<SelectComponent> = {
       imports: [SharedModule, BrowserAnimationsModule],
     }),
     componentWrapperDecorator(
-      (story) => `<div style="max-width: 300px; height: 200px;">${story}</div>`,
+      (story) => `<app-root><div style="max-width: 300px; height: 200px;">${story}</div></app-root>`,
     ),
   ],
   argTypes: {

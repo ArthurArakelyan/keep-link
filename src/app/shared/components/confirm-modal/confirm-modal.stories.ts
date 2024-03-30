@@ -25,6 +25,9 @@ const meta: Meta<ConfirmModalComponent> = {
     moduleMetadata({
       imports: [SharedModule],
     }),
+    componentWrapperDecorator(
+      (story) => `<app-root>${story}</app-root>`,
+    ),
   ],
   argTypes: {
     title: {
