@@ -26,7 +26,7 @@ const meta: Meta<SettingsThemeComponent> = {
       imports: [SettingsModule, StoreModule.forRoot(appReducer)],
     }),
     componentWrapperDecorator(
-      (story) => `<div style="width: 260px;">${story}</div>`,
+      (story) => `<app-root><div style="width: 260px;">${story}</div></app-root>`,
     ),
   ],
   argTypes: {

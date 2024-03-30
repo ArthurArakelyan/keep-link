@@ -31,7 +31,7 @@ const meta: Meta<FolderComponent> = {
       imports: [HomeModule, RouterTestingModule, BrowserAnimationsModule, StoreModule.forRoot(appReducer)],
     }),
     componentWrapperDecorator(
-      (story) => `<div style="max-width: 345px;">${story}</div>`,
+      (story) => `<app-root><div style="max-width: 345px;">${story}</div></app-root>`,
     ),
   ],
   argTypes: {

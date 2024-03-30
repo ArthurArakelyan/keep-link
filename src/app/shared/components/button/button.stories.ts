@@ -18,6 +18,9 @@ const meta: Meta<ButtonComponent> = {
     moduleMetadata({
       imports: [SharedModule],
     }),
+    componentWrapperDecorator(
+      (story) => `<app-root>${story}</app-root>`,
+    ),
   ],
   argTypes: {
     type: {

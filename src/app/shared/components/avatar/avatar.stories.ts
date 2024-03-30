@@ -19,7 +19,7 @@ const meta: Meta<AvatarComponent> = {
       imports: [SharedModule],
     }),
     componentWrapperDecorator(
-      (story) => `<div style="width: 48px; height: 48px;">${story}</div>`,
+      (story) => `<app-root><div style="width: 48px; height: 48px;">${story}</div></app-root>`,
     ),
   ],
   argTypes: {

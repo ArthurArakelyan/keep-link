@@ -21,7 +21,7 @@ const meta: Meta<LinkComponent> = {
       imports: [HomeModule, RouterTestingModule, BrowserAnimationsModule],
     }),
     componentWrapperDecorator(
-      (story) => `<div style="width: 275px; background-color: var(--card-color); border-radius: 0.375rem; box-shadow: 0 0 5px var(--shadow-md-color);">${story}</div>`,
+      (story) => `<app-root><div style="width: 275px; background-color: var(--card-color); border-radius: 0.375rem; box-shadow: 0 0 5px var(--shadow-md-color);">${story}</div></app-root>`,
     ),
   ],
   argTypes: {
